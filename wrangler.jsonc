@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "orchha-palace-hotel",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-08-31",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    "ENVIRONMENT": "production",
+    "LEAD_FROM_EMAIL": "Orchha Palace Website <website@orchhapalace.com>",
+    "LEAD_TO_EMAIL": "sales@orchhapalace.com,reservations@orchhapalace.com"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

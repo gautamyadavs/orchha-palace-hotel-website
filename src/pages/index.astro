@@ -1,0 +1,137 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import AvailabilityBar from "@/components/AvailabilityBar.astro";
+import RoomCard from "@/components/RoomCard.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { contact, propertyFacts } from "@/data/site";
+import { getSiteData } from "@/lib/cms";
+import { withBase } from "@/lib/paths";
+
+const { rooms, dining, amenities, media } = await getSiteData();
+const mediaById = (id: string) => media.find((item) => item.id === id) || media[0];
+const featuredRooms = rooms.slice(0, 5);
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Hotel",
+    name: "Orchha Palace Hotel & Convention Centre",
+    url: Astro.site,
+    image: new URL(withBase("/images/property-royal-ambience.jpg"), Astro.site),
+    telephone: "+91-95160-06201",
+    email: contact.reservationsEmail,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Sawant Nagar, Near Ramraja Temple",
+      addressLocality: "Orchha",
+      addressRegion: "Madhya Pradesh",
+      postalCode: "472246",
+      addressCountry: "IN"
+    },
+    amenityFeature: amenities.slice(0, 6).map((item) => ({ "@type": "LocationFeatureSpecification", name: item.name, value: true }))
+  },
+  ...dining.slice(0, 2).map((venue) => ({
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    name: venue.name,
+    servesCuisine: venue.type,
+    parentOrganization: { "@type": "Hotel", name: "Orchha Palace Hotel & Convention Centre" }
+  }))
+];
+---
+
+<BaseLayout
+  title="Orchha Palace Hotel & Convention Centre | Stay, Dine & Celebrate in Orchha"
+  description="A 12-acre palace hotel in Orchha with spacious rooms, two restaurants, pool, spa and seven indoor and outdoor event venues. Check live availability securely."
+  schema={schema}
+  preloadImage={withBase("/images/hero-orchha.webp")}
+  preloadMobileImage={withBase("/images/hero-orchha-mobile.webp")}
+>
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="home-hero__media">
+      <picture>
+        <source media="(max-width: 640px)" srcset={withBase("/images/hero-orchha-mobile.webp")} type="image/webp" />
+        <source media="(max-width: 640px)" srcset={withBase("/images/hero-orchha-mobile.jpg")} />
+        <source srcset={withBase("/images/hero-orchha.webp")} type="image/webp" />
+        <img src={withBase("/images/hero-orchha.jpg")} alt="Orchha cenotaphs beside the Betwa River at sunset" width="1800" height="1350" fetchpriority="high" />
+      </picture>
+    </div>
+    <div class="home-hero__shade" aria-hidden="true"></div>
+    <div class="home-hero__content shell">
+      <p class="eyebrow eyebrow--light">Orchha, Madhya Pradesh</p>
+      <h1 id="home-title">A quieter kind of royal stay</h1>
+      <p>Twelve landscaped acres near Orchha's forts and temples, shaped for unhurried stays and meaningful gatherings.</p>
+    </div>
+  </section>
+
+  <div class="home-booking-wrap">
+    <AvailabilityBar heading="Find your room" />
+  </div>
+
+  <section class="section shell" aria-labelledby="welcome-title">
+    <div class="editorial-split">
+      <div class="editorial-split__image editorial-split__image--wide">
+        <img src={mediaById("property-royal-ambience").src} alt={mediaById("property-royal-ambience").alt} width="622" height="321" loading="lazy" />
+      </div>
+      <div class="editorial-split__copy">
+        <p class="eyebrow">Quiet heritage, warm hospitality</p>
+        <h2 id="welcome-title">A palace stay with room to breathe</h2>
+        <p>Orchha Palace pairs Mughal-inspired architecture and local craft with spacious contemporary rooms, generous gardens and thoughtful service—close to the landmarks, but calm enough to truly switch off.</p>
+        <a class="text-link" href={withBase("/hotel-amenities/")}>Discover the hotel <Icon name="ph:arrow-right" size={18} aria-hidden="true" /></a>
+      </div>
+    </div>
+    <div class="fact-strip" style="margin-top:clamp(48px,8vw,90px)">
+      {propertyFacts.map((fact) => <div><strong>{fact.value}</strong><span>{fact.label}</span></div>)}
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="shell">
+      <SectionHeading eyebrow="Stay your way" title="Five ways to settle in" copy="Compare the space, bed configuration, bathroom and features that matter before you move into the live booking engine." />
+      <div class="room-grid">
+        {featuredRooms.map((room, index) => <RoomCard room={room} featured={index === 0} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell">
+    <SectionHeading eyebrow="Beyond the room" title="A fuller reason to stay" copy="Poolside afternoons, restorative treatments and food worth lingering over—all within the estate." />
+    <div class="experience-grid">
+      <article class="experience-card">
+        <img src={mediaById("pool").src} alt={mediaById("pool").alt} width="900" height="700" loading="lazy" />
+        <div class="experience-card__body"><p class="eyebrow">Restore</p><h3>Pool, spa & wellness</h3><p>Swim, train, book a treatment or arrange a private yoga session.</p><a class="text-link" href={withBase("/hotel-amenities/")}>Explore wellness <Icon name="ph:arrow-right" size={18} /></a></div>
+      </article>
+      <article class="experience-card">
+        <img src={dining[0].image.src} alt={dining[0].image.alt} width="900" height="700" loading="lazy" />
+        <div class="experience-card__body"><p class="eyebrow">Dine</p><h3>Three distinct settings</h3><p>Indian and international dining at Annajal, Pan-Asian favourites at Dragon, and evening drinks at Madira.</p><a class="text-link" href={withBase("/dining/")}>Explore dining <Icon name="ph:arrow-right" size={18} /></a></div>
+      </article>
+      <article class="experience-card">
+        <img src={mediaById("private-garden-dining").src} alt={mediaById("private-garden-dining").alt} width="950" height="1280" loading="lazy" style={`object-position:${mediaById("private-garden-dining").focalPoint}`} />
+        <div class="experience-card__body"><p class="eyebrow">Gather</p><h3>Seven event venues</h3><p>From a 14-seat boardroom to a 140,000 sq. ft. lawn, choose the scale that fits your occasion.</p><a class="text-link" href={withBase("/weddings-events/")}>Plan an event <Icon name="ph:arrow-right" size={18} /></a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="shell editorial-split">
+      <div class="editorial-split__copy">
+        <p class="eyebrow eyebrow--light">Destination Orchha</p>
+        <h2>History, just beyond the garden gates</h2>
+        <p style="color:rgba(255,255,255,.7)">Ram Raja Temple, Jahangir Mahal and the Betwa River are close enough for an early walk, an afternoon trail or a private guided visit arranged by the concierge.</p>
+        <a class="text-link text-link--light" href={withBase("/explore-orchha/")}>Explore Orchha <Icon name="ph:arrow-right" size={18} /></a>
+      </div>
+      <div class="editorial-split__image">
+        <img src={mediaById("orchha-fort").src} alt={mediaById("orchha-fort").alt} width="1000" height="1100" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell">
+    <SectionHeading align="center" eyebrow="Ready when you are" title="Let Orchha set the pace" copy="Check live room availability, or speak with the hotel team if you are planning for a group or celebration." />
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+      <a class="button button--primary" href="#availability" data-booking-jump>Check availability <Icon name="ph:arrow-up" size={18} /></a>
+      <a class="button button--secondary" href={contact.whatsapp} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Chat on WhatsApp <Icon name="ph:whatsapp-logo" size={18} /></a>
+    </div>
+  </section>
+</BaseLayout>

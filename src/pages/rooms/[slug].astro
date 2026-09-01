@@ -1,0 +1,78 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+import AvailabilityBar from "@/components/AvailabilityBar.astro";
+import RoomCard from "@/components/RoomCard.astro";
+import RoomGallery from "@/components/RoomGallery.astro";
+import { getSiteData } from "@/lib/cms";
+import type { Room } from "@/lib/types";
+
+export async function getStaticPaths() {
+  const { rooms } = await getSiteData();
+  return rooms.map((room) => ({ params: { slug: room.slug }, props: { room } }));
+}
+
+type Props = { room: Room };
+const { room } = Astro.props;
+const { rooms } = await getSiteData();
+const related = rooms.filter((item) => item.slug !== room.slug).slice(0, 2);
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "HotelRoom",
+  name: room.name,
+  description: room.description,
+  floorSize: room.size,
+  bed: { "@type": "BedDetails", typeOfBed: room.bed },
+  containedInPlace: { "@type": "Hotel", name: "Orchha Palace Hotel & Convention Centre" }
+};
+---
+
+<BaseLayout title={`${room.name} | Orchha Palace`} description={room.description} image={room.image.src} preloadImage={room.image.src} preloadMobileImage={room.image.mobileSrc || room.image.src} schema={schema}>
+  <PageHero eyebrow={room.eyebrow} title={room.name} copy={room.description} image={room.image.src} mobileImage={room.image.mobileSrc} alt={room.image.alt} position={room.image.focalPoint} />
+  <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Rooms", href: "/rooms/" }, { label: room.name }]} />
+
+  <section class="section shell">
+    <div class="room-detail-intro">
+      <div class="room-detail-intro__copy">
+        <p class="eyebrow">The essentials</p>
+        <h2>Know your room before you arrive</h2>
+        <p>{room.description}</p>
+        <a class="button button--primary" href="#availability">Check availability <Icon name="ph:arrow-down" size={18} /></a>
+      </div>
+      <dl class="detail-facts">
+        <div><dt>Space</dt><dd>{room.size}</dd></div>
+        <div><dt>Bed</dt><dd>{room.bed}</dd></div>
+        <div><dt>Best for</dt><dd>{room.idealFor}</dd></div>
+        <div><dt>Bathroom</dt><dd>{room.bathroom}</dd></div>
+        <div><dt>Aspect</dt><dd>{room.view}</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="shell">
+      <div class="room-gallery-heading">
+        <div><p class="eyebrow">Room gallery</p><h2>Look around before you book</h2></div>
+        <p>{room.gallery.length} category-matched views show the available angles and verified features without reusing photographs from another room category.</p>
+      </div>
+      <RoomGallery room={room.slug} images={room.gallery} />
+    </div>
+  </section>
+
+  <section class="section shell">
+    <div class="list-columns">
+      <div><p class="eyebrow">Highlights</p><ul class="feature-list">{room.highlights.map((item) => <li><Icon name="ph:check" size={18} /> {item}</li>)}</ul></div>
+      <div><p class="eyebrow">Room amenities</p><ul class="feature-list">{room.amenities.map((item) => <li><Icon name="ph:check" size={18} /> {item}</li>)}</ul></div>
+      <div><p class="eyebrow">Included</p><ul class="feature-list">{room.inclusions.map((item) => <li><Icon name="ph:check" size={18} /> {item}</li>)}</ul></div>
+    </div>
+  </section>
+
+  <section class="section section--paper"><div class="shell"><AvailabilityBar compact heading={`Check ${room.shortName} availability`} /></div></section>
+
+  <section class="section shell">
+    <p class="eyebrow">Also consider</p>
+    <div class="room-grid">{related.map((item) => <RoomCard room={item} />)}</div>
+  </section>
+</BaseLayout>

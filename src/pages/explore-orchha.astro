@@ -1,0 +1,27 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { contact } from "@/data/site";
+import { getSiteData } from "@/lib/cms";
+
+const { media } = await getSiteData();
+const byId = (id: string) => media.find((item) => item.id === id) || media[0];
+const places = [
+  { name: "Ram Raja Temple", copy: "A singular palace-temple at the centre of Orchha's daily rhythm, around 2 km from the hotel.", image: byId("ram-raja") },
+  { name: "Jahangir Mahal & Orchha Fort", copy: "Palaces, courtyards and elevated views that reward an early start and a slow walk.", image: byId("orchha-fort") },
+  { name: "Betwa River & cenotaphs", copy: "Riverside trails, birdlife and the skyline that defines an Orchha sunset.", image: byId("hero-orchha") }
+];
+---
+
+<BaseLayout title="Explore Orchha | Orchha Palace" description="Plan time around Ram Raja Temple, Jahangir Mahal, Orchha Fort and the Betwa River from Orchha Palace." image={byId("hero-orchha").src}>
+  <PageHero eyebrow="Explore Orchha" title="Let the old city set the pace" copy="Fort walls, temple bells, river light and unhurried lanes—all close to your room." image={byId("hero-orchha").src} alt={byId("hero-orchha").alt} />
+  <section class="section shell">
+    <SectionHeading eyebrow="Nearby" title="Three places worth making time for" copy="Distances and access can change around festivals; the concierge can help with current timings, transport and private guides." />
+    <div class="destination-grid">
+      {places.map((place) => <article class="destination-card"><img src={place.image.src} alt={place.image.alt} width="960" height="720" loading="lazy" /><div class="destination-card__body"><h3>{place.name}</h3><p>{place.copy}</p></div></article>)}
+    </div>
+  </section>
+  <section class="section section--dark"><div class="shell editorial-split"><div class="editorial-split__copy"><p class="eyebrow eyebrow--light">Getting here</p><h2>Orchha is closer than it feels</h2><p style="color:rgba(255,255,255,.7)">Jhansi railway station is approximately 16 km away. Gwalior and Khajuraho airports are the nearest larger air connections. Ask the hotel about current transfers before travelling.</p><a class="text-link text-link--light" href={contact.maps} target="_blank" rel="noreferrer" data-track="directions_clicked">Get directions <Icon name="ph:arrow-up-right" size={18} /></a></div><div class="editorial-split__image"><img src={byId("property-exterior").src} alt={byId("property-exterior").alt} width="1000" height="1100" loading="lazy" /></div></div></section>
+</BaseLayout>

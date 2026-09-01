@@ -1,0 +1,25 @@
+---
+type Props = {
+  eyebrow?: string;
+  title: string;
+  copy: string;
+  image: string;
+  mobileImage?: string;
+  alt: string;
+  position?: string;
+};
+const { eyebrow, title, copy, image, mobileImage, alt, position = "50% 50%" } = Astro.props;
+---
+
+<section class="page-hero">
+  <picture class="page-hero__media">
+    {mobileImage && <source media="(max-width: 640px)" srcset={mobileImage} />}
+    <img src={image} alt={alt} width="1800" height="1100" loading="eager" fetchpriority="high" decoding="sync" style={`object-position:${position}`} />
+  </picture>
+  <div class="page-hero__shade" aria-hidden="true"></div>
+  <div class="page-hero__content shell">
+    {eyebrow && <p class="eyebrow eyebrow--light">{eyebrow}</p>}
+    <h1>{title}</h1>
+    <p>{copy}</p>
+  </div>
+</section>

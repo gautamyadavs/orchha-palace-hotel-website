@@ -1,0 +1,8 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { withBase } from "@/lib/paths";
+---
+
+<BaseLayout title="Page not found | Orchha Palace" description="The requested page could not be found." noindex={true}>
+  <section class="legal-page"><div class="legal-page__content shell"><p class="eyebrow">404</p><h1>This path has wandered</h1><p>The page may have moved, but the hotel is still right where you left it.</p><a class="button button--primary" href={withBase("/")}>Return home</a></div></section>
+</BaseLayout>

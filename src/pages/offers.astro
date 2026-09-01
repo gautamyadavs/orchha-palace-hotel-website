@@ -1,0 +1,18 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import AvailabilityBar from "@/components/AvailabilityBar.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { getSiteData } from "@/lib/cms";
+
+const { media } = await getSiteData();
+const hero = media.find((item) => item.id === "property-courtyard") || media[0];
+---
+
+<BaseLayout title="Offers | Orchha Palace" description="View current, verified stay offers from Orchha Palace." image={hero.src} noindex={true}>
+  <PageHero eyebrow="Offers" title="Only the offers we can stand behind" copy="There are no public website offers at the moment. Live rates and inclusions are always shown by the official booking engine." image={hero.src} alt={hero.alt} />
+  <section class="section shell">
+    <SectionHeading eyebrow="No active offers" title="The clearest rate is the live rate" copy="We do not publish expired packages or hard-code prices that may differ from the booking engine." />
+    <AvailabilityBar compact heading="Check current rates" />
+  </section>
+</BaseLayout>

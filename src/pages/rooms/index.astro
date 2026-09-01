@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import RoomCard from "@/components/RoomCard.astro";
+import AvailabilityBar from "@/components/AvailabilityBar.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { getSiteData } from "@/lib/cms";
+
+const { rooms, media } = await getSiteData();
+const hero = media.find((item) => item.id === "presidential-suite") || rooms[0].image;
+---
+
+<BaseLayout title="Rooms & Suites | Orchha Palace" description="Compare all five room and suite categories at Orchha Palace, including space, beds, bathrooms, inclusions and key amenities.">
+  <PageHero eyebrow="Rooms & suites" title="Choose the space that feels right" copy="Five considered stays, from generous standard rooms to a private two-bedroom Presidential Suite." image={hero.src} alt={hero.alt} />
+  <section class="section shell">
+    <SectionHeading eyebrow="Compare before you book" title="Every stay, clearly explained" copy="Rates and availability are always checked in the live booking engine; the details here help you choose with confidence first." />
+    <div class="room-grid">
+      {rooms.map((room, index) => <RoomCard room={room} featured={index === 4} />)}
+    </div>
+  </section>
+  <section class="section section--paper"><div class="shell"><AvailabilityBar compact heading="Check live room availability" /></div></section>
+</BaseLayout>

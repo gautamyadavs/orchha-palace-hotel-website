@@ -1,0 +1,26 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { contact } from "@/data/site";
+import { getSiteData } from "@/lib/cms";
+import { withBase } from "@/lib/paths";
+
+const { media } = await getSiteData();
+const hero = media.find((item) => item.id === "property-exterior") || media[0];
+---
+
+<BaseLayout title="Contact Orchha Palace" description="Contact Orchha Palace for reservations, dining, events, directions and travel assistance." image={hero.src}>
+  <PageHero eyebrow="Contact" title="The hotel team is here to help" copy="For stays, dining, celebrations and directions, choose the quickest route below." image={hero.src} alt={hero.alt} />
+  <section class="section shell">
+    <SectionHeading eyebrow="Get in touch" title="One question, one clear contact" />
+    <div class="contact-grid">
+      <div class="contact-card"><Icon name="ph:bed" size={28} /><h3>Reservations</h3><a href={`mailto:${contact.reservationsEmail}`}>{contact.reservationsEmail}</a><a href="tel:+919516006201" data-track="call_clicked">+91 95160 06201</a></div>
+      <div class="contact-card"><Icon name="ph:confetti" size={28} /><h3>Events & weddings</h3><a href={`mailto:${contact.salesEmail}`}>{contact.salesEmail}</a><a href={withBase("/weddings-events/#event-enquiry")}>Send an event enquiry</a></div>
+      <div class="contact-card"><Icon name="ph:whatsapp-logo" size={28} /><h3>WhatsApp</h3><a href={contact.whatsapp} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Start a conversation</a></div>
+      <div class="contact-card"><Icon name="ph:map-pin" size={28} /><h3>Directions</h3><p>{contact.address}</p><a href={contact.maps} target="_blank" rel="noreferrer" data-track="directions_clicked">Open Google Maps</a></div>
+    </div>
+  </section>
+  <section class="section section--paper"><div class="shell editorial-split"><div class="editorial-split__image"><img src={hero.src} alt={hero.alt} width="1000" height="1100" loading="lazy" /></div><div class="editorial-split__copy"><p class="eyebrow">Arrival notes</p><h2>Plan the final stretch before you leave</h2><p>Jhansi railway station is approximately 16 km from the hotel. The nearest larger airports are Gwalior and Khajuraho. Ask the hotel to confirm current road times and available transfers.</p><a class="button button--primary" href={contact.maps} target="_blank" rel="noreferrer" data-track="directions_clicked">Get directions <Icon name="ph:arrow-up-right" size={18} /></a></div></div></section>
+</BaseLayout>

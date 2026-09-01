@@ -1,0 +1,74 @@
+---
+import { Icon } from "astro-icon/components";
+import { venues } from "@/data/site";
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<form class="lead-form" data-event-lead-form novalidate>
+  <div class="field-grid">
+    <label>
+      <span>Name *</span>
+      <input name="name" autocomplete="name" required maxlength="100" />
+    </label>
+    <label>
+      <span>Phone *</span>
+      <input name="phone" type="tel" autocomplete="tel" required maxlength="30" />
+    </label>
+    <label>
+      <span>Email *</span>
+      <input name="email" type="email" autocomplete="email" required maxlength="160" />
+    </label>
+    <label>
+      <span>Event type *</span>
+      <select name="eventType" required>
+        <option value="">Choose one</option>
+        <option>Wedding</option>
+        <option>Engagement or reception</option>
+        <option>Corporate conference</option>
+        <option>Product launch</option>
+        <option>Private celebration</option>
+        <option>Other</option>
+      </select>
+    </label>
+    <label>
+      <span>Tentative date</span>
+      <input name="tentativeDate" type="date" />
+    </label>
+    <label>
+      <span>Expected guests *</span>
+      <input name="guestCount" type="number" min="2" max="5000" value="100" required />
+    </label>
+    <label class="field-grid__wide">
+      <span>Preferred venue</span>
+      <select name="preferredVenue">
+        <option value="">Help me choose</option>
+        {venues.map((venue) => <option value={venue.name}>{venue.name}</option>)}
+      </select>
+    </label>
+    <label class="field-grid__wide">
+      <span>Tell us what you are planning</span>
+      <textarea name="message" rows="5" maxlength="2000" placeholder="Functions, room requirements, food preferences or anything that helps us understand the occasion"></textarea>
+    </label>
+  </div>
+
+  <label class="checkbox-field">
+    <input name="consent" type="checkbox" required />
+    <span>I agree that Orchha Palace may contact me about this enquiry. *</span>
+  </label>
+
+  {turnstileSiteKey && <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>}
+  <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+  <div class="lead-form__submit">
+    <button class="button button--primary" type="submit">
+      Send event enquiry <Icon name="ph:arrow-right" size={19} aria-hidden="true" />
+    </button>
+    <p class="form-message" data-lead-message aria-live="polite"></p>
+  </div>
+
+  <div class="lead-form__fallback" data-lead-fallback hidden>
+    <p>We could not send the form. Your details were not recorded.</p>
+    <a href="tel:+919516006201">Call +91 95160 06201</a>
+    <a href="https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%27d%20like%20to%20plan%20an%20event." target="_blank" rel="noreferrer">Continue on WhatsApp</a>
+  </div>
+</form>

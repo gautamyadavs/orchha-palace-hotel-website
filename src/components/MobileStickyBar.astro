@@ -1,0 +1,15 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div class="mobile-sticky" data-mobile-sticky>
+  <a href="tel:+919516006201" aria-label="Call hotel" data-track="call_clicked">
+    <Icon name="ph:phone" size={22} aria-hidden="true" />
+  </a>
+  <a href="https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%27d%20like%20help%20planning%20a%20stay." target="_blank" rel="noreferrer" aria-label="WhatsApp hotel" data-track="whatsapp_clicked">
+    <Icon name="ph:whatsapp-logo" size={22} aria-hidden="true" />
+  </a>
+  <a class="mobile-sticky__booking" href="#availability" data-booking-jump>
+    Check availability <Icon name="ph:arrow-right" size={18} aria-hidden="true" />
+  </a>
+</div>

@@ -1,0 +1,64 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import EventLeadForm from "@/components/EventLeadForm.astro";
+import { contact } from "@/data/site";
+import { getSiteData } from "@/lib/cms";
+
+const { venues, media } = await getSiteData();
+const hero = media.find((item) => item.id === "wedding-showcase") || venues.find((item) => item.slug === "jeja-bagh")?.image || venues[0].image;
+---
+
+<BaseLayout title="Weddings, Meetings & Events | Orchha Palace" description="Compare seven indoor and outdoor venues at Orchha Palace, from a 14-seat boardroom to a 140,000 sq. ft. lawn, and send an event enquiry." image={hero.src} preloadImage={hero.src} preloadMobileImage={hero.mobileSrc || hero.src}>
+  <PageHero eyebrow="Destination weddings in Orchha" title="A palace made for celebration" copy="Ceremonies beneath the open sky, grand indoor gatherings and room for your guests across one 12-acre estate." image={hero.src} mobileImage={hero.mobileSrc} alt={hero.alt} position={hero.focalPoint} />
+
+  <section class="section shell">
+    <SectionHeading eyebrow="Compare the spaces" title="Start with scale, then shape the atmosphere" copy="Published sizes and indoor theatre capacities follow the hotel's current official information. Outdoor capacities are planned to your layout and require final confirmation from the events team." />
+    <div class="venue-table-wrap" role="region" aria-label="Venue comparison" tabindex="0">
+      <table class="venue-table">
+        <thead><tr><th>Venue</th><th>Setting</th><th>Size</th><th>Capacity</th><th>Layouts</th></tr></thead>
+        <tbody>{venues.map((venue) => <tr><td>{venue.name}</td><td>{venue.type}</td><td>{venue.size}</td><td>{venue.capacity}</td><td>{venue.layouts.join(" · ")}</td></tr>)}</tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="shell">
+      <SectionHeading eyebrow="See the possibilities" title="From boardroom focus to open-sky celebration" />
+      <p class="content-note">The lead wedding photograph was selected by the hotel. Supporting venue photographs remain representative property images until the exact lawn, hall and boardroom mapping is approved.</p>
+      <div class="venue-grid">
+        {venues.map((venue) => (
+          <article class="venue-card">
+            <img src={venue.image.src} alt={venue.image.alt} width="960" height="720" loading="lazy" />
+            <div class="venue-card__body"><p class="eyebrow">{venue.type}</p><h3>{venue.name}</h3><p>{venue.description}</p><div class="venue-card__meta"><span>{venue.size}</span><span>{venue.capacity}</span></div></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="shell">
+      <SectionHeading eyebrow="How planning works" title="Clear steps, one hotel team" copy="A practical route from first conversation to final celebration." />
+      <div class="fact-strip" style="border-color:rgba(255,255,255,.2)">
+        <div><strong>01</strong><span style="color:rgba(255,255,255,.65)">Share your date, scale and priorities</span></div>
+        <div><strong>02</strong><span style="color:rgba(255,255,255,.65)">Shortlist spaces and room needs</span></div>
+        <div><strong>03</strong><span style="color:rgba(255,255,255,.65)">Shape food, setup and guest flow</span></div>
+        <div><strong>04</strong><span style="color:rgba(255,255,255,.65)">Confirm the tailored proposal</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell" id="event-enquiry">
+    <div class="lead-layout">
+      <div>
+        <p class="eyebrow">Start the conversation</p>
+        <h2>Tell us what you are imagining</h2>
+        <p style="color:var(--ink-soft)">Share the essentials and the events team will respond with suitable spaces and next steps. No payment is collected through this form.</p>
+        <div class="contact-card"><h3>Prefer to speak now?</h3><a href="tel:+919516006201" data-track="call_clicked">+91 95160 06201</a><a href={contact.whatsapp} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Continue on WhatsApp</a></div>
+      </div>
+      <EventLeadForm />
+    </div>
+  </section>
+</BaseLayout>

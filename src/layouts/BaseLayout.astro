@@ -1,0 +1,84 @@
+---
+import "@fontsource/cormorant-garamond/500.css";
+import "@fontsource/cormorant-garamond/600.css";
+import "@fontsource/manrope/400.css";
+import "@fontsource/manrope/500.css";
+import "@fontsource/manrope/600.css";
+import "@/styles/global.css";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import ConsentBanner from "@/components/ConsentBanner.astro";
+import MobileStickyBar from "@/components/MobileStickyBar.astro";
+import { basePath, withBase } from "@/lib/paths";
+
+type Props = {
+  title: string;
+  description: string;
+  image?: string;
+  canonicalPath?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+  stickyBooking?: boolean;
+  preloadImage?: string;
+  preloadMobileImage?: string;
+};
+
+const {
+  title,
+  description,
+  image = withBase("/images/hero-orchha.jpg"),
+  canonicalPath = Astro.url.pathname,
+  schema,
+  noindex = false,
+  stickyBooking = true,
+  preloadImage,
+  preloadMobileImage
+} = Astro.props;
+const site = Astro.site || new URL(import.meta.env.PUBLIC_SITE_URL || "https://orchhapalace.com");
+const canonical = new URL(canonicalPath, site);
+const socialImage = new URL(image, site);
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
+const siteStatus = import.meta.env.PUBLIC_SITE_STATUS || "staging";
+const effectiveNoindex = noindex || siteStatus !== "production";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#4f0f16" />
+    <meta name="description" content={description} />
+    <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
+    {preloadMobileImage && <link rel="preload" as="image" href={withBase(preloadMobileImage)} media="(max-width: 640px)" fetchpriority="high" />}
+    {preloadImage && <link rel="preload" as="image" href={withBase(preloadImage)} media="(min-width: 641px)" fetchpriority="high" />}
+    {effectiveNoindex && <meta name="robots" content="noindex,nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <title>{title}</title>
+    {schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
+    {turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+  </head>
+  <body data-turnstile-site-key={turnstileSiteKey || ""} data-gtm-id={gtmId || ""} data-base-path={basePath}>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <ConsentBanner />
+    {stickyBooking && <MobileStickyBar />}
+    <script>
+      import "../scripts/site.ts";
+    </script>
+  </body>
+</html>

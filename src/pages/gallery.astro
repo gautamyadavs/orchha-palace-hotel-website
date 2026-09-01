@@ -1,0 +1,21 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { getSiteData } from "@/lib/cms";
+
+const { media } = await getSiteData();
+const previewMode = import.meta.env.DEV || import.meta.env.PUBLIC_MEDIA_PREVIEW === "true";
+const approved = media.filter((item) => !item.peopleVisible && (previewMode || item.publishApproved));
+const hero = approved.find((item) => item.id === "property-exterior") || approved[0] || media[0];
+---
+
+<BaseLayout title="Gallery | Orchha Palace" description="Explore approved photography of Orchha Palace rooms, dining, pool, wellness, gardens and event venues." image={hero.src}>
+  <PageHero eyebrow="Gallery" title="See the stay before you choose it" copy="Rooms, gardens, dining and gathering spaces—selected from the hotel's approved property library." image={hero.src} alt={hero.alt} />
+  <section class="section shell">
+    <SectionHeading eyebrow={previewMode ? "Curated preview library" : "Approved property library"} title="A closer look around" copy="Identifiable guest, wedding attendee and VIP photography is intentionally excluded. Preview-only assets remain blocked from public launch until hotel approval is recorded." />
+    <div class="gallery-grid">
+      {approved.map((item) => <figure><img src={item.src} alt={item.alt} width="1200" height="900" loading="lazy" style={`object-position:${item.focalPoint}`} /></figure>)}
+    </div>
+  </section>
+</BaseLayout>

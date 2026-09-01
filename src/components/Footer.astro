@@ -1,0 +1,48 @@
+---
+import { Icon } from "astro-icon/components";
+import { contact } from "@/data/site";
+import { withBase } from "@/lib/paths";
+---
+
+<footer class="site-footer">
+  <div class="footer-intro shell">
+    <p class="eyebrow eyebrow--light">Your stay in Orchha</p>
+    <h2>Arrive curious.<br />Leave restored.</h2>
+    <a class="text-link text-link--light" href="#availability" data-booking-jump>
+      Check availability <Icon name="ph:arrow-up-right" size={18} aria-hidden="true" />
+    </a>
+  </div>
+  <div class="footer-grid shell">
+    <div>
+      <p class="footer-label">Find us</p>
+      <address>{contact.address}</address>
+      <a href={contact.maps} target="_blank" rel="noreferrer" data-track="directions_clicked">Open in Google Maps</a>
+    </div>
+    <div>
+      <p class="footer-label">Stay</p>
+      <a href={withBase("/rooms/")}>Rooms & suites</a>
+      <a href={withBase("/hotel-amenities/")}>Hotel & amenities</a>
+      <a href={withBase("/dining/")}>Dining</a>
+      <a href={withBase("/gallery/")}>Gallery</a>
+    </div>
+    <div>
+      <p class="footer-label">Gather</p>
+      <a href={withBase("/weddings-events/")}>Weddings & events</a>
+      <a href={withBase("/contact/")}>Contact</a>
+      <a href={contact.whatsapp} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp</a>
+    </div>
+    <div>
+      <p class="footer-label">Contact</p>
+      <a href="tel:+919516006201" data-track="call_clicked">+91 95160 06201</a>
+      <a href={`mailto:${contact.reservationsEmail}`}>{contact.reservationsEmail}</a>
+    </div>
+  </div>
+  <div class="footer-bottom shell">
+    <p>© {new Date().getFullYear()} Orchha Palace Hotel & Convention Centre</p>
+    <div>
+      <a href={withBase("/privacy/")}>Privacy</a>
+      <a href={withBase("/terms/")}>Terms</a>
+      <a href={withBase("/booking-policies/")}>Booking policies</a>
+    </div>
+  </div>
+</footer>

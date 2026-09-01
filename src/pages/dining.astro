@@ -1,0 +1,64 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import { contact } from "@/data/site";
+import { getSiteData } from "@/lib/cms";
+import { withBase } from "@/lib/paths";
+
+const { dining, media } = await getSiteData();
+const food = media.find((item) => item.id === "food") || dining[0].image;
+const schema = dining.map((venue) => ({
+  "@context": "https://schema.org",
+  "@type": venue.slug === "madira" ? "BarOrPub" : "Restaurant",
+  name: venue.name,
+  description: venue.description,
+  servesCuisine: venue.type,
+  telephone: "+91-95160-06201",
+  parentOrganization: { "@type": "Hotel", name: "Orchha Palace Hotel & Convention Centre" }
+}));
+---
+
+<BaseLayout title="Dining at Orchha Palace | Annajal, Dragon & Madira" description="Discover multi-cuisine dining at Annajal, Pan-Asian favourites at Dragon and evening drinks at Madira Bar." image={food.src} schema={schema}>
+  <PageHero eyebrow="Dining" title="Three places to follow your appetite" copy="Regional flavours, global comfort, Pan-Asian favourites and an easy evening bar—all within the hotel." image={food.src} alt={food.alt} />
+
+  <section class="section shell">
+    <SectionHeading eyebrow="Choose your setting" title="From breakfast to a final drink" copy="Opening hours and service formats may change around events; the front desk can confirm today's schedule." />
+    <p class="content-note">Photography is being matched to the exact restaurant and bar names. The hotel must approve those mappings before public launch.</p>
+    <div class="dining-grid">
+      {dining.map((venue) => (
+        <article class="dining-card">
+          <img src={venue.image.src} alt={venue.image.alt} width="960" height="740" loading="lazy" />
+          <div class="dining-card__body">
+            <p class="eyebrow">{venue.type}</p>
+            <h2 style="font-size:clamp(2.5rem,7vw,4rem)">{venue.name}</h2>
+            <p>{venue.description}</p>
+            <div class="dining-card__meta"><span>{venue.location}</span>{venue.capacity && <span>{venue.capacity}</span>}</div>
+            <ul class="feature-list" style="margin-top:16px">{venue.highlights.map((item) => <li><Icon name="ph:check" size={17} /> {item}</li>)}</ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="shell editorial-split">
+      <div class="editorial-split__image"><img src={food.src} alt={food.alt} width="1000" height="1100" loading="lazy" /></div>
+      <div class="editorial-split__copy">
+        <p class="eyebrow eyebrow--light">A table for the occasion</p>
+        <h2>Dining for groups and celebrations</h2>
+        <p style="color:rgba(255,255,255,.7)">Planning a wedding, conference or private dinner? The culinary team can shape menus and service around the event format and guest list.</p>
+        <a class="text-link text-link--light" href={withBase("/weddings-events/#event-enquiry")}>Plan an event menu <Icon name="ph:arrow-right" size={18} /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell">
+    <SectionHeading align="center" eyebrow="Reserve or ask" title="Speak with the hotel team" copy="For restaurant hours, dietary requests and group dining, contact the hotel directly." />
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+      <a class="button button--primary" href={`tel:${contact.phones[0].replace(/\s/g, "")}`} data-track="call_clicked">Call the hotel <Icon name="ph:phone" size={18} /></a>
+      <a class="button button--secondary" href={contact.whatsapp} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp <Icon name="ph:whatsapp-logo" size={18} /></a>
+    </div>
+  </section>
+</BaseLayout>

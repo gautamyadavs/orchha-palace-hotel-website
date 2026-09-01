@@ -1,0 +1,55 @@
+---
+import { Icon } from "astro-icon/components";
+import { withBase } from "@/lib/paths";
+
+const nav = [
+  { href: withBase("/rooms/"), label: "Rooms" },
+  { href: withBase("/dining/"), label: "Dining" },
+  { href: withBase("/weddings-events/"), label: "Weddings & events" },
+  { href: withBase("/hotel-amenities/"), label: "Hotel & amenities" },
+  { href: withBase("/explore-orchha/"), label: "Explore Orchha" },
+  { href: withBase("/contact/"), label: "Contact" }
+];
+---
+
+<header class="site-header" data-header>
+  <a class="wordmark" href={withBase("/")}>
+    <span class="wordmark__name">Orchha Palace</span>
+    <span class="wordmark__sub">Hotel & Convention Centre</span>
+  </a>
+
+  <nav class="desktop-nav" aria-label="Primary navigation">
+    {nav.slice(0, 5).map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+
+  <div class="header-actions">
+    <a class="header-call" href="tel:+919516006201" data-track="call_clicked" aria-label="Call Orchha Palace">
+      <Icon name="ph:phone" size={20} aria-hidden="true" />
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open>
+      <span>Menu</span>
+      <Icon name="ph:list" size={22} aria-hidden="true" />
+    </button>
+  </div>
+
+  <div class="menu-drawer" id="site-menu" role="dialog" aria-modal="true" aria-label="Site navigation" aria-hidden="true" data-menu>
+    <div class="menu-drawer__top">
+      <span class="menu-kicker">Orchha Palace</span>
+      <button class="icon-button" type="button" aria-label="Close menu" data-menu-close>
+        <Icon name="ph:x" size={26} aria-hidden="true" />
+      </button>
+    </div>
+    <nav class="menu-nav" aria-label="Mobile navigation">
+      {nav.map((item, index) => (
+        <a href={item.href}>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <div class="menu-drawer__contact">
+      <a href="tel:+919516006201">+91 95160 06201</a>
+      <a href="mailto:reservations@orchhapalace.com">reservations@orchhapalace.com</a>
+    </div>
+  </div>
+</header>

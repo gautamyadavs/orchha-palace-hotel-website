@@ -1,0 +1,18 @@
+---
+import { Icon } from "astro-icon/components";
+import { withBase } from "@/lib/paths";
+type Item = { label: string; href?: string };
+type Props = { items: Item[] };
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumbs shell" aria-label="Breadcrumb">
+  <ol>
+    {items.map((item, index) => (
+      <li>
+        {item.href ? <a href={withBase(item.href)}>{item.label}</a> : <span aria-current="page">{item.label}</span>}
+        {index < items.length - 1 && <Icon name="ph:caret-right" size={13} aria-hidden="true" />}
+      </li>
+    ))}
+  </ol>
+</nav>

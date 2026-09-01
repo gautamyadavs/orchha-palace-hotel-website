@@ -1,0 +1,80 @@
+---
+import { Icon } from "astro-icon/components";
+import type { ImageAsset } from "@/lib/types";
+
+type Props = {
+  room: string;
+  images: ImageAsset[];
+};
+
+const { room, images } = Astro.props;
+const titleId = `gallery-title-${room}`;
+---
+
+<div class="room-gallery" data-room-gallery data-room={room}>
+  <div class="room-gallery__stage" tabindex="0" aria-labelledby={titleId}>
+    <button class="room-gallery__open" type="button" data-gallery-open data-track="room_gallery_opened" data-room={room} aria-haspopup="dialog" aria-label={`Open ${images[0].subject} full screen`}>
+      <img
+        data-gallery-main
+        src={images[0].src}
+        alt={images[0].alt}
+        width="1200"
+        height="900"
+        loading="lazy"
+        style={`object-position:${images[0].focalPoint}`}
+      />
+    </button>
+    <button class="room-gallery__arrow room-gallery__arrow--previous" type="button" data-gallery-previous aria-label="Previous room photo">
+      <Icon name="ph:caret-left-bold" size={20} />
+    </button>
+    <button class="room-gallery__arrow room-gallery__arrow--next" type="button" data-gallery-next aria-label="Next room photo">
+      <Icon name="ph:caret-right-bold" size={20} />
+    </button>
+    <span class="room-gallery__count" data-gallery-count aria-live="polite">1 / {images.length}</span>
+  </div>
+
+  <div class="room-gallery__summary">
+    <p id={titleId} data-gallery-caption>{images[0].subject}</p>
+    <span>Swipe, use the arrows or choose a thumbnail</span>
+  </div>
+
+  <div class="room-gallery__thumbnails" aria-label={`${room} photo choices`}>
+    {images.map((item, index) => (
+      <button
+        class="room-gallery__thumbnail"
+        type="button"
+        data-gallery-thumbnail
+        data-src={item.src}
+        data-alt={item.alt}
+        data-caption={item.subject}
+        data-position={item.focalPoint || "50% 50%"}
+        aria-label={`Show photo ${index + 1}: ${item.subject}`}
+        aria-pressed={index === 0 ? "true" : "false"}
+      >
+        <img src={item.src} alt="" width="144" height="96" loading="lazy" style={`object-position:${item.focalPoint}`} />
+        <span>{item.subject}</span>
+      </button>
+    ))}
+  </div>
+
+  <dialog class="room-gallery-dialog" data-gallery-dialog aria-labelledby={`${titleId}-dialog`}>
+    <div class="room-gallery-dialog__frame">
+      <form method="dialog">
+        <button class="room-gallery-dialog__close" type="submit" aria-label="Close full-screen room gallery">
+          <Icon name="ph:x" size={22} />
+        </button>
+      </form>
+      <img data-gallery-dialog-image src={images[0].src} alt={images[0].alt} width="1600" height="1200" />
+      <button class="room-gallery-dialog__arrow room-gallery-dialog__arrow--previous" type="button" data-gallery-dialog-previous aria-label="Previous room photo">
+        <Icon name="ph:caret-left-bold" size={24} />
+      </button>
+      <button class="room-gallery-dialog__arrow room-gallery-dialog__arrow--next" type="button" data-gallery-dialog-next aria-label="Next room photo">
+        <Icon name="ph:caret-right-bold" size={24} />
+      </button>
+      <div class="room-gallery-dialog__meta">
+        <p id={`${titleId}-dialog`} data-gallery-dialog-caption>{images[0].subject}</p>
+        <span data-gallery-dialog-count>1 / {images.length}</span>
+      </div>
+    </div>
+  </dialog>
+</div>
