@@ -1,0 +1,30 @@
+---
+import { Icon } from "astro-icon/components";
+import BookingForm from "@/components/BookingForm.astro";
+import { DEFAULT_BOOKING_URL } from "@/lib/booking";
+
+const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL?.trim() || DEFAULT_BOOKING_URL;
+---
+
+<dialog class="booking-sheet" data-booking-sheet aria-labelledby="booking-sheet-title">
+  <div class="booking-sheet__panel">
+    <header class="booking-sheet__header">
+      <div>
+        <p class="eyebrow">Direct, secure booking</p>
+        <h2 id="booking-sheet-title">Plan your stay</h2>
+      </div>
+      <button class="booking-sheet__close" type="button" data-booking-close aria-label="Close booking search">
+        <Icon name="ph:x" size={24} aria-hidden="true" />
+      </button>
+    </header>
+
+    <p class="booking-sheet__intro">Choose your dates and guests here, then compare live rooms and complete payment in the hotel's official booking engine.</p>
+    <BookingForm bookingUrl={bookingUrl} source="booking_sheet" variant="sheet" />
+
+    <div class="booking-sheet__help">
+      <p>Booking more than one room or need help with a special request?</p>
+      <a href="tel:+919516006201" data-track="call_clicked"><Icon name="ph:phone" size={18} aria-hidden="true" /> Call reservations</a>
+      <a href="https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%27d%20like%20help%20with%20a%20room%20booking." target="_blank" rel="noreferrer" data-track="whatsapp_clicked"><Icon name="ph:whatsapp-logo" size={18} aria-hidden="true" /> WhatsApp</a>
+    </div>
+  </div>
+</dialog>

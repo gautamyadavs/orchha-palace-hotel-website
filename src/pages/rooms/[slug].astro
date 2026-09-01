@@ -39,7 +39,15 @@ const schema = {
         <p class="eyebrow">The essentials</p>
         <h2>Know your room before you arrive</h2>
         <p>{room.description}</p>
-        <a class="button button--primary" href="#availability">Check availability <Icon name="ph:arrow-down" size={18} /></a>
+        <a
+          class="button button--primary"
+          href="#availability"
+          data-booking-open
+          data-booking-source="room_detail"
+          data-booking-room={room.slug}
+          data-booking-room-name={room.name}
+          data-booking-room-code={room.maximojoRoomCode || ""}
+        >Check this room <Icon name="ph:calendar-check" size={18} /></a>
       </div>
       <dl class="detail-facts">
         <div><dt>Space</dt><dd>{room.size}</dd></div>
@@ -69,7 +77,7 @@ const schema = {
     </div>
   </section>
 
-  <section class="section section--paper"><div class="shell"><AvailabilityBar compact heading={`Check ${room.shortName} availability`} /></div></section>
+  <section class="section section--paper"><div class="shell"><AvailabilityBar compact heading={`Check ${room.shortName} availability`} room={{ slug: room.slug, name: room.name, code: room.maximojoRoomCode }} /></div></section>
 
   <section class="section shell">
     <p class="eyebrow">Also consider</p>

@@ -16,6 +16,20 @@ This audit cross-checks the room-category galleries currently visible on [Bookin
 
 The resulting website interaction provides previous/next controls, swipe navigation, a thumbnail rail, a current-photo count, descriptive captions, keyboard arrow navigation, and a full-screen dialog on every room detail page.
 
+## Maximojo catalogue status
+
+The live Maximojo engine was checked without creating a reservation. It currently exposes only two sellable categories—Standard and Deluxe—rather than the five categories presented by the website. Its Deluxe carousel also contains an unrelated food photograph.
+
+Before adding any `maximojoRoomCode` to website content, hotel operations must:
+
+1. Confirm the PMS and channel-manager mapping for Standard, Standard Twin, Deluxe, Deluxe Twin and Presidential Suite.
+2. Confirm inventory, occupancy and at least one active rate plan for every category.
+3. Upload the approved, category-specific gallery set described above and remove unrelated images.
+4. Run a dated search in Maximojo and verify all five cards, names, rates and galleries.
+5. Record and test the corresponding `roomcode` for each website room slug.
+
+Until those checks pass, room CTAs preserve the guest's room preference in the website interface but open the general Maximojo results rather than sending an invented room code.
+
 ## Standard versus Deluxe
 
 The earlier preview incorrectly made the categories appear interchangeable. The current mapping is separated:

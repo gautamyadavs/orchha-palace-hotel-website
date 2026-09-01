@@ -28,6 +28,8 @@ export type Room = {
   highlights: string[];
   amenities: string[];
   inclusions: string[];
+  /** Only set after the corresponding Maximojo room category has been verified. */
+  maximojoRoomCode?: string;
 };
 
 export type DiningVenue = {
@@ -64,8 +66,8 @@ export type BookingSearch = {
   checkOut: string;
   adults: number;
   children: number;
-  rooms: number;
   promoCode?: string;
+  roomCode?: string;
 };
 
 export type EventLead = {

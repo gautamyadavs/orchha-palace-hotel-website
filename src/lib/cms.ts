@@ -55,6 +55,7 @@ const query = `{
     idealFor,
     bathroom,
     view,
+    maximojoRoomCode,
     "image": ${referencedImageProjection("room", "name")},
     "gallery": gallery[]->${mediaProjection},
     "highlights": coalesce(highlights, []),

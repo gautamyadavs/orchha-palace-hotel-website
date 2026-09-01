@@ -60,6 +60,12 @@ export const room = defineType({
     defineField({ name: "idealFor", title: "Ideal for", type: "string" }),
     defineField({ name: "bathroom", title: "Bathroom", type: "string" }),
     defineField({ name: "view", title: "View / aspect", type: "string" }),
+    defineField({
+      name: "maximojoRoomCode",
+      title: "Verified Maximojo room code",
+      type: "string",
+      description: "Optional. Publish only after this code has been tested against the live Orchha Palace booking engine."
+    }),
     approvedMediaReference(),
     defineField({ name: "gallery", title: "Gallery", type: "array", of: [defineArrayMember({ type: "reference", to: [{ type: "mediaAsset" }] })] }),
     defineField({ name: "highlights", title: "Highlights", type: "array", of: [defineArrayMember({ type: "string" })] }),

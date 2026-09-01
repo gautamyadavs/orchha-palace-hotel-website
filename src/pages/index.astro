@@ -17,7 +17,7 @@ const schema = [
     "@context": "https://schema.org",
     "@type": "Hotel",
     name: "Orchha Palace Hotel & Convention Centre",
-    url: Astro.site,
+    url: new URL(withBase("/"), Astro.site),
     image: new URL(withBase("/images/property-royal-ambience.jpg"), Astro.site),
     telephone: "+91-95160-06201",
     email: contact.reservationsEmail,
@@ -130,7 +130,7 @@ const schema = [
   <section class="section shell">
     <SectionHeading align="center" eyebrow="Ready when you are" title="Let Orchha set the pace" copy="Check live room availability, or speak with the hotel team if you are planning for a group or celebration." />
     <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
-      <a class="button button--primary" href="#availability" data-booking-jump>Check availability <Icon name="ph:arrow-up" size={18} /></a>
+      <a class="button button--primary" href="#availability" data-booking-open data-booking-source="home_final_cta">Check availability <Icon name="ph:arrow-up" size={18} /></a>
       <a class="button button--secondary" href={contact.whatsapp} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Chat on WhatsApp <Icon name="ph:whatsapp-logo" size={18} /></a>
     </div>
   </section>

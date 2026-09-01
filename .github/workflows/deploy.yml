@@ -28,6 +28,7 @@ jobs:
         env:
           PUBLIC_SITE_STATUS: staging
           PUBLIC_MEDIA_PREVIEW: "true"
+          PUBLIC_BOOKING_URL: "https://bookingengine.maximojo.com/?hid=India54468d49-cd5b-4af2-a615-303eda366eea"
 
   deploy:
     environment:

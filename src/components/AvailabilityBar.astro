@@ -1,74 +1,43 @@
 ---
 import { Icon } from "astro-icon/components";
+import BookingForm from "@/components/BookingForm.astro";
+import { DEFAULT_BOOKING_URL } from "@/lib/booking";
 import { withBase } from "@/lib/paths";
 
-type Props = { compact?: boolean; heading?: string };
-const { compact = false, heading = "Plan your stay" } = Astro.props;
-const supportsSearch = import.meta.env.PUBLIC_MAXIMOJO_SUPPORTS_SEARCH === "true";
-const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL?.trim();
-
-const formatDate = (date: Date) => date.toISOString().slice(0, 10);
-const checkIn = new Date();
-checkIn.setDate(checkIn.getDate() + 14);
-const checkOut = new Date(checkIn);
-checkOut.setDate(checkOut.getDate() + 2);
+type RoomIntent = { slug: string; name: string; code?: string };
+type Props = { compact?: boolean; heading?: string; room?: RoomIntent };
+const { compact = false, heading = "Plan your stay", room } = Astro.props;
+const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL?.trim() || DEFAULT_BOOKING_URL;
 ---
 
 <section class:list={["availability", compact && "availability--compact"]} id="availability" aria-labelledby="availability-heading">
   <div class="availability__heading">
     <p class="eyebrow">Direct, secure booking</p>
     <h2 id="availability-heading">{heading}</h2>
-    <p>Live availability and payment continue securely in the hotel's official booking engine.</p>
+    <p>Choose your stay here, then compare live rooms and complete secure PayU payment in Maximojo.</p>
   </div>
 
-  {bookingUrl && supportsSearch ? (
-    <form class="availability-form" data-booking-form data-booking-url={bookingUrl} data-supports-search="true" novalidate>
-      <label>
-        <span><Icon name="ph:calendar-blank" size={20} aria-hidden="true" /> Check in</span>
-        <input type="date" name="checkIn" value={formatDate(checkIn)} min={formatDate(new Date())} required />
-      </label>
-      <label>
-        <span><Icon name="ph:calendar-check" size={20} aria-hidden="true" /> Check out</span>
-        <input type="date" name="checkOut" value={formatDate(checkOut)} min={formatDate(checkIn)} required />
-      </label>
-      <label>
-        <span><Icon name="ph:users" size={20} aria-hidden="true" /> Guests</span>
-        <select name="adults" aria-label="Adults">
-          <option value="1">1 adult</option>
-          <option value="2" selected>2 adults</option>
-          <option value="3">3 adults</option>
-          <option value="4">4 adults</option>
-          <option value="5">5 adults</option>
-          <option value="6">6 adults</option>
-        </select>
-        <input type="hidden" name="children" value="0" />
-        <input type="hidden" name="rooms" value="1" />
-      </label>
-      <p class="form-message" data-booking-message aria-live="polite"></p>
-      <button class="button button--primary availability-form__button" type="submit">
-        Check availability <Icon name="ph:arrow-right" size={19} aria-hidden="true" />
-      </button>
-    </form>
-  ) : bookingUrl ? (
-    <div class="availability-direct">
-      <p>Your dates and room choice will be confirmed in the hotel's live rate calendar.</p>
-      <a class="button button--primary" href={bookingUrl} target="_blank" rel="noreferrer" data-track="booking_engine_handoff">
-        Check live availability <Icon name="ph:arrow-up-right" size={19} aria-hidden="true" />
-      </a>
-    </div>
-  ) : (
-    <div class="availability-direct">
-      <p>The hotel's live booking link is being verified. Reservations can confirm dates and rates now.</p>
-      <div class="availability-direct__actions">
-        <a class="button button--primary" href="tel:+919516006201" data-track="call_clicked">
-          Call reservations <Icon name="ph:phone" size={19} aria-hidden="true" />
-        </a>
-        <a class="button button--secondary" href="https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%27d%20like%20to%20check%20room%20availability." target="_blank" rel="noreferrer" data-track="whatsapp_clicked">
-          Ask on WhatsApp <Icon name="ph:whatsapp-logo" size={19} aria-hidden="true" />
-        </a>
-      </div>
-    </div>
-  )}
+  <div class="availability__desktop-form">
+    <BookingForm bookingUrl={bookingUrl} source={room ? "room_availability" : "availability_bar"} room={room} />
+  </div>
+
+  <a
+    class="button button--primary availability__mobile-open"
+    href="#availability"
+    data-booking-open
+    data-booking-source={room ? "room_availability" : "availability_bar"}
+    data-booking-room={room?.slug || ""}
+    data-booking-room-name={room?.name || ""}
+    data-booking-room-code={room?.code || ""}
+  >
+    Choose dates & guests <Icon name="ph:arrow-right" size={19} aria-hidden="true" />
+  </a>
+
+  <div class="availability__support">
+    <span>Need two or more rooms?</span>
+    <a href="tel:+919516006201" data-track="call_clicked">Call</a>
+    <a href="https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%27d%20like%20help%20with%20a%20multi-room%20booking." target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp</a>
+  </div>
 
   <a class="availability__rooms" href={withBase("/rooms/")}>View rooms & suites <Icon name="ph:caret-right" size={17} aria-hidden="true" /></a>
 </section>

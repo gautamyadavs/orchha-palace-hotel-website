@@ -1,0 +1,80 @@
+---
+import { Icon } from "astro-icon/components";
+
+type RoomIntent = {
+  slug: string;
+  name: string;
+  code?: string;
+};
+
+type Props = {
+  bookingUrl: string;
+  source: string;
+  room?: RoomIntent;
+  variant?: "inline" | "sheet";
+};
+
+const { bookingUrl, source, room, variant = "inline" } = Astro.props;
+---
+
+<form
+  class:list={["booking-form", `booking-form--${variant}`]}
+  data-booking-form
+  data-booking-url={bookingUrl}
+  data-booking-source={source}
+  data-booking-room={room?.slug || ""}
+  data-booking-room-name={room?.name || ""}
+  data-booking-room-code={room?.code || ""}
+  novalidate
+>
+  <div class="booking-form__room" data-booking-room-preference hidden={!room}>
+    <Icon name="ph:bed" size={20} aria-hidden="true" />
+    <span>Preferred stay: <strong data-booking-room-name>{room?.name}</strong></span>
+    <button type="button" data-booking-room-clear hidden={!room}>View every room</button>
+  </div>
+
+  <div class="booking-form__grid">
+    <label class="booking-form__field">
+      <span><Icon name="ph:calendar-blank" size={19} aria-hidden="true" /> Check in</span>
+      <input type="date" name="checkIn" required />
+    </label>
+
+    <label class="booking-form__field">
+      <span><Icon name="ph:calendar-check" size={19} aria-hidden="true" /> Check out</span>
+      <input type="date" name="checkOut" required />
+    </label>
+
+    <label class="booking-form__field">
+      <span><Icon name="ph:user" size={19} aria-hidden="true" /> Adults</span>
+      <select name="adults" aria-label="Adults">
+        {Array.from({ length: 12 }, (_, index) => index + 1).map((count) => (
+          <option value={count} selected={count === 2}>{count}</option>
+        ))}
+      </select>
+    </label>
+
+    <label class="booking-form__field">
+      <span><Icon name="ph:baby" size={19} aria-hidden="true" /> Children</span>
+      <select name="children" aria-label="Children">
+        {Array.from({ length: 9 }, (_, index) => index).map((count) => (
+          <option value={count} selected={count === 0}>{count}</option>
+        ))}
+      </select>
+    </label>
+
+    <button class="button button--primary booking-form__submit" type="submit">
+      Check live rates <Icon name="ph:arrow-right" size={19} aria-hidden="true" />
+    </button>
+  </div>
+
+  <details class="booking-form__promo">
+    <summary>Add a promo code</summary>
+    <label>
+      <span>Promo code</span>
+      <input type="text" name="promoCode" inputmode="text" autocomplete="off" maxlength="40" />
+    </label>
+  </details>
+
+  <p class="booking-form__note">Live rates, room selection and secure PayU payment continue in Maximojo. Add another room in the next step.</p>
+  <p class="form-message" data-booking-message role="status" aria-live="polite"></p>
+</form>

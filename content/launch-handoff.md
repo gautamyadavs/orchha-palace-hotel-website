@@ -4,22 +4,25 @@ Complete this once with hotel management before enabling a production build.
 
 ## 1. Booking engine
 
-- Confirmed public Maximojo booking URL:
-- Does it accept prefilled dates? Yes / No
-- Check-in parameter name and format:
-- Check-out parameter name and format:
-- Adults parameter name:
-- Children parameter name:
-- Room-count parameter name:
-- Promo-code parameter name:
+- Confirmed public Maximojo booking URL: `https://bookingengine.maximojo.com/?hid=India54468d49-cd5b-4af2-a615-303eda366eea`
+- Prefilled dates verified: Yes, ISO `YYYY-MM-DD`
+- Check-in parameter: `checkin`
+- Check-out parameter: `checkout`
+- Adults parameter: `nAdults`
+- Children parameter: `nChildrens`
+- Room-count parameter: unsupported in the current engine; add rooms after handoff
+- Promo-code parameter: `promocode`
+- Optional room parameter: `roomcode`, only after each catalogue mapping is verified
 - Test booking reference completed through PayU:
 - Cancellation/amendment journey checked by:
 
-If any parameter is uncertain, keep `PUBLIC_MAXIMOJO_SUPPORTS_SEARCH=false`; the site will open the engine without appending dates.
+The website-to-Maximojo handoff has been verified without creating a reservation. Payment success remains unverified until staff completes a controlled booking.
 
 ## 2. Room approval
 
 For each category, confirm its exact primary photo, 6–10 gallery photos, name, size, bed configuration, maximum occupancy, view/aspect, bathroom, amenities and inclusions.
+
+Maximojo must expose five distinct sellable categories before room-specific codes are published: Standard, Standard Twin, Deluxe, Deluxe Twin and Presidential Suite. Confirm the PMS/channel mapping and rate plans before changing production inventory.
 
 - Standard Room: 2 category-matched staging images; exact Standard bathroom and 4–8 additional useful views required.
 - Standard Room Twin: 2 category-matched staging images; exact Standard bathroom and clean alternate angles required.

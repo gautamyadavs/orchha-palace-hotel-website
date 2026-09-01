@@ -32,11 +32,13 @@ Each room detail page now has a booking-platform-style gallery with category-spe
 
 ## Booking handoff
 
-`PUBLIC_BOOKING_URL` is the single source for the Maximojo handoff. Until the hotel supplies the final public engine URL and its query contract, the preview offers call and WhatsApp reservations instead of guessing or linking to an unverified page. Set `PUBLIC_MAXIMOJO_SUPPORTS_SEARCH=true` only after end-to-end verification with Maximojo and PayU.
+`PUBLIC_BOOKING_URL` points to the verified Orchha Palace Maximojo engine. The website sends `checkin`, `checkout`, `nAdults`, `nChildrens`, optional `promocode`, and an optional management-approved `roomcode`, then continues in the same tab. Maximojo ignores its `nRooms` query value, so additional rooms are added inside the engine instead of collecting a room count that cannot be preserved.
+
+The public engine currently exposes only Standard and Deluxe. Do not populate `maximojoRoomCode` or claim category-specific handoff until management and Maximojo have configured and checked all five sellable categories. The custom site never receives payment-card data, Maximojo passwords, PayU merchant credentials or payment callbacks.
 
 A production build intentionally fails unless Sanity is configured with complete content and people-free media that is both rights-cleared and publication-approved. This prevents preview photography or unverified room/venue mappings from reaching the public domain accidentally.
 
-The custom site never receives payment-card data.
+Payment completion has not been tested by design. Staff must complete a controlled production booking before the site can be promoted from staging.
 
 ## Event leads
 

@@ -106,42 +106,127 @@ function setupTrackedActions() {
   });
 }
 
-function setupBooking() {
-  const form = $<HTMLFormElement>("[data-booking-form]");
-  if (!form) return;
-  const message = $<HTMLElement>("[data-booking-message]", form);
-  const checkIn = $<HTMLInputElement>('input[name="checkIn"]', form);
-  const checkOut = $<HTMLInputElement>('input[name="checkOut"]', form);
+const formatLocalDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
 
-  checkIn?.addEventListener("change", () => {
-    if (!checkIn.value || !checkOut) return;
-    const minimum = new Date(`${checkIn.value}T12:00:00`);
-    minimum.setDate(minimum.getDate() + 1);
-    checkOut.min = minimum.toISOString().slice(0, 10);
-    if (!checkOut.value || checkOut.value <= checkIn.value) checkOut.value = checkOut.min;
+const dateAfter = (date: Date, days: number) => {
+  const next = new Date(date);
+  next.setDate(next.getDate() + days);
+  return next;
+};
+
+function setupBookingSheet() {
+  const sheet = $<HTMLDialogElement>("[data-booking-sheet]");
+  const form = sheet ? $<HTMLFormElement>("[data-booking-form]", sheet) : null;
+  if (!sheet || !form) return;
+
+  let returnFocus: HTMLElement | null = null;
+  const preference = $<HTMLElement>("[data-booking-room-preference]", form);
+  const preferenceName = $<HTMLElement>("[data-booking-room-name]", form);
+  const clearRoom = $<HTMLButtonElement>("[data-booking-room-clear]", form);
+
+  const setRoomIntent = (slug = "", name = "", code = "") => {
+    form.dataset.bookingRoom = slug;
+    form.dataset.bookingRoomName = name;
+    form.dataset.bookingRoomCode = code;
+    if (preferenceName) preferenceName.textContent = name;
+    if (preference) preference.hidden = !name;
+    if (clearRoom) clearRoom.hidden = !name;
+  };
+
+  $$<HTMLElement>("[data-booking-open]").forEach((opener) => {
+    opener.addEventListener("click", (event) => {
+      event.preventDefault();
+      returnFocus = opener;
+      const room = opener.dataset.bookingRoom || "";
+      const source = opener.dataset.bookingSource || "booking_cta";
+      setRoomIntent(room, opener.dataset.bookingRoomName || "", opener.dataset.bookingRoomCode || "");
+      form.dataset.bookingSource = source;
+      track("booking_sheet_opened", room ? { source, room } : { source });
+      if (room) track("room_booking_started", { source, room });
+      sheet.showModal();
+      document.body.classList.add("booking-open");
+      requestAnimationFrame(() => $<HTMLInputElement>('input[name="checkIn"]', form)?.focus());
+    });
   });
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    try {
-      const url = createBookingUrl(
-        {
-          checkIn: String(data.get("checkIn") || ""),
-          checkOut: String(data.get("checkOut") || ""),
-          adults: Number(data.get("adults") || 2),
-          children: Number(data.get("children") || 0),
-          rooms: Number(data.get("rooms") || 1)
-        },
-        { baseUrl: form.dataset.bookingUrl || `${document.body.dataset.basePath || ""}/rooms/`, supportsSearch: form.dataset.supportsSearch === "true" }
-      );
-      if (message) message.textContent = "Opening the hotel's secure booking engine…";
-      track("availability_started", { adults: Number(data.get("adults") || 2) });
-      track("booking_engine_handoff");
-      window.open(url, "_blank", "noopener,noreferrer");
-    } catch (error) {
-      if (message) message.textContent = error instanceof Error ? error.message : "Review the dates and try again.";
+  clearRoom?.addEventListener("click", () => setRoomIntent());
+  $<HTMLButtonElement>("[data-booking-close]", sheet)?.addEventListener("click", () => sheet.close());
+  sheet.addEventListener("click", (event) => {
+    if (event.target === sheet) sheet.close();
+  });
+  sheet.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      sheet.close();
     }
+  });
+  sheet.addEventListener("close", () => {
+    document.body.classList.remove("booking-open");
+    returnFocus?.focus();
+  });
+}
+
+function setupBookingForms() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  $$<HTMLFormElement>("[data-booking-form]").forEach((form) => {
+    const message = $<HTMLElement>("[data-booking-message]", form);
+    const checkIn = $<HTMLInputElement>('input[name="checkIn"]', form);
+    const checkOut = $<HTMLInputElement>('input[name="checkOut"]', form);
+    if (!checkIn || !checkOut) return;
+
+    checkIn.min = formatLocalDate(today);
+    if (!checkIn.value) checkIn.value = formatLocalDate(dateAfter(today, 14));
+    checkOut.min = formatLocalDate(dateAfter(new Date(`${checkIn.value}T12:00:00`), 1));
+    if (!checkOut.value) checkOut.value = formatLocalDate(dateAfter(new Date(`${checkIn.value}T12:00:00`), 2));
+
+    checkIn.addEventListener("change", () => {
+      if (!checkIn.value) return;
+      const minimum = dateAfter(new Date(`${checkIn.value}T12:00:00`), 1);
+      checkOut.min = formatLocalDate(minimum);
+      if (!checkOut.value || checkOut.value <= checkIn.value) checkOut.value = checkOut.min;
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const source = form.dataset.bookingSource || "availability_bar";
+      const room = form.dataset.bookingRoom || "";
+      const details: Record<string, string | number> = {
+        source,
+        adults: Number(data.get("adults") || 2),
+        children: Number(data.get("children") || 0)
+      };
+      if (room) details.room = room;
+
+      try {
+        if (!form.dataset.bookingUrl) throw new Error("Live booking is temporarily unavailable. Please call or WhatsApp reservations.");
+        const url = createBookingUrl(
+          {
+            checkIn: String(data.get("checkIn") || ""),
+            checkOut: String(data.get("checkOut") || ""),
+            adults: Number(data.get("adults") || 2),
+            children: Number(data.get("children") || 0),
+            promoCode: String(data.get("promoCode") || ""),
+            roomCode: form.dataset.bookingRoomCode || ""
+          },
+          { baseUrl: form.dataset.bookingUrl }
+        );
+        if (message) message.textContent = "Taking you to secure live rates…";
+        track("availability_submitted", details);
+        track("booking_engine_handoff", details);
+        window.location.assign(url.href);
+      } catch (error) {
+        if (message) message.textContent = error instanceof Error ? error.message : "Review the dates and try again.";
+        track("booking_handoff_failed", details);
+      }
+    });
   });
 }
 
@@ -309,6 +394,7 @@ function setupRoomGalleries() {
 setupMenu();
 setupConsent();
 setupTrackedActions();
-setupBooking();
+setupBookingSheet();
+setupBookingForms();
 setupLeadForm();
 setupRoomGalleries();

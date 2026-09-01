@@ -19,8 +19,21 @@ const { room, featured = false } = Astro.props;
       <div><dt>Space</dt><dd>{room.size}</dd></div>
       <div><dt>Bed</dt><dd>{room.bed}</dd></div>
     </dl>
-    <a class="text-link" href={withBase(`/rooms/${room.slug}/`)}>
-      Explore this stay <Icon name="ph:arrow-right" size={18} aria-hidden="true" />
-    </a>
+    <div class="room-card__actions">
+      <a class="text-link" href={withBase(`/rooms/${room.slug}/`)}>
+        Explore this stay <Icon name="ph:arrow-right" size={18} aria-hidden="true" />
+      </a>
+      <a
+        class="button button--primary button--small"
+        href="#availability"
+        data-booking-open
+        data-booking-source="room_card"
+        data-booking-room={room.slug}
+        data-booking-room-name={room.name}
+        data-booking-room-code={room.maximojoRoomCode || ""}
+      >
+        Check this room <Icon name="ph:calendar-check" size={17} aria-hidden="true" />
+      </a>
+    </div>
   </div>
 </article>
