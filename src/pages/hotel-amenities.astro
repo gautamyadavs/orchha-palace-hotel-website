@@ -7,11 +7,13 @@ import AvailabilityBar from "@/components/AvailabilityBar.astro";
 import { getSiteData } from "@/lib/cms";
 
 const { amenities, media } = await getSiteData();
-const pool = media.find((item) => item.id === "pool") || media[0];
+const hero = media.find((item) => item.id === "property-courtyard") || media[0];
+const spa = media.find((item) => item.id === "spa-salon") || hero;
+const gym = media.find((item) => item.id === "gym") || hero;
 ---
 
-<BaseLayout title="Hotel & Amenities | Orchha Palace" description="Explore Orchha Palace's outdoor pool, spa, fitness centre, 4,100 sq. ft. Kids Zone, dining, concierge and guest services." image={pool.src}>
-  <PageHero eyebrow="Hotel & amenities" title="Everything a good stay needs" copy="Wellness, family time, dining and useful service—close enough to enjoy without planning your day around it." image={pool.src} alt={pool.alt} />
+<BaseLayout title="Hotel & Amenities | Orchha Palace" description="Explore Orchha Palace's spa and salon, fitness centre, outdoor pool, 4,100 sq. ft. Kids Zone, dining, concierge and guest services." image={hero.src}>
+  <PageHero eyebrow="Hotel & amenities" title="Everything a good stay needs" copy="Wellness, movement, family time, dining and useful service—close enough to enjoy without planning your day around it." image={hero.src} alt={hero.alt} />
 
   <section class="section shell">
     <SectionHeading eyebrow="At the hotel" title="Spend the day entirely your way" copy="Some services, treatments and private instruction require advance booking; the concierge can arrange them before or during your stay." />
@@ -21,9 +23,19 @@ const pool = media.find((item) => item.id === "pool") || media[0];
   </section>
 
   <section class="section section--paper">
-    <div class="shell editorial-split">
-      <div class="editorial-split__image"><img src={pool.src} alt={pool.alt} width="1000" height="1100" loading="lazy" /></div>
-      <div class="editorial-split__copy"><p class="eyebrow">Poolside hours</p><h2>Swim, stretch out, slow down</h2><p>The freeform outdoor pool includes an inbuilt stage and a sun deck for long, unhurried afternoons. Poolside refreshments are available through the hotel team.</p><a class="text-link" href="#availability" data-booking-open data-booking-source="amenities">Plan a stay <Icon name="ph:calendar-check" size={18} /></a></div>
+    <div class="shell">
+      <SectionHeading eyebrow="Wellness, your way" title="Reset gently or keep your routine" copy="The pool remains part of the stay, while dedicated spaces for treatments, salon appointments and exercise give the rest of the hotel equal room to shine." />
+      <div class="wellness-grid">
+        <article class="wellness-card wellness-card--spa">
+          <div class="wellness-card__image"><img src={spa.src} alt={spa.alt} width="1080" height="1080" loading="lazy" /></div>
+          <div class="wellness-card__body"><p class="eyebrow">Spa & salon</p><h3>A full spa-and-salon pause</h3><p>Kairali Spa and Vanity Durbar bring massage and facial treatments together with hair, beauty and grooming services. Advance appointments are recommended.</p></div>
+        </article>
+        <article class="wellness-card">
+          <div class="wellness-card__image"><img src={gym.src} alt={gym.alt} width="1200" height="900" loading="lazy" /></div>
+          <div class="wellness-card__body"><p class="eyebrow">Fitness</p><h3>Keep your routine in view</h3><p>The dedicated fitness room includes treadmills, an elliptical trainer, free weights, benches and floor space for stretching or yoga.</p></div>
+        </article>
+      </div>
+      <div class="wellness-action"><a class="text-link" href="#availability" data-booking-open data-booking-source="amenities">Plan a stay <Icon name="ph:calendar-check" size={18} /></a></div>
     </div>
   </section>
 

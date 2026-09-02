@@ -2,16 +2,29 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageHero from "@/components/PageHero.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
+import RoomGallery from "@/components/RoomGallery.astro";
 import EventLeadForm from "@/components/EventLeadForm.astro";
 import { contact } from "@/data/site";
 import { getSiteData } from "@/lib/cms";
 
 const { venues, media } = await getSiteData();
 const hero = media.find((item) => item.id === "wedding-showcase") || venues.find((item) => item.slug === "jeja-bagh")?.image || venues[0].image;
+const privateDate = media.find((item) => item.id === "private-date") || hero;
+const eventShowcase = media.filter((item) => ["event-showcase-one", "event-showcase-two", "event-showcase-fireworks"].includes(item.id));
 ---
 
 <BaseLayout title="Weddings, Meetings & Events | Orchha Palace" description="Compare seven indoor and outdoor venues at Orchha Palace, from a 14-seat boardroom to a 140,000 sq. ft. lawn, and send an event enquiry." image={hero.src} preloadImage={hero.src} preloadMobileImage={hero.mobileSrc || hero.src}>
   <PageHero eyebrow="Destination weddings in Orchha" title="A palace made for celebration" copy="Ceremonies beneath the open sky, grand indoor gatherings and room for your guests across one 12-acre estate." image={hero.src} mobileImage={hero.mobileSrc} alt={hero.alt} position={hero.focalPoint} />
+
+  {eventShowcase.length > 0 && (
+    <section class="section shell">
+      <div class="room-gallery-heading">
+        <div><p class="eyebrow">Celebrations in motion</p><h2>See what the estate can become</h2></div>
+        <p>Swipe through three starting points—from a colourful daytime welcome and the open-air amphitheatre to a fireworks-lit wedding finale. More celebrations can be added as the library grows.</p>
+      </div>
+      <RoomGallery room="event-showcase" images={eventShowcase} label="event" trackEvent="event_gallery_opened" />
+    </section>
+  )}
 
   <section class="section shell">
     <SectionHeading eyebrow="Compare the spaces" title="Start with scale, then shape the atmosphere" copy="Published sizes and indoor theatre capacities follow the hotel's current official information. Outdoor capacities are planned to your layout and require final confirmation from the events team." />
@@ -26,7 +39,7 @@ const hero = media.find((item) => item.id === "wedding-showcase") || venues.find
   <section class="section section--paper">
     <div class="shell">
       <SectionHeading eyebrow="See the possibilities" title="From boardroom focus to open-sky celebration" />
-      <p class="content-note">The lead wedding photograph was selected by the hotel. Supporting venue photographs remain representative property images until the exact lawn, hall and boardroom mapping is approved.</p>
+      <p class="content-note">The lead wedding and boardroom photographs are confirmed hotel selections. Other supporting venue photographs remain representative property images until each lawn and hall is mapped by the hotel team.</p>
       <div class="venue-grid">
         {venues.map((venue) => (
           <article class="venue-card">
@@ -35,6 +48,13 @@ const hero = media.find((item) => item.id === "wedding-showcase") || venues.find
           </article>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="section shell">
+    <div class="editorial-split private-date-feature">
+      <div class="editorial-split__image editorial-split__image--wide"><img src={privateDate.src} alt={privateDate.alt} width="1200" height="794" loading="lazy" style={`object-position:${privateDate.focalPoint}`} /></div>
+      <div class="editorial-split__copy"><p class="eyebrow">Just for two</p><h2>Plan a private date worth remembering</h2><p>Mark a Valentine’s evening, anniversary or personal milestone with a candlelit private setup shaped around the two of you. Share the occasion and preferred date with the events team to explore dining, décor and location options.</p><a class="button button--primary" href="#event-enquiry">Plan a private evening</a></div>
     </div>
   </section>
 

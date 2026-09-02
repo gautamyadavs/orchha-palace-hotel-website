@@ -42,11 +42,31 @@ export const media: ImageAsset[] = [
     ...image("presidential-suite", "/images/presidential-suite.webp", "Presidential Suite bedroom with carved timber bed and generous floor space", "room", "Presidential Suite bedroom"),
     mobileSrc: withBase("/images/presidential-suite-mobile.webp")
   },
+  {
+    ...image("presidential-suite-exterior", "/images/presidential-suite-exterior.webp", "Low-rise Presidential Suite exterior facing a private garden at Orchha Palace", "room", "Presidential Suite exterior", "landscape", "50% 54%"),
+    rightsStatus: "approved",
+    publishApproved: true
+  },
+  {
+    ...image("presidential-bedroom-two", "/images/presidential-bedroom-two.webp", "Presidential Suite second bedroom with a double bed, timber headboard and television", "room", "Presidential Suite second bedroom"),
+    rightsStatus: "approved",
+    publishApproved: true
+  },
   image("suite-living", "/images/suite-living.jpg", "Presidential Suite private living room with carved sofas around a coffee table", "room", "Presidential Suite living room"),
   image("presidential-dining", "/images/presidential-dining.jpg", "Presidential Suite dining room with a six-seat table and adjoining lounge", "room", "Presidential Suite dining room"),
   image("presidential-private-pool", "/images/presidential-private-pool.jpg", "Private swimming pool in the Presidential Suite courtyard", "room", "Presidential Suite private pool"),
   image("presidential-jacuzzi", "/images/presidential-jacuzzi.jpg", "Presidential Suite master bathroom jacuzzi prepared with flower petals", "room", "Presidential Suite master bathroom", "portrait"),
   image("pool", "/images/pool.jpg", "Outdoor swimming pool surrounded by palace architecture", "wellness", "Swimming pool", "landscape", "50% 55%"),
+  {
+    ...image("spa-salon", "/images/spa-salon.webp", "Kairali Spa and Vanity Durbar services card beside the salon interior", "wellness", "Spa and salon"),
+    rightsStatus: "approved",
+    publishApproved: true
+  },
+  {
+    ...image("gym", "/images/gym.webp", "Hotel fitness room with treadmills, an elliptical trainer, free weights and exercise mats", "wellness", "Fitness room"),
+    rightsStatus: "approved",
+    publishApproved: true
+  },
   image("kids-zone", "/images/kids-zone.jpg", "Outdoor play area for younger guests", "wellness", "Kids Zone"),
   image("annajal", "/images/annajal-selected.webp", "Annajal dining room set for service at Orchha Palace", "dining", "Annajal"),
   {
@@ -65,7 +85,35 @@ export const media: ImageAsset[] = [
   image("samrat", "/images/samrat-hall.jpg", "Indoor event hall at Orchha Palace; exact venue mapping is awaiting hotel confirmation", "venue", "Samrat Hall — mapping pending"),
   image("bundela", "/images/bundela-darbar.jpg", "Indoor banquet setup at Orchha Palace; exact venue mapping is awaiting hotel confirmation", "venue", "Bundela Darbar — mapping pending"),
   image("diwan", "/images/diwan-e-khas.jpg", "Indoor event hall at Orchha Palace; exact venue mapping is awaiting hotel confirmation", "venue", "Diwan-e-Khas — mapping pending"),
-  image("boardroom", "/images/boardroom.jpg", "Indoor event setup at Orchha Palace; exact boardroom mapping is awaiting hotel confirmation", "venue", "Boardroom — mapping pending"),
+  {
+    ...image("boardroom", "/images/boardroom.webp", "Orchha Palace boardroom with a long conference table, display and seating for fourteen guests", "venue", "Boardroom"),
+    rightsStatus: "approved",
+    publishApproved: true
+  },
+  {
+    ...image("private-date", "/images/private-date.webp", "A couple sharing a private candlelit dinner on the illuminated hotel lawn", "venue", "Private date-night setup"),
+    peopleVisible: true,
+    rightsStatus: "approved",
+    publishApproved: true
+  },
+  {
+    ...image("event-showcase-one", "/images/event-showcase-one.webp", "Colourful daytime wedding celebration staged in the Orchha Palace gardens", "venue", "Daytime wedding celebration"),
+    peopleVisible: true,
+    rightsStatus: "approved",
+    publishApproved: true
+  },
+  {
+    ...image("event-showcase-two", "/images/event-showcase-two.webp", "A couple walking through the pink open-air amphitheatre at Orchha Palace", "venue", "Open-air amphitheatre"),
+    peopleVisible: true,
+    rightsStatus: "approved",
+    publishApproved: true
+  },
+  {
+    ...image("event-showcase-fireworks", "/images/event-showcase-fireworks.webp", "Wedding couple on a floral stage beneath a coordinated fireworks display", "venue", "Wedding finale with fireworks", "landscape", "50% 46%"),
+    peopleVisible: true,
+    rightsStatus: "approved",
+    publishApproved: true
+  },
   {
     ...image("private-garden-dining", "/images/private-garden-dining.jpg", "Private dining table arranged on the lawn beneath a carved stone wall", "venue", "Private garden dining", "portrait", "50% 61%"),
     peopleVisible: true
@@ -173,7 +221,7 @@ export const rooms: Room[] = [
     bathroom: "Two attached bathrooms; master bath with jacuzzi and steam",
     view: "Private pool and garden setting",
     image: byId("presidential-suite"),
-    gallery: [byId("presidential-suite"), byId("suite-living"), byId("presidential-dining"), byId("presidential-private-pool"), byId("presidential-jacuzzi")],
+    gallery: [byId("presidential-suite"), byId("presidential-suite-exterior"), byId("presidential-bedroom-two"), byId("suite-living"), byId("presidential-dining"), byId("presidential-private-pool"), byId("presidential-jacuzzi")],
     highlights: ["Private pool", "Dedicated butler", "Living and dining room", "Jacuzzi and steam bath"],
     amenities: [...sharedAmenities, "56-inch television", "Media console", "Pantry", "Private pool"],
     inclusions: ["Welcome cake or wine", "Fruit basket", "Floral arrangement", "Butler service"]
@@ -224,8 +272,8 @@ export const venues: EventVenue[] = [
 
 export const amenities: Amenity[] = [
   { name: "Outdoor pool", icon: "ph:swimming-pool", description: "A landscaped freeform pool with sun deck, poolside refreshments and an inbuilt stage.", image: byId("pool") },
-  { name: "Spa & steam", icon: "ph:sparkle", description: "Massage, facial and reflexology treatments, plus steam and jacuzzi facilities." },
-  { name: "Fitness & yoga", icon: "ph:barbell", description: "A fully fitted gym; personal training and private yoga sessions can be arranged." },
+  { name: "Spa & salon", icon: "ph:sparkle", description: "Massage and facial treatments alongside hair, beauty and grooming services by appointment.", image: byId("spa-salon") },
+  { name: "Fitness & yoga", icon: "ph:barbell", description: "A dedicated gym with cardio equipment, free weights and space to stretch or practise yoga.", image: byId("gym") },
   { name: "Kids Zone", icon: "ph:balloon", description: "A 4,100 sq. ft. outdoor play area with slides, swings, climbing frames and trampolines.", image: byId("kids-zone") },
   { name: "24-hour dining", icon: "ph:bell-ringing", description: "Round-the-clock in-room dining for early arrivals, late evenings and quiet meals in." },
   { name: "Concierge", icon: "ph:map-pin", description: "Local sightseeing, transport and private Orchha experiences arranged on request." },

@@ -1061,6 +1061,52 @@ h3 {
   gap: 12px;
 }
 
+.wellness-grid {
+  display: grid;
+  gap: 22px;
+}
+
+.wellness-card {
+  overflow: hidden;
+  background: var(--ivory);
+}
+
+.wellness-card__image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.wellness-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wellness-card--spa .wellness-card__image img {
+  object-fit: contain;
+}
+
+.wellness-card__body {
+  padding: 24px;
+}
+
+.wellness-card__body h3 {
+  margin-bottom: 12px;
+  font-size: 2.2rem;
+}
+
+.wellness-card__body > p:not(.eyebrow) {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.wellness-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
 .gallery-grid figure {
   margin: 0;
   overflow: hidden;
@@ -1682,6 +1728,10 @@ h3 {
 
   .amenity-grid,
   .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wellness-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
