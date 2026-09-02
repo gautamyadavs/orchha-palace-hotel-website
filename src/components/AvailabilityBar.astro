@@ -14,7 +14,7 @@ const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL?.trim() || DEFAULT_BOOKING
   <div class="availability__heading">
     <p class="eyebrow">Direct, secure booking</p>
     <h2 id="availability-heading">{heading}</h2>
-    <p>Choose your stay here, then compare live rooms and complete secure PayU payment in Maximojo.</p>
+    <p>Select your dates and guests to see current rooms and rates. Your secure booking opens in the hotel's official booking system.</p>
   </div>
 
   <div class="availability__desktop-form">
@@ -34,10 +34,10 @@ const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL?.trim() || DEFAULT_BOOKING
   </a>
 
   <div class="availability__support">
-    <span>Need two or more rooms?</span>
+    <span>Planning a group stay?</span>
     <a href="tel:+919516006201" data-track="call_clicked">Call</a>
     <a href="https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%27d%20like%20help%20with%20a%20multi-room%20booking." target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp</a>
   </div>
 
-  <a class="availability__rooms" href={withBase("/rooms/")}>View rooms & suites <Icon name="ph:caret-right" size={17} aria-hidden="true" /></a>
+  <a class="availability__rooms" href={withBase("/rooms/")}>Compare rooms & suites <Icon name="ph:caret-right" size={17} aria-hidden="true" /></a>
 </section>

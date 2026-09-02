@@ -9,6 +9,48 @@ declare global {
 const $ = <T extends Element>(selector: string, root: ParentNode = document) => root.querySelector<T>(selector);
 const $$ = <T extends Element>(selector: string, root: ParentNode = document) => [...root.querySelectorAll<T>(selector)];
 
+function setupHeader() {
+  const header = $<HTMLElement>("[data-header]");
+  if (!header) return;
+
+  let scheduled = false;
+  const update = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 32);
+    scheduled = false;
+  };
+
+  update();
+  window.addEventListener("scroll", () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+}
+
+function setupStickyBooking() {
+  const sticky = $<HTMLElement>("[data-mobile-sticky]");
+  if (!sticky || !("IntersectionObserver" in window)) return;
+
+  const visibility = new Map<Element, boolean>();
+  const update = () => sticky.classList.toggle("is-hidden", [...visibility.values()].some(Boolean));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => visibility.set(entry.target, entry.isIntersecting));
+    update();
+  }, { threshold: 0.2 });
+
+  const bookingAction = $<HTMLElement>("#availability");
+  const footer = $<HTMLElement>(".site-footer");
+  const inPageActions = $$<HTMLElement>("[data-booking-open]").filter((target) => (
+    !target.closest("[data-mobile-sticky], .site-header, .menu-drawer, .booking-sheet")
+  ));
+
+  [bookingAction, footer, ...inPageActions].forEach((target) => {
+    if (!target) return;
+    visibility.set(target, false);
+    observer.observe(target);
+  });
+}
+
 function setupMenu() {
   const menu = $<HTMLElement>("[data-menu]");
   const open = $<HTMLButtonElement>("[data-menu-open]");
@@ -391,6 +433,7 @@ function setupRoomGalleries() {
   });
 }
 
+setupHeader();
 setupMenu();
 setupConsent();
 setupTrackedActions();
@@ -398,3 +441,4 @@ setupBookingSheet();
 setupBookingForms();
 setupLeadForm();
 setupRoomGalleries();
+setupStickyBooking();

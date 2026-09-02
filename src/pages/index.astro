@@ -62,6 +62,14 @@ const schema = [
       <p class="eyebrow eyebrow--light">Orchha, Madhya Pradesh</p>
       <h1 id="home-title">A quieter kind of royal stay</h1>
       <p>Twelve landscaped acres near Orchha's forts and temples, shaped for unhurried stays and meaningful gatherings.</p>
+      <div class="home-hero__actions" aria-label="Plan your stay">
+        <a class="button button--light" href="#availability" data-booking-open data-booking-source="home_hero">
+          Check availability <Icon name="ph:calendar-check" size={18} aria-hidden="true" />
+        </a>
+        <a class="button button--on-dark" href={withBase("/rooms/")}>
+          Explore rooms <Icon name="ph:arrow-right" size={18} aria-hidden="true" />
+        </a>
+      </div>
     </div>
   </section>
 
@@ -81,7 +89,7 @@ const schema = [
         <a class="text-link" href={withBase("/hotel-amenities/")}>Discover the hotel <Icon name="ph:arrow-right" size={18} aria-hidden="true" /></a>
       </div>
     </div>
-    <div class="fact-strip" style="margin-top:clamp(48px,8vw,90px)">
+    <div class="fact-strip home-fact-strip">
       {propertyFacts.map((fact) => <div><strong>{fact.value}</strong><span>{fact.label}</span></div>)}
     </div>
   </section>
@@ -118,7 +126,7 @@ const schema = [
       <div class="editorial-split__copy">
         <p class="eyebrow eyebrow--light">Destination Orchha</p>
         <h2>History, just beyond the garden gates</h2>
-        <p style="color:rgba(255,255,255,.7)">Ram Raja Temple, Jahangir Mahal and the Betwa River are close enough for an early walk, an afternoon trail or a private guided visit arranged by the concierge.</p>
+        <p class="copy-on-dark">Ram Raja Temple, Jahangir Mahal and the Betwa River are close enough for an early walk, an afternoon trail or a private guided visit arranged by the concierge.</p>
         <a class="text-link text-link--light" href={withBase("/explore-orchha/")}>Explore Orchha <Icon name="ph:arrow-right" size={18} /></a>
       </div>
       <div class="editorial-split__image">
@@ -129,7 +137,7 @@ const schema = [
 
   <section class="section shell">
     <SectionHeading align="center" eyebrow="Ready when you are" title="Let Orchha set the pace" copy="Check live room availability, or speak with the hotel team if you are planning for a group or celebration." />
-    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+    <div class="centered-actions">
       <a class="button button--primary" href="#availability" data-booking-open data-booking-source="home_final_cta">Check availability <Icon name="ph:arrow-up" size={18} /></a>
       <a class="button button--secondary" href={contact.whatsapp} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Chat on WhatsApp <Icon name="ph:whatsapp-logo" size={18} /></a>
     </div>

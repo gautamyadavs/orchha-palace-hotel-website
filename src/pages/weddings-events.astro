@@ -13,8 +13,8 @@ const privateDate = media.find((item) => item.id === "private-date") || hero;
 const eventShowcase = media.filter((item) => ["event-showcase-one", "event-showcase-two", "event-showcase-fireworks"].includes(item.id));
 ---
 
-<BaseLayout title="Weddings, Meetings & Events | Orchha Palace" description="Compare seven indoor and outdoor venues at Orchha Palace, from a 14-seat boardroom to a 140,000 sq. ft. lawn, and send an event enquiry." image={hero.src} preloadImage={hero.src} preloadMobileImage={hero.mobileSrc || hero.src}>
-  <PageHero eyebrow="Destination weddings in Orchha" title="A palace made for celebration" copy="Ceremonies beneath the open sky, grand indoor gatherings and room for your guests across one 12-acre estate." image={hero.src} mobileImage={hero.mobileSrc} alt={hero.alt} position={hero.focalPoint} />
+<BaseLayout title="Weddings, Meetings & Events | Orchha Palace" description="Compare seven indoor and outdoor venues at Orchha Palace, from a 14-seat boardroom to a 140,000 sq. ft. lawn, and send an event enquiry." image={hero.src} preloadImage={hero.src} preloadMobileImage={hero.mobileSrc || hero.src} stickyBooking={false}>
+  <PageHero eyebrow="Destination weddings in Orchha" title="A palace made for celebration" copy="Ceremonies beneath the open sky, grand indoor gatherings and room for your guests across one 12-acre estate." image={hero.src} mobileImage={hero.mobileSrc} alt={hero.alt} position={hero.focalPoint} cta={{ label: "Start an event enquiry", href: "#event-enquiry" }} />
 
   {eventShowcase.length > 0 && (
     <section class="section shell">
