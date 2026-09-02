@@ -9,6 +9,7 @@ import { withBase } from "@/lib/paths";
 
 const { dining, media } = await getSiteData();
 const food = media.find((item) => item.id === "food") || dining[0].image;
+const groupDining = media.find((item) => item.id === "dining-groups") || food;
 const schema = dining.map((venue) => ({
   "@context": "https://schema.org",
   "@type": venue.slug === "madira" ? "BarOrPub" : "Restaurant",
@@ -25,7 +26,6 @@ const schema = dining.map((venue) => ({
 
   <section class="section shell">
     <SectionHeading eyebrow="Choose your setting" title="From breakfast to a final drink" copy="Opening hours and service formats may change around events; the front desk can confirm today's schedule." />
-    <p class="content-note">Photography is being matched to the exact restaurant and bar names. The hotel must approve those mappings before public launch.</p>
     <div class="dining-grid">
       {dining.map((venue) => (
         <article class="dining-card">
@@ -44,7 +44,7 @@ const schema = dining.map((venue) => ({
 
   <section class="section section--dark">
     <div class="shell editorial-split">
-      <div class="editorial-split__image"><img src={food.src} alt={food.alt} width="1000" height="1100" loading="lazy" /></div>
+      <div class="editorial-split__image"><img src={groupDining.src} alt={groupDining.alt} width="1800" height="1079" loading="lazy" /></div>
       <div class="editorial-split__copy">
         <p class="eyebrow eyebrow--light">A table for the occasion</p>
         <h2>Dining for groups and celebrations</h2>

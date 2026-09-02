@@ -48,10 +48,17 @@ export const media: ImageAsset[] = [
   image("presidential-jacuzzi", "/images/presidential-jacuzzi.jpg", "Presidential Suite master bathroom jacuzzi prepared with flower petals", "room", "Presidential Suite master bathroom", "portrait"),
   image("pool", "/images/pool.jpg", "Outdoor swimming pool surrounded by palace architecture", "wellness", "Swimming pool", "landscape", "50% 55%"),
   image("kids-zone", "/images/kids-zone.jpg", "Outdoor play area for younger guests", "wellness", "Kids Zone"),
-  image("annajal", "/images/annajal.jpg", "Dining room at Orchha Palace; exact restaurant mapping is awaiting hotel confirmation", "dining", "Annajal — mapping pending"),
-  image("dragon", "/images/dragon.jpg", "Dining room at Orchha Palace; exact restaurant mapping is awaiting hotel confirmation", "dining", "Dragon — mapping pending"),
-  image("madira", "/images/madira.jpg", "Lobby lounge at Orchha Palace; exact bar mapping is awaiting hotel confirmation", "dining", "Madira Bar — mapping pending"),
-  image("food", "/images/dining-food.jpg", "Dining room prepared for service at Orchha Palace", "dining", "Dining"),
+  image("annajal", "/images/annajal-selected.webp", "Annajal dining room set for service at Orchha Palace", "dining", "Annajal"),
+  {
+    ...image("dragon", "/images/dragon-selected.webp", "Dragon restaurant illuminated by its signature red lanterns", "dining", "Dragon"),
+    peopleVisible: true
+  },
+  {
+    ...image("madira", "/images/madira-selected.webp", "Madira bar with its warmly lit bottle display", "dining", "Madira Bar"),
+    peopleVisible: true
+  },
+  image("food", "/images/dining-main.webp", "Formal dining room arranged for an evening meal at Orchha Palace", "dining", "Main dining room"),
+  image("dining-groups", "/images/dining-groups.webp", "Decorative place setting prepared for a private group lunch", "dining", "Celebration dining place setting"),
   image("indramani", "/images/indramani-bagh.jpg", "Outdoor event lawn at Orchha Palace; exact venue mapping is awaiting hotel confirmation", "venue", "Indramani Bagh — mapping pending"),
   image("jeja", "/images/jeja-bagh.jpg", "Outdoor event lawn at Orchha Palace; exact venue mapping is awaiting hotel confirmation", "venue", "Jeja Bagh — mapping pending"),
   image("rudra", "/images/rudra-bagh.jpg", "Orchha Palace courtyard; exact Rudra Bagh mapping is awaiting hotel confirmation", "venue", "Rudra Bagh — mapping pending"),
