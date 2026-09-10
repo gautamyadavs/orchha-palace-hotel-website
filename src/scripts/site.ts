@@ -3,6 +3,7 @@ import { createBookingUrl } from "@/lib/booking";
 declare global {
   interface Window {
     dataLayer?: Array<Record<string, unknown>>;
+    turnstile?: { reset: () => void };
   }
 }
 
@@ -38,9 +39,10 @@ function setupStickyBooking() {
     update();
   }, { threshold: 0.2 });
 
-  const bookingAction = $<HTMLElement>("#availability");
+  const targetSelector = sticky.dataset.stickyTarget || "#availability";
+  const bookingAction = $<HTMLElement>(targetSelector);
   const footer = $<HTMLElement>(".site-footer");
-  const inPageActions = $$<HTMLElement>("[data-booking-open]").filter((target) => (
+  const inPageActions = $$<HTMLElement>("[data-booking-open], [data-sticky-suppress]").filter((target) => (
     !target.closest("[data-mobile-sticky], .site-header, .menu-drawer, .booking-sheet")
   ));
 
@@ -143,6 +145,7 @@ function setupTrackedActions() {
       if (!event) return;
       const details: Record<string, string> = {};
       if (element.dataset.room) details.room = element.dataset.room;
+      if (element.dataset.source) details.source = element.dataset.source;
       track(event, details);
     });
   });
@@ -278,7 +281,13 @@ function setupLeadForm() {
   const message = $<HTMLElement>("[data-lead-message]", form);
   const fallback = $<HTMLElement>("[data-lead-fallback]", form);
   const submit = $<HTMLButtonElement>('button[type="submit"]', form);
+  const endpoint = form.dataset.leadEndpoint || "";
+  const enabled = form.dataset.leadEnabled === "true";
+  if (!enabled || !endpoint) return;
   let started = false;
+  let submissionId = crypto.randomUUID();
+  const tentativeDate = $<HTMLInputElement>('input[name="tentativeDate"]', form);
+  if (tentativeDate) tentativeDate.min = formatLocalDate(new Date());
 
   form.addEventListener("focusin", () => {
     if (!started) {
@@ -305,14 +314,16 @@ function setupLeadForm() {
       message: String(data.get("message") || ""),
       consent: data.get("consent") === "on",
       turnstileToken: String(data.get("cf-turnstile-response") || ""),
-      website: String(data.get("website") || "")
+      website: String(data.get("website") || ""),
+      submissionId
     };
 
     if (submit) submit.disabled = true;
+    form.setAttribute("aria-busy", "true");
     if (message) message.textContent = "Sending your enquiry securely…";
 
     try {
-      const response = await fetch(`${document.body.dataset.basePath || ""}/api/event-leads`, {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(payload)
@@ -321,8 +332,9 @@ function setupLeadForm() {
       if (!response.ok || !result.ok) throw new Error(result.message || "The enquiry could not be sent.");
 
       form.reset();
+      submissionId = crypto.randomUUID();
       if (message) {
-        message.textContent = "Thank you. The events team has received your enquiry and will be in touch.";
+        message.textContent = "Thank you. The sales team has received your enquiry and will be in touch.";
         message.classList.add("is-success");
       }
       track("event_form_completed");
@@ -331,6 +343,8 @@ function setupLeadForm() {
       fallback?.removeAttribute("hidden");
       track("event_form_failed");
     } finally {
+      window.turnstile?.reset();
+      form.removeAttribute("aria-busy");
       if (submit) submit.disabled = false;
     }
   });

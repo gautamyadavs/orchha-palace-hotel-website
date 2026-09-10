@@ -16,9 +16,9 @@ const hero = media.find((item) => item.id === "property-exterior") || media[0];
   <section class="section shell">
     <SectionHeading eyebrow="Get in touch" title="One question, one clear contact" />
     <div class="contact-grid">
-      <div class="contact-card"><Icon name="ph:bed" size={28} /><h3>Reservations</h3><a href={`mailto:${contact.reservationsEmail}`}>{contact.reservationsEmail}</a><a href="tel:+919516006201" data-track="call_clicked">+91 95160 06201</a></div>
+      <div class="contact-card"><Icon name="ph:bed" size={28} /><h3>Reservations</h3><a href={`mailto:${contact.reservationsEmail}`}>{contact.reservationsEmail}</a><a href={contact.primaryPhoneHref} data-track="call_clicked">{contact.primaryPhone}</a></div>
       <div class="contact-card"><Icon name="ph:confetti" size={28} /><h3>Events & weddings</h3><a href={`mailto:${contact.salesEmail}`}>{contact.salesEmail}</a><a href={withBase("/weddings-events/#event-enquiry")}>Send an event enquiry</a></div>
-      <div class="contact-card"><Icon name="ph:whatsapp-logo" size={28} /><h3>WhatsApp</h3><a href={contact.whatsapp} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Start a conversation</a></div>
+      <div class="contact-card"><Icon name="ph:whatsapp-logo" size={28} /><h3>WhatsApp</h3><a href={contact.whatsapp.stay} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Start a conversation</a></div>
       <div class="contact-card"><Icon name="ph:map-pin" size={28} /><h3>Directions</h3><p>{contact.address}</p><a href={contact.maps} target="_blank" rel="noreferrer" data-track="directions_clicked">Open Google Maps</a></div>
     </div>
   </section>

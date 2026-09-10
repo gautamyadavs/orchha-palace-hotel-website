@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import BookingForm from "@/components/BookingForm.astro";
+import { contact } from "@/data/site";
 import { DEFAULT_BOOKING_URL } from "@/lib/booking";
 import { withBase } from "@/lib/paths";
 
@@ -35,8 +36,8 @@ const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL?.trim() || DEFAULT_BOOKING
 
   <div class="availability__support">
     <span>Planning a group stay?</span>
-    <a href="tel:+919516006201" data-track="call_clicked">Call</a>
-    <a href="https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%27d%20like%20help%20with%20a%20multi-room%20booking." target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp</a>
+    <a href={contact.primaryPhoneHref} data-track="call_clicked">Call</a>
+    <a href={contact.whatsapp.groupStay} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp</a>
   </div>
 
   <a class="availability__rooms" href={withBase("/rooms/")}>Compare rooms & suites <Icon name="ph:caret-right" size={17} aria-hidden="true" /></a>

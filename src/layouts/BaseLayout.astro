@@ -11,6 +11,7 @@ import ConsentBanner from "@/components/ConsentBanner.astro";
 import MobileStickyBar from "@/components/MobileStickyBar.astro";
 import BookingSheet from "@/components/BookingSheet.astro";
 import { basePath, withBase } from "@/lib/paths";
+import type { JourneyMode } from "@/lib/types";
 
 type Props = {
   title: string;
@@ -20,6 +21,7 @@ type Props = {
   schema?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
   stickyBooking?: boolean;
+  journey?: JourneyMode;
   preloadImage?: string;
   preloadMobileImage?: string;
 };
@@ -32,6 +34,7 @@ const {
   schema,
   noindex = false,
   stickyBooking = true,
+  journey = "stay",
   preloadImage,
   preloadMobileImage
 } = Astro.props;
@@ -69,16 +72,16 @@ const effectiveNoindex = noindex || siteStatus !== "production";
     {schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
     {turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
   </head>
-  <body data-turnstile-site-key={turnstileSiteKey || ""} data-gtm-id={gtmId || ""} data-base-path={basePath}>
+  <body data-turnstile-site-key={turnstileSiteKey || ""} data-gtm-id={gtmId || ""} data-base-path={basePath} data-journey={journey}>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <Header />
+    <Header journey={journey} />
     <main id="main-content">
       <slot />
     </main>
-    <Footer />
+    <Footer journey={journey} />
     <ConsentBanner />
     <BookingSheet />
-    {stickyBooking && <MobileStickyBar />}
+    {stickyBooking && <MobileStickyBar journey={journey} />}
     <script>
       import "../scripts/site.ts";
     </script>

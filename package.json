@@ -12,9 +12,11 @@
     "preview": "astro preview",
     "check": "astro check && tsc --noEmit --project tsconfig.worker.json",
     "test": "node --test --experimental-strip-types tests/*.test.ts",
+    "verify:production": "node scripts/verify-production.mjs",
     "sanity": "sanity dev",
     "sanity:deploy": "sanity deploy",
-    "deploy": "npm run build && wrangler deploy",
+    "deploy": "npm run build && npm run verify:production && wrangler deploy --env=\"\" --strict",
+    "deploy:preflight": "wrangler deploy --env preflight --strict",
     "cf-typegen": "wrangler types"
   },
   "dependencies": {

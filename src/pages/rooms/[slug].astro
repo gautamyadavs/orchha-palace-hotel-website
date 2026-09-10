@@ -6,6 +6,8 @@ import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import AvailabilityBar from "@/components/AvailabilityBar.astro";
 import RoomCard from "@/components/RoomCard.astro";
 import RoomGallery from "@/components/RoomGallery.astro";
+import AssistedReservation from "@/components/AssistedReservation.astro";
+import { contact } from "@/data/site";
 import { getSiteData } from "@/lib/cms";
 import type { Room } from "@/lib/types";
 
@@ -18,6 +20,7 @@ type Props = { room: Room };
 const { room } = Astro.props;
 const { rooms } = await getSiteData();
 const related = rooms.filter((item) => item.slug !== room.slug).slice(0, 2);
+const assisted = room.bookingMode === "assisted";
 const schema = {
   "@context": "https://schema.org",
   "@type": "HotelRoom",
@@ -29,7 +32,7 @@ const schema = {
 };
 ---
 
-<BaseLayout title={`${room.name} | Orchha Palace`} description={room.description} image={room.image.src} preloadImage={room.image.src} preloadMobileImage={room.image.mobileSrc || room.image.src} schema={schema}>
+<BaseLayout title={`${room.name} | Orchha Palace`} description={room.description} image={room.image.src} preloadImage={room.image.src} preloadMobileImage={room.image.mobileSrc || room.image.src} schema={schema} journey={assisted ? "assisted-suite" : "stay"}>
   <PageHero eyebrow={room.eyebrow} title={room.name} copy={room.description} image={room.image.src} mobileImage={room.image.mobileSrc} alt={room.image.alt} position={room.image.focalPoint} />
   <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Rooms", href: "/rooms/" }, { label: room.name }]} />
 
@@ -39,15 +42,14 @@ const schema = {
         <p class="eyebrow">The essentials</p>
         <h2>Know your room before you arrive</h2>
         <p>{room.description}</p>
-        <a
-          class="button button--primary"
-          href="#availability"
-          data-booking-open
-          data-booking-source="room_detail"
-          data-booking-room={room.slug}
-          data-booking-room-name={room.name}
-          data-booking-room-code={room.maximojoRoomCode || ""}
-        >Check this room <Icon name="ph:calendar-check" size={18} /></a>
+        {assisted ? (
+          <div class="room-detail-intro__actions">
+            <a class="button button--primary" href={contact.primaryPhoneHref} data-track="assisted_reservation_call_clicked" data-room={room.slug} data-sticky-suppress>Call to reserve <Icon name="ph:phone" size={18} /></a>
+            <a class="button button--secondary" href={contact.whatsapp.presidentialSuite} target="_blank" rel="noreferrer" data-track="assisted_reservation_whatsapp_clicked" data-room={room.slug} data-sticky-suppress>WhatsApp <Icon name="ph:whatsapp-logo" size={18} /></a>
+          </div>
+        ) : (
+          <a class="button button--primary" href="#availability" data-booking-open data-booking-source="room_detail" data-booking-room={room.slug} data-booking-room-name={room.name} data-booking-room-code={room.maximojoRoomCode || ""}>Check this room <Icon name="ph:calendar-check" size={18} /></a>
+        )}
       </div>
       <dl class="detail-facts">
         <div><dt>Space</dt><dd>{room.size}</dd></div>
@@ -62,7 +64,7 @@ const schema = {
   <section class="section section--paper">
     <div class="shell">
       <div class="room-gallery-heading">
-        <div><p class="eyebrow">Room gallery</p><h2>Look around before you book</h2></div>
+        <div><p class="eyebrow">Room gallery</p><h2>{assisted ? "Explore the suite before you call" : "Look around before you book"}</h2></div>
         <p>{room.gallery.length} category-matched views show the available angles and verified features without reusing photographs from another room category.</p>
       </div>
       <RoomGallery room={room.slug} images={room.gallery} />
@@ -77,10 +79,12 @@ const schema = {
     </div>
   </section>
 
-  <section class="section section--paper"><div class="shell"><AvailabilityBar compact heading={`Check ${room.shortName} availability`} room={{ slug: room.slug, name: room.name, code: room.maximojoRoomCode }} /></div></section>
+  <section class="section section--paper"><div class="shell">
+    {assisted ? <AssistedReservation /> : <AvailabilityBar compact heading={`Check ${room.shortName} availability`} room={{ slug: room.slug, name: room.name, code: room.maximojoRoomCode }} />}
+  </div></section>
 
   <section class="section shell">
     <p class="eyebrow">Also consider</p>
-    <div class="room-grid">{related.map((item) => <RoomCard room={item} />)}</div>
+    <div class="room-grid">{related.map((item) => <RoomCard room={item} showBookingAction={!assisted} />)}</div>
   </section>
 </BaseLayout>

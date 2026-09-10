@@ -1,0 +1,48 @@
+---
+import { Icon } from "astro-icon/components";
+import { contact } from "@/data/site";
+
+type Props = {
+  heading?: string;
+  copy?: string;
+  source?: string;
+};
+
+const {
+  heading = "Reserve the Presidential Suite directly",
+  copy = "This private two-bedroom suite is not sold through the online booking engine. Call or WhatsApp the reservations team to discuss dates and availability.",
+  source = "suite_reservation_panel"
+} = Astro.props;
+---
+
+<div class="assisted-reservation" id="suite-reservation">
+  <div>
+    <p class="eyebrow">Personal reservation</p>
+    <h2>{heading}</h2>
+    <p>{copy}</p>
+  </div>
+  <div class="assisted-reservation__actions">
+    <a
+      class="button button--primary"
+      href={contact.primaryPhoneHref}
+      data-track="assisted_reservation_call_clicked"
+      data-room="presidential-suite"
+      data-source={source}
+      data-sticky-suppress
+    >
+      Call to reserve <Icon name="ph:phone" size={18} aria-hidden="true" />
+    </a>
+    <a
+      class="button button--secondary"
+      href={contact.whatsapp.presidentialSuite}
+      target="_blank"
+      rel="noreferrer"
+      data-track="assisted_reservation_whatsapp_clicked"
+      data-room="presidential-suite"
+      data-source={source}
+      data-sticky-suppress
+    >
+      WhatsApp <Icon name="ph:whatsapp-logo" size={18} aria-hidden="true" />
+    </a>
+  </div>
+</div>

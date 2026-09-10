@@ -28,9 +28,12 @@ export type Room = {
   highlights: string[];
   amenities: string[];
   inclusions: string[];
+  bookingMode: "online" | "assisted";
   /** Only set after the corresponding Maximojo room category has been verified. */
   maximojoRoomCode?: string;
 };
+
+export type JourneyMode = "stay" | "event" | "assisted-suite";
 
 export type DiningVenue = {
   slug: string;

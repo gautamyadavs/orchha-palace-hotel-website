@@ -1,15 +1,36 @@
 ---
 import { Icon } from "astro-icon/components";
+import { contact } from "@/data/site";
+import type { JourneyMode } from "@/lib/types";
+
+type Props = { journey?: JourneyMode };
+const { journey = "stay" } = Astro.props;
+const target = journey === "event" ? "#event-enquiry" : journey === "assisted-suite" ? "#suite-reservation" : "#availability";
 ---
 
-<div class="mobile-sticky" data-mobile-sticky>
-  <a href="tel:+919516006201" aria-label="Call hotel" data-track="call_clicked">
-    <Icon name="ph:phone" size={22} aria-hidden="true" />
-  </a>
-  <a href="https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%27d%20like%20help%20planning%20a%20stay." target="_blank" rel="noreferrer" aria-label="WhatsApp hotel" data-track="whatsapp_clicked">
-    <Icon name="ph:whatsapp-logo" size={22} aria-hidden="true" />
-  </a>
-  <a class="mobile-sticky__booking" href="#availability" data-booking-open data-booking-source="mobile_sticky">
-    Check availability <Icon name="ph:arrow-right" size={18} aria-hidden="true" />
-  </a>
+<div class:list={["mobile-sticky", journey === "assisted-suite" && "mobile-sticky--assisted"]} data-mobile-sticky data-sticky-target={target}>
+  {journey === "assisted-suite" ? (
+    <>
+      <a class="mobile-sticky__assisted-action" href={contact.primaryPhoneHref} data-track="assisted_reservation_call_clicked" data-room="presidential-suite" data-source="mobile_sticky">
+        <Icon name="ph:phone" size={21} aria-hidden="true" /> Call to reserve
+      </a>
+      <a class="mobile-sticky__assisted-action" href={contact.whatsapp.presidentialSuite} target="_blank" rel="noreferrer" data-track="assisted_reservation_whatsapp_clicked" data-room="presidential-suite" data-source="mobile_sticky">
+        <Icon name="ph:whatsapp-logo" size={21} aria-hidden="true" /> WhatsApp
+      </a>
+    </>
+  ) : (
+    <>
+      <a href={contact.primaryPhoneHref} aria-label={journey === "event" ? "Call the events team" : "Call hotel"} data-track={journey === "event" ? "event_call_clicked" : "call_clicked"}>
+        <Icon name="ph:phone" size={22} aria-hidden="true" />
+      </a>
+      <a href={journey === "event" ? contact.whatsapp.event : contact.whatsapp.stay} target="_blank" rel="noreferrer" aria-label={journey === "event" ? "WhatsApp the events team" : "WhatsApp hotel"} data-track={journey === "event" ? "event_whatsapp_clicked" : "whatsapp_clicked"}>
+        <Icon name="ph:whatsapp-logo" size={22} aria-hidden="true" />
+      </a>
+      {journey === "event" ? (
+        <a class="mobile-sticky__booking" href="#event-enquiry">Send enquiry <Icon name="ph:arrow-down" size={18} aria-hidden="true" /></a>
+      ) : (
+        <a class="mobile-sticky__booking" href="#availability" data-booking-open data-booking-source="mobile_sticky">Check availability <Icon name="ph:arrow-right" size={18} aria-hidden="true" /></a>
+      )}
+    </>
+  )}
 </div>

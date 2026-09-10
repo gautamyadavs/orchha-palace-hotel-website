@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import BookingForm from "@/components/BookingForm.astro";
+import { contact } from "@/data/site";
 import { DEFAULT_BOOKING_URL } from "@/lib/booking";
 
 const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL?.trim() || DEFAULT_BOOKING_URL;
@@ -23,8 +24,8 @@ const bookingUrl = import.meta.env.PUBLIC_BOOKING_URL?.trim() || DEFAULT_BOOKING
 
     <div class="booking-sheet__help">
       <p>Booking more than one room or need help with a special request?</p>
-      <a href="tel:+919516006201" data-track="call_clicked"><Icon name="ph:phone" size={18} aria-hidden="true" /> Call reservations</a>
-      <a href="https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%27d%20like%20help%20with%20a%20room%20booking." target="_blank" rel="noreferrer" data-track="whatsapp_clicked"><Icon name="ph:whatsapp-logo" size={18} aria-hidden="true" /> WhatsApp</a>
+      <a href={contact.primaryPhoneHref} data-track="call_clicked"><Icon name="ph:phone" size={18} aria-hidden="true" /> Call reservations</a>
+      <a href={contact.whatsapp.roomBooking} target="_blank" rel="noreferrer" data-track="whatsapp_clicked"><Icon name="ph:whatsapp-logo" size={18} aria-hidden="true" /> WhatsApp</a>
     </div>
   </div>
 </dialog>

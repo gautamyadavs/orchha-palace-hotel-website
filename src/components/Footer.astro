@@ -2,15 +2,23 @@
 import { Icon } from "astro-icon/components";
 import { contact } from "@/data/site";
 import { withBase } from "@/lib/paths";
+import type { JourneyMode } from "@/lib/types";
+
+type Props = { journey?: JourneyMode };
+const { journey = "stay" } = Astro.props;
 ---
 
 <footer class="site-footer">
   <div class="footer-intro shell">
-    <p class="eyebrow eyebrow--light">Your stay in Orchha</p>
-    <h2>Arrive curious.<br />Leave restored.</h2>
-    <a class="text-link text-link--light" href="#availability" data-booking-open data-booking-source="footer">
-      Check availability <Icon name="ph:arrow-up-right" size={18} aria-hidden="true" />
-    </a>
+    <p class="eyebrow eyebrow--light">{journey === "event" ? "Your occasion in Orchha" : journey === "assisted-suite" ? "A private stay in Orchha" : "Your stay in Orchha"}</p>
+    <h2>{journey === "event" ? <>Imagine it here.<br />Plan it with us.</> : journey === "assisted-suite" ? <>Reserve personally.<br />Stay exceptionally.</> : <>Arrive curious.<br />Leave restored.</>}</h2>
+    {journey === "event" ? (
+      <a class="text-link text-link--light" href="#event-enquiry">Send an event enquiry <Icon name="ph:arrow-up-right" size={18} aria-hidden="true" /></a>
+    ) : journey === "assisted-suite" ? (
+      <a class="text-link text-link--light" href={contact.primaryPhoneHref} data-track="assisted_reservation_call_clicked" data-room="presidential-suite" data-source="footer">Call to reserve <Icon name="ph:phone" size={18} aria-hidden="true" /></a>
+    ) : (
+      <a class="text-link text-link--light" href="#availability" data-booking-open data-booking-source="footer">Check availability <Icon name="ph:arrow-up-right" size={18} aria-hidden="true" /></a>
+    )}
   </div>
   <div class="footer-grid shell">
     <div>
@@ -31,12 +39,12 @@ import { withBase } from "@/lib/paths";
       <a href={withBase("/weddings-events/")}>Weddings & events</a>
       <a href={withBase("/explore-orchha/")}>Explore Orchha</a>
       <a href={withBase("/contact/")}>Contact</a>
-      <a href={contact.whatsapp} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp</a>
+      <a href={journey === "event" ? contact.whatsapp.event : journey === "assisted-suite" ? contact.whatsapp.presidentialSuite : contact.whatsapp.stay} target="_blank" rel="noreferrer" data-track={journey === "event" ? "event_whatsapp_clicked" : journey === "assisted-suite" ? "assisted_reservation_whatsapp_clicked" : "whatsapp_clicked"} data-room={journey === "assisted-suite" ? "presidential-suite" : undefined}>WhatsApp</a>
     </div>
     <div>
       <p class="footer-label">Contact</p>
-      <a href="tel:+919516006201" data-track="call_clicked">+91 95160 06201</a>
-      <a href={`mailto:${contact.reservationsEmail}`}>{contact.reservationsEmail}</a>
+      <a href={contact.primaryPhoneHref} data-track="call_clicked">{contact.primaryPhone}</a>
+      <a href={`mailto:${journey === "event" ? contact.salesEmail : contact.reservationsEmail}`}>{journey === "event" ? contact.salesEmail : contact.reservationsEmail}</a>
     </div>
   </div>
   <div class="footer-bottom shell">

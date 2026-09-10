@@ -61,10 +61,24 @@ export const room = defineType({
     defineField({ name: "bathroom", title: "Bathroom", type: "string" }),
     defineField({ name: "view", title: "View / aspect", type: "string" }),
     defineField({
+      name: "bookingMode",
+      title: "Reservation method",
+      type: "string",
+      options: { list: [{ title: "Online booking", value: "online" }, { title: "Call or WhatsApp", value: "assisted" }] },
+      initialValue: "online",
+      validation: (rule) => rule.required()
+    }),
+    defineField({
       name: "maximojoRoomCode",
       title: "Verified Maximojo room code",
       type: "string",
-      description: "Optional. Publish only after this code has been tested against the live Orchha Palace booking engine."
+      description: "Optional. Publish only after this code has been tested against the live Orchha Palace booking engine. Assisted-reservation rooms cannot have a code.",
+      hidden: ({ parent }) => parent?.bookingMode === "assisted",
+      validation: (rule) => rule.custom((value, context) => (
+        (context.parent as { bookingMode?: string } | undefined)?.bookingMode === "assisted" && value
+          ? "Remove the online room code from assisted-reservation rooms."
+          : true
+      ))
     }),
     approvedMediaReference(),
     defineField({ name: "gallery", title: "Gallery", type: "array", of: [defineArrayMember({ type: "reference", to: [{ type: "mediaAsset" }] })] }),

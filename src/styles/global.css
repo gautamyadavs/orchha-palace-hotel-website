@@ -374,6 +374,21 @@ h3 {
   font-size: 0.74rem;
 }
 
+@media (max-width: 699px) {
+  .menu-button {
+    width: 48px;
+    padding: 0;
+  }
+
+  .menu-button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+}
+
 .menu-drawer {
   position: fixed;
   z-index: 100;
@@ -1011,6 +1026,30 @@ h3 {
   margin-top: auto;
 }
 
+.room-card__actions--assisted {
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.room-card__contact-actions,
+.room-detail-intro__actions,
+.assisted-reservation__actions {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.room-card__contact-actions .button,
+.room-detail-intro__actions .button,
+.assisted-reservation__actions .button {
+  flex: 1 1 180px;
+}
+
+.experience-card picture {
+  display: block;
+}
+
 .experience-grid,
 .dining-grid,
 .venue-grid,
@@ -1227,6 +1266,30 @@ h3 {
 
 .room-detail-intro__copy > p:not(.eyebrow) {
   max-width: 60ch;
+  color: var(--ink-soft);
+}
+
+.room-detail-intro__actions {
+  margin-top: 26px;
+}
+
+.assisted-reservation {
+  display: grid;
+  gap: 26px;
+  border: 1px solid var(--line-strong);
+  border-left: 4px solid var(--maroon);
+  background: var(--white);
+  padding: clamp(24px, 5vw, 44px);
+}
+
+.assisted-reservation h2 {
+  max-width: 18ch;
+  margin-bottom: 14px;
+}
+
+.assisted-reservation p:last-child {
+  max-width: 62ch;
+  margin-bottom: 0;
   color: var(--ink-soft);
 }
 
@@ -1611,6 +1674,17 @@ h3 {
   padding: 24px;
 }
 
+.lead-form__fields {
+  min-width: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.lead-form__fields:disabled {
+  opacity: 0.48;
+}
+
 .field-grid {
   display: grid;
   gap: 18px;
@@ -1672,14 +1746,18 @@ h3 {
   margin-top: 20px;
 }
 
-.lead-form__fallback {
+.lead-form__fallback,
+.lead-form__unavailable {
   border-left: 3px solid var(--maroon);
   margin-top: 20px;
   padding-left: 16px;
 }
 
-.lead-form__fallback a {
+.lead-form__fallback a,
+.lead-form__unavailable a {
   display: block;
+  min-height: 44px;
+  padding-block: 9px;
   color: var(--maroon);
   font-weight: 600;
 }
@@ -1863,6 +1941,26 @@ body.booking-open .mobile-sticky {
   text-transform: uppercase;
 }
 
+.mobile-sticky--assisted {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mobile-sticky__assisted-action {
+  gap: 7px;
+  padding: 10px 12px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mobile-sticky__assisted-action:last-child {
+  border-right: 0;
+  background: var(--maroon);
+}
+
 .consent-banner {
   position: fixed;
   z-index: 80;
@@ -1955,6 +2053,19 @@ body.booking-open .mobile-sticky {
   .lead-layout {
     grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
     gap: 64px;
+  }
+
+  .assisted-reservation {
+    grid-template-columns: minmax(0, 1fr) minmax(380px, auto);
+    align-items: center;
+  }
+
+  .assisted-reservation__actions {
+    justify-content: flex-end;
+  }
+
+  .assisted-reservation__actions .button {
+    flex: 0 1 auto;
   }
 
   .room-grid,

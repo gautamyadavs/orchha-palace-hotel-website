@@ -1,10 +1,11 @@
 ---
 import { Icon } from "astro-icon/components";
+import { contact } from "@/data/site";
 import type { Room } from "@/lib/types";
 import { withBase } from "@/lib/paths";
 
-type Props = { room: Room; featured?: boolean };
-const { room, featured = false } = Astro.props;
+type Props = { room: Room; featured?: boolean; showBookingAction?: boolean };
+const { room, featured = false, showBookingAction = true } = Astro.props;
 ---
 
 <article class:list={["room-card", featured && "room-card--featured"]}>
@@ -19,21 +20,31 @@ const { room, featured = false } = Astro.props;
       <div><dt>Space</dt><dd>{room.size}</dd></div>
       <div><dt>Bed</dt><dd>{room.bed}</dd></div>
     </dl>
-    <div class="room-card__actions">
-      <a class="text-link" href={withBase(`/rooms/${room.slug}/`)}>
-        Explore this stay <Icon name="ph:arrow-right" size={18} aria-hidden="true" />
-      </a>
-      <a
-        class="button button--primary button--small"
-        href="#availability"
-        data-booking-open
-        data-booking-source="room_card"
-        data-booking-room={room.slug}
-        data-booking-room-name={room.name}
-        data-booking-room-code={room.maximojoRoomCode || ""}
-      >
-        Check this room <Icon name="ph:calendar-check" size={17} aria-hidden="true" />
-      </a>
-    </div>
+    {room.bookingMode === "assisted" ? (
+      <div class="room-card__actions room-card__actions--assisted">
+        <a class="text-link" href={withBase(`/rooms/${room.slug}/`)}>
+          Explore the suite <Icon name="ph:arrow-right" size={18} aria-hidden="true" />
+        </a>
+        <div class="room-card__contact-actions">
+          <a class="button button--primary button--small" href={contact.primaryPhoneHref} data-track="assisted_reservation_call_clicked" data-room={room.slug} data-sticky-suppress>
+            Call to reserve <Icon name="ph:phone" size={17} aria-hidden="true" />
+          </a>
+          <a class="button button--secondary button--small" href={contact.whatsapp.presidentialSuite} target="_blank" rel="noreferrer" data-track="assisted_reservation_whatsapp_clicked" data-room={room.slug} data-sticky-suppress>
+            WhatsApp <Icon name="ph:whatsapp-logo" size={17} aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    ) : (
+      <div class="room-card__actions">
+        <a class="text-link" href={withBase(`/rooms/${room.slug}/`)}>
+          Explore this stay <Icon name="ph:arrow-right" size={18} aria-hidden="true" />
+        </a>
+        {showBookingAction && (
+          <a class="button button--primary button--small" href="#availability" data-booking-open data-booking-source="room_card" data-booking-room={room.slug} data-booking-room-name={room.name} data-booking-room-code={room.maximojoRoomCode || ""}>
+            Check this room <Icon name="ph:calendar-check" size={17} aria-hidden="true" />
+          </a>
+        )}
+      </div>
+    )}
   </div>
 </article>

@@ -1,5 +1,6 @@
 import type { Amenity, DiningVenue, EventVenue, ImageAsset, Room, SiteData } from "@/lib/types";
 import { withBase } from "@/lib/paths";
+export { contact } from "@/lib/contact";
 
 const image = (
   id: string,
@@ -18,8 +19,8 @@ const image = (
   orientation,
   focalPoint,
   peopleVisible: false,
-  rightsStatus: "verify",
-  publishApproved: false
+  rightsStatus: "approved",
+  publishApproved: true
 });
 
 export const media: ImageAsset[] = [
@@ -79,12 +80,12 @@ export const media: ImageAsset[] = [
   },
   image("food", "/images/dining-main.webp", "Formal dining room arranged for an evening meal at Orchha Palace", "dining", "Main dining room"),
   image("dining-groups", "/images/dining-groups.webp", "Decorative place setting prepared for a private group lunch", "dining", "Celebration dining place setting"),
-  image("indramani", "/images/indramani-bagh.jpg", "Outdoor event lawn at Orchha Palace; exact venue mapping is awaiting hotel confirmation", "venue", "Indramani Bagh — mapping pending"),
-  image("jeja", "/images/jeja-bagh.jpg", "Outdoor event lawn at Orchha Palace; exact venue mapping is awaiting hotel confirmation", "venue", "Jeja Bagh — mapping pending"),
-  image("rudra", "/images/rudra-bagh.jpg", "Orchha Palace courtyard; exact Rudra Bagh mapping is awaiting hotel confirmation", "venue", "Rudra Bagh — mapping pending"),
-  image("samrat", "/images/samrat-hall.jpg", "Indoor event hall at Orchha Palace; exact venue mapping is awaiting hotel confirmation", "venue", "Samrat Hall — mapping pending"),
-  image("bundela", "/images/bundela-darbar.jpg", "Indoor banquet setup at Orchha Palace; exact venue mapping is awaiting hotel confirmation", "venue", "Bundela Darbar — mapping pending"),
-  image("diwan", "/images/diwan-e-khas.jpg", "Indoor event hall at Orchha Palace; exact venue mapping is awaiting hotel confirmation", "venue", "Diwan-e-Khas — mapping pending"),
+  image("indramani", "/images/indramani-bagh.jpg", "Outdoor event lawn at Orchha Palace", "venue", "Indramani Bagh"),
+  image("jeja", "/images/jeja-bagh.jpg", "Outdoor event lawn at Orchha Palace", "venue", "Jeja Bagh"),
+  image("rudra", "/images/rudra-bagh.jpg", "Orchha Palace courtyard", "venue", "Rudra Bagh"),
+  image("samrat", "/images/samrat-hall.jpg", "Indoor event hall at Orchha Palace", "venue", "Samrat Hall"),
+  image("bundela", "/images/bundela-darbar.jpg", "Indoor banquet setup at Orchha Palace", "venue", "Bundela Darbar"),
+  image("diwan", "/images/diwan-e-khas.jpg", "Indoor event hall at Orchha Palace", "venue", "Diwan-e-Khas"),
   {
     ...image("boardroom", "/images/boardroom.webp", "Orchha Palace boardroom with a long conference table, display and seating for fourteen guests", "venue", "Boardroom"),
     rightsStatus: "approved",
@@ -93,6 +94,12 @@ export const media: ImageAsset[] = [
   {
     ...image("private-date", "/images/private-date.webp", "A couple sharing a private candlelit dinner on the illuminated hotel lawn", "venue", "Private date-night setup"),
     peopleVisible: true,
+    rightsStatus: "approved",
+    publishApproved: true
+  },
+  {
+    ...image("event-lawn-setup", "/images/event-lawn-setup.webp", "Round dining tables arranged on a lawn at Orchha Palace for an outdoor event", "venue", "Outdoor event setup", "landscape", "50% 50%"),
+    mobileSrc: withBase("/images/event-lawn-setup-mobile.webp"),
     rightsStatus: "approved",
     publishApproved: true
   },
@@ -156,7 +163,8 @@ export const rooms: Room[] = [
     gallery: [byId("standard-room"), byId("standard-room-angle")],
     highlights: ["Landscaped outdoor-shower feature", "24-hour dining", "Heritage-inspired interiors"],
     amenities: sharedAmenities,
-    inclusions: ["Welcome drink on arrival", "Complimentary mineral water", "Daily housekeeping"]
+    inclusions: ["Welcome drink on arrival", "Complimentary mineral water", "Daily housekeeping"],
+    bookingMode: "online"
   },
   {
     slug: "standard-room-twin",
@@ -173,7 +181,8 @@ export const rooms: Room[] = [
     gallery: [byId("standard-twin"), byId("standard-twin-service")],
     highlights: ["True twin configuration", "24-hour dining", "Generous bathroom"],
     amenities: sharedAmenities,
-    inclusions: ["Welcome drink on arrival", "Complimentary mineral water", "Daily housekeeping"]
+    inclusions: ["Welcome drink on arrival", "Complimentary mineral water", "Daily housekeeping"],
+    bookingMode: "online"
   },
   {
     slug: "deluxe-room",
@@ -190,7 +199,8 @@ export const rooms: Room[] = [
     gallery: [byId("deluxe-room"), byId("deluxe-room-angle"), byId("deluxe-room-evening"), byId("deluxe-bathroom"), byId("deluxe-bathroom-angle")],
     highlights: ["Full bathtub", "Extra living space", "24-hour dining"],
     amenities: sharedAmenities,
-    inclusions: ["Welcome drink on arrival", "Complimentary cookies", "Daily housekeeping"]
+    inclusions: ["Welcome drink on arrival", "Complimentary cookies", "Daily housekeeping"],
+    bookingMode: "online"
   },
   {
     slug: "deluxe-room-twin",
@@ -207,7 +217,8 @@ export const rooms: Room[] = [
     gallery: [byId("deluxe-twin"), byId("deluxe-bathroom"), byId("deluxe-bathroom-angle")],
     highlights: ["True twin configuration", "Full bathtub", "Extra living space"],
     amenities: sharedAmenities,
-    inclusions: ["Welcome drink on arrival", "Complimentary cookies", "Daily housekeeping"]
+    inclusions: ["Welcome drink on arrival", "Complimentary cookies", "Daily housekeeping"],
+    bookingMode: "online"
   },
   {
     slug: "presidential-suite",
@@ -224,7 +235,8 @@ export const rooms: Room[] = [
     gallery: [byId("presidential-suite"), byId("presidential-suite-exterior"), byId("presidential-bedroom-two"), byId("suite-living"), byId("presidential-dining"), byId("presidential-private-pool"), byId("presidential-jacuzzi")],
     highlights: ["Private pool", "Dedicated butler", "Living and dining room", "Jacuzzi and steam bath"],
     amenities: [...sharedAmenities, "56-inch television", "Media console", "Pantry", "Private pool"],
-    inclusions: ["Welcome cake or wine", "Fruit basket", "Floral arrangement", "Butler service"]
+    inclusions: ["Welcome cake or wine", "Fruit basket", "Floral arrangement", "Butler service"],
+    bookingMode: "assisted"
   }
 ];
 
@@ -282,15 +294,6 @@ export const amenities: Amenity[] = [
 ];
 
 export const fallbackSiteData: SiteData = { rooms, dining, venues, amenities, media };
-
-export const contact = {
-  phones: ["+91 95160 06201", "+91 95160 06203", "+91 95160 06204"],
-  reservationsEmail: "reservations@orchhapalace.com",
-  salesEmail: "sales@orchhapalace.com",
-  address: "Sawant Nagar, Near Ramraja Temple, Distt. Niwari, Orchha, Madhya Pradesh 472246",
-  whatsapp: "https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%27d%20like%20help%20planning%20a%20stay.",
-  maps: "https://maps.app.goo.gl/NPxqpeqWNFf4j6c36"
-};
 
 export const propertyFacts = [
   { value: "12 acres", label: "landscaped estate" },

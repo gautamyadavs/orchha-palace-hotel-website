@@ -16,7 +16,7 @@ const schema = dining.map((venue) => ({
   name: venue.name,
   description: venue.description,
   servesCuisine: venue.type,
-  telephone: "+91-95160-06201",
+  telephone: contact.primaryPhoneSchema,
   parentOrganization: { "@type": "Hotel", name: "Orchha Palace Hotel & Convention Centre" }
 }));
 ---
@@ -57,8 +57,8 @@ const schema = dining.map((venue) => ({
   <section class="section shell">
     <SectionHeading align="center" eyebrow="Reserve or ask" title="Speak with the hotel team" copy="For restaurant hours, dietary requests and group dining, contact the hotel directly." />
     <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
-      <a class="button button--primary" href={`tel:${contact.phones[0].replace(/\s/g, "")}`} data-track="call_clicked">Call the hotel <Icon name="ph:phone" size={18} /></a>
-      <a class="button button--secondary" href={contact.whatsapp} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp <Icon name="ph:whatsapp-logo" size={18} /></a>
+      <a class="button button--primary" href={contact.primaryPhoneHref} data-track="call_clicked">Call the hotel <Icon name="ph:phone" size={18} /></a>
+      <a class="button button--secondary" href={contact.whatsapp.stay} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp <Icon name="ph:whatsapp-logo" size={18} /></a>
     </div>
   </section>
 </BaseLayout>

@@ -13,7 +13,7 @@ const privateDate = media.find((item) => item.id === "private-date") || hero;
 const eventShowcase = media.filter((item) => ["event-showcase-one", "event-showcase-two", "event-showcase-fireworks"].includes(item.id));
 ---
 
-<BaseLayout title="Weddings, Meetings & Events | Orchha Palace" description="Compare seven indoor and outdoor venues at Orchha Palace, from a 14-seat boardroom to a 140,000 sq. ft. lawn, and send an event enquiry." image={hero.src} preloadImage={hero.src} preloadMobileImage={hero.mobileSrc || hero.src} stickyBooking={false}>
+<BaseLayout title="Weddings, Meetings & Events | Orchha Palace" description="Compare seven indoor and outdoor venues at Orchha Palace, from a 14-seat boardroom to a 140,000 sq. ft. lawn, and send an event enquiry." image={hero.src} preloadImage={hero.src} preloadMobileImage={hero.mobileSrc || hero.src} journey="event">
   <PageHero eyebrow="Destination weddings in Orchha" title="A palace made for celebration" copy="Ceremonies beneath the open sky, grand indoor gatherings and room for your guests across one 12-acre estate." image={hero.src} mobileImage={hero.mobileSrc} alt={hero.alt} position={hero.focalPoint} cta={{ label: "Start an event enquiry", href: "#event-enquiry" }} />
 
   {eventShowcase.length > 0 && (
@@ -76,7 +76,7 @@ const eventShowcase = media.filter((item) => ["event-showcase-one", "event-showc
         <p class="eyebrow">Start the conversation</p>
         <h2>Tell us what you are imagining</h2>
         <p style="color:var(--ink-soft)">Share the essentials and the events team will respond with suitable spaces and next steps. No payment is collected through this form.</p>
-        <div class="contact-card"><h3>Prefer to speak now?</h3><a href="tel:+919516006201" data-track="call_clicked">+91 95160 06201</a><a href={contact.whatsapp} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Continue on WhatsApp</a></div>
+        <div class="contact-card"><h3>Prefer to speak now?</h3><a href={contact.primaryPhoneHref} data-track="event_call_clicked">{contact.primaryPhone}</a><a href={contact.whatsapp.event} target="_blank" rel="noreferrer" data-track="event_whatsapp_clicked">Continue on WhatsApp</a></div>
       </div>
       <EventLeadForm />
     </div>

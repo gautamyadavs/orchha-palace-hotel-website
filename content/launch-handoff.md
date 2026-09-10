@@ -1,6 +1,6 @@
 # Orchha Palace launch handoff
 
-Complete this once with hotel management before enabling a production build.
+Repository content, imagery, rights and mappings were approved for production by the owner on 4 September 2026. Complete the remaining external-integration checks before domain cutover.
 
 ## 1. Booking engine
 
@@ -20,43 +20,44 @@ The website-to-Maximojo handoff has been verified without creating a reservation
 
 ## 2. Room approval
 
-For each category, confirm its exact primary photo, 6–10 gallery photos, name, size, bed configuration, maximum occupancy, view/aspect, bathroom, amenities and inclusions.
+The current primary photos, galleries, names, sizes, bed configurations, occupancy guidance, bathrooms, amenities and inclusions are approved for production.
 
-Maximojo must expose five distinct sellable categories before room-specific codes are published: Standard, Standard Twin, Deluxe, Deluxe Twin and Presidential Suite. Confirm the PMS/channel mapping and rate plans before changing production inventory.
+Maximojo room-specific codes may be published only after the four online categories are verified: Standard, Standard Twin, Deluxe and Deluxe Twin. Confirm the PMS/channel mapping and rate plans before changing production inventory. The Presidential Suite is assisted-reservation-only and must not be added to the website's online booking handoff.
 
-- Standard Room: 2 category-matched staging images; exact Standard bathroom and 4–8 additional useful views required.
-- Standard Room Twin: 2 category-matched staging images; exact Standard bathroom and clean alternate angles required.
-- Deluxe Room: 5 category-matched staging images, including bathtub and shower; hotel approval and 1–5 more useful views required.
-- Deluxe Room Twin: 3 category-matched staging images; add at least one additional verified twin-room angle.
-- Presidential Suite: 5 user-confirmed staging images cover the primary bedroom, living room, dining room, private pool and jacuzzi; add the second bedroom and wider shower/bathroom view.
+- Standard Room: approved.
+- Standard Room Twin: approved.
+- Deluxe Room: approved.
+- Deluxe Room Twin: approved.
+- Presidential Suite: approved as assisted-reservation-only.
+- Presidential Suite direct call and suite-specific WhatsApp journey checked on listing, detail, header and mobile sticky actions: automated assertions pass; complete final live-device check before cutover.
 
-Resolve the room-size discrepancy documented in `content/room-image-audit.md` before approval. Booking.com, MakeMyTrip and the legacy hotel content currently show different Standard and Deluxe sizes.
+The owner approved the room descriptions currently recorded in the repository. Future inventory changes should still be reconciled against the PMS and booking engine.
 
 ## 3. Dining approval
 
-For Annajal, Dragon and Madira, confirm exact photos, cuisine/offer, location, seating capacity and current opening times.
+The current photos, cuisine descriptions, locations and capacity copy are approved. Opening times remain intentionally directed to the hotel for confirmation.
 
-- Annajal:
-- Dragon:
-- Madira:
+- Annajal: approved.
+- Dragon: approved.
+- Madira: approved.
 
 ## 4. Wedding and event approval
 
-Confirm exact photos, dimensions, maximum capacities by layout and any restrictions for:
+The current photos, dimensions and capacity language are approved for:
 
-- Indramani Bagh:
-- Jeja Bagh:
-- Rudra Bagh:
-- Samrat Hall:
-- Bundela Darbar:
-- Diwan-e-Khas:
-- Boardroom:
+- Indramani Bagh.
+- Jeja Bagh.
+- Rudra Bagh.
+- Samrat Hall.
+- Bundela Darbar.
+- Diwan-e-Khas.
+- Boardroom.
 
 Outdoor capacities should remain “confirmed after layout review” unless the events team approves a specific published number.
 
 ## 5. Media rights
 
-Update `content/media-manifest.csv` and the corresponding Sanity media record only after all of the following are true:
+All current manifest entries meet the owner's production approval. For new media, update `content/media-manifest.csv` and any corresponding Sanity record only after all of the following are true:
 
 - the asset is hotel-owned or has recorded publication permission;
 - the exact room/restaurant/venue mapping is confirmed;
@@ -67,11 +68,11 @@ Update `content/media-manifest.csv` and the corresponding Sanity media record on
 
 ## 6. Public details and policies
 
-- Reservations phone and email:
-- Wedding/events phone and email:
-- WhatsApp number:
-- Postal address and Maps link:
-- Check-in/check-out times:
+- Reservations phone and email: `+91 95160 06201`, `reservations@orchhapalace.com`.
+- Wedding/events phone and email: `+91 95160 06201`, `sales@orchhapalace.com`.
+- WhatsApp number: `+91 95160 06201` with intent-specific messages.
+- Postal address and Maps link: centralized in `src/lib/contact.ts` and approved.
+- Check-in/check-out times: 2:00 PM / 10:00 AM.
 - Occupancy and child policy:
 - Cancellation/refund policy owner:
 - Privacy contact:
@@ -79,10 +80,16 @@ Update `content/media-manifest.csv` and the corresponding Sanity media record on
 ## 7. Integration and launch sign-off
 
 - All credentials visible in the supplied image have been rotated.
-- Sanity production dataset is complete.
+- Approved repository content is validated in the production build; Sanity remains optional.
 - Turnstile production keys are configured.
+- Turnstile site key permits `gautamyadavs.github.io`, `orchhapalace.com` and `www.orchhapalace.com`.
+- `LEAD_RATE_LIMIT` Workers KV binding is configured and a sixth same-hour test is rejected.
+- Worker `LEAD_ALLOWED_ORIGINS` contains only the three approved exact origins.
+- Worker sends the critical staff notification only to `sales@orchhapalace.com`; guest confirmation failure is non-blocking.
+- GitHub repository variables `PUBLIC_LEAD_API_URL` and `PUBLIC_TURNSTILE_SITE_KEY` are configured.
+- A controlled enquiry from GitHub Pages and each production hostname reaches sales with every submitted field.
 - Resend sender domain is verified and delivery is tested.
-- GTM container is approved and analytics consent is tested.
+- GTM remains disabled until a production container is supplied; consent behavior is covered independently.
 - Staging remains `noindex` during staff/guest review.
 - Production build succeeds with `PUBLIC_SITE_STATUS=production`.
-- Hotel management has signed off the final content and imagery.
+- Hotel management has signed off the final content and imagery: 4 September 2026.

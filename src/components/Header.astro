@@ -1,6 +1,11 @@
 ---
 import { Icon } from "astro-icon/components";
+import { contact } from "@/data/site";
 import { withBase } from "@/lib/paths";
+import type { JourneyMode } from "@/lib/types";
+
+type Props = { journey?: JourneyMode };
+const { journey = "stay" } = Astro.props;
 
 const navGroups = [
   {
@@ -55,17 +60,22 @@ const isCurrent = (href: string) => {
   </nav>
 
   <div class="header-actions">
-    <a class="header-call" href="tel:+919516006201" data-track="call_clicked" aria-label="Call Orchha Palace">
+    <a class="header-call" href={contact.primaryPhoneHref} data-track={journey === "event" ? "event_call_clicked" : journey === "assisted-suite" ? "assisted_reservation_call_clicked" : "call_clicked"} data-room={journey === "assisted-suite" ? "presidential-suite" : undefined} data-source="header_icon" aria-label={journey === "event" ? "Call the events team" : journey === "assisted-suite" ? "Call to reserve the Presidential Suite" : "Call Orchha Palace"}>
       <Icon name="ph:phone" size={20} aria-hidden="true" />
     </a>
-    <a
-      class="button button--primary button--small header-book"
-      href="#availability"
-      data-booking-open
-      data-booking-source="header"
-    >
-      Book a room <Icon name="ph:arrow-right" size={17} aria-hidden="true" />
-    </a>
+    {journey === "event" ? (
+      <a class="button button--primary button--small header-book" href="#event-enquiry">
+        Plan an event <Icon name="ph:arrow-down" size={17} aria-hidden="true" />
+      </a>
+    ) : journey === "assisted-suite" ? (
+      <a class="button button--primary button--small header-book" href={contact.primaryPhoneHref} data-track="assisted_reservation_call_clicked" data-room="presidential-suite" data-source="header">
+        Call to reserve <Icon name="ph:phone" size={17} aria-hidden="true" />
+      </a>
+    ) : (
+      <a class="button button--primary button--small header-book" href="#availability" data-booking-open data-booking-source="header">
+        Book a room <Icon name="ph:arrow-right" size={17} aria-hidden="true" />
+      </a>
+    )}
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-open>
       <span>Menu</span>
       <Icon name="ph:list" size={22} aria-hidden="true" />
@@ -93,12 +103,22 @@ const isCurrent = (href: string) => {
       ))}
     </nav>
     <div class="menu-drawer__footer">
-      <a class="button button--light" href="#availability" data-booking-open data-booking-source="menu">
-        Check availability <Icon name="ph:calendar-check" size={18} aria-hidden="true" />
-      </a>
+      {journey === "event" ? (
+        <a class="button button--light" href="#event-enquiry">
+          Send an event enquiry <Icon name="ph:arrow-down" size={18} aria-hidden="true" />
+        </a>
+      ) : journey === "assisted-suite" ? (
+        <a class="button button--light" href={contact.whatsapp.presidentialSuite} target="_blank" rel="noreferrer" data-track="assisted_reservation_whatsapp_clicked" data-room="presidential-suite">
+          WhatsApp about the suite <Icon name="ph:whatsapp-logo" size={18} aria-hidden="true" />
+        </a>
+      ) : (
+        <a class="button button--light" href="#availability" data-booking-open data-booking-source="menu">
+          Check availability <Icon name="ph:calendar-check" size={18} aria-hidden="true" />
+        </a>
+      )}
       <div class="menu-drawer__contact">
-        <a href="tel:+919516006201">+91 95160 06201</a>
-        <a href="mailto:reservations@orchhapalace.com">reservations@orchhapalace.com</a>
+        <a href={contact.primaryPhoneHref}>{contact.primaryPhone}</a>
+        <a href={`mailto:${journey === "event" ? contact.salesEmail : contact.reservationsEmail}`}>{journey === "event" ? contact.salesEmail : contact.reservationsEmail}</a>
       </div>
     </div>
   </div>

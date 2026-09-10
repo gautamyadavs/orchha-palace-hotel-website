@@ -1,19 +1,70 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "orchha-palace-hotel",
-  "main": "worker/index.ts",
-  "compatibility_date": "2026-08-31",
-  "assets": {
-    "directory": "./dist",
-    "binding": "ASSETS",
-    "run_worker_first": ["/api/*"]
-  },
-  "vars": {
-    "ENVIRONMENT": "production",
-    "LEAD_FROM_EMAIL": "Orchha Palace Website <website@orchhapalace.com>",
-    "LEAD_TO_EMAIL": "sales@orchhapalace.com,reservations@orchhapalace.com"
-  },
-  "observability": {
-    "enabled": true
-  }
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "orchha-palace-hotel",
+	"main": "worker/index.ts",
+	"compatibility_date": "2026-08-31",
+	"workers_dev": false,
+	"preview_urls": false,
+	"routes": [
+		{
+			"pattern": "orchhapalace.com",
+			"custom_domain": true
+		},
+		{
+			"pattern": "www.orchhapalace.com",
+			"custom_domain": true
+		}
+	],
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS",
+		"run_worker_first": true
+	},
+	"kv_namespaces": [
+		{
+			"binding": "LEAD_RATE_LIMIT",
+			"id": "f8c5af66eb594bce8ee8ada913523efb"
+		}
+	],
+	"secrets": {
+		"required": [
+			"RESEND_API_KEY",
+			"TURNSTILE_SECRET_KEY"
+		]
+	},
+	"vars": {
+		"ENVIRONMENT": "production",
+		"LEAD_FROM_EMAIL": "Orchha Palace <enquiries@updates.orchhapalace.com>",
+		"LEAD_TO_EMAIL": "sales@orchhapalace.com",
+		"LEAD_ALLOWED_ORIGINS": "https://gautamyadavs.github.io,https://orchhapalace.com,https://www.orchhapalace.com"
+	},
+	"observability": {
+		"enabled": true
+	},
+	"env": {
+		"preflight": {
+			"name": "orchha-palace-hotel-preflight",
+			"workers_dev": true,
+			"preview_urls": false,
+			"routes": [],
+			"kv_namespaces": [
+				{
+					"binding": "LEAD_RATE_LIMIT",
+					"id": "f451820f0f814c588ac414c611cfad7a"
+				}
+			],
+			"secrets": {
+				"required": [
+					"RESEND_API_KEY",
+					"TURNSTILE_SECRET_KEY"
+				]
+			},
+			"vars": {
+				"ENVIRONMENT": "production",
+				"LEAD_FROM_EMAIL": "Orchha Palace <enquiries@updates.orchhapalace.com>",
+				"LEAD_TO_EMAIL": "sales@orchhapalace.com",
+				"LEAD_ALLOWED_ORIGINS": "https://gautamyadavs.github.io,https://orchhapalace.com,https://www.orchhapalace.com"
+			}
+		}
+	}
 }
