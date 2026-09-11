@@ -9,6 +9,10 @@
 		{
 			"pattern": "orchhapalace.com",
 			"custom_domain": true
+		},
+		{
+			"pattern": "www.orchhapalace.com",
+			"custom_domain": true
 		}
 	],
 	"assets": {
