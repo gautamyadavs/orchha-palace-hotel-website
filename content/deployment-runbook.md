@@ -36,10 +36,11 @@ The Resend and Turnstile secret values are stored only in the two Cloudflare Wor
 - Resend reported the staff message delivered only to `sales@orchhapalace.com`; it contained every submitted field and used the guest address as `Reply-To`.
 - Resend reported the separate guest acknowledgement delivered; it used `sales@orchhapalace.com` as `Reply-To`.
 - The public preflight endpoint accepted the exact GitHub Pages origin and rejected an unapproved origin. Automated tests cover the remaining validation, Turnstile, rate-limit, timeout, idempotency, and provider-failure cases.
+- Before cutover, public DNS delegated to `ns09.domaincontrol.com` and `ns10.domaincontrol.com`. The apex had no A/AAAA record and `www` pointed to the unresolved apex, so no working legacy web origin was available. Cloudflare assigned `jack.ns.cloudflare.com` and `olivia.ns.cloudflare.com`.
 
 ## Cutover
 
-1. Export or screenshot the current apex and `www` DNS records, proxy state, SSL/TLS mode, redirect rules and current origin values. Record the latest working Worker deployment/version ID.
+1. Export or screenshot the current apex and `www` DNS records, proxy state, SSL/TLS mode, redirect rules and current origin values. Record the latest working Worker deployment/version ID. The 2026-09-11 pre-cutover Cloudflare zone export is archived at `content/deployment-snapshots/cloudflare-dns-before-cutover-2026-09-11.txt`.
 2. Keep the current web origin running. Do not alter apex mail MX/TXT records.
 3. Configure the protected GitHub `production` environment with `CLOUDFLARE_ACCOUNT_ID`, the least-privilege `CLOUDFLARE_API_TOKEN`, and `PUBLIC_TURNSTILE_SITE_KEY`.
 4. Manually dispatch `Deploy production to Cloudflare`. The final Wrangler configuration attaches both Custom Domains and disables production `workers.dev` access.
