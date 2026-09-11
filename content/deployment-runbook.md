@@ -17,6 +17,8 @@
 - Preflight Worker: `https://orchha-palace-hotel-preflight.orchhapalace-hotel.workers.dev`
 - Preflight KV namespace: `f451820f0f814c588ac414c611cfad7a`
 - Production KV namespace: `f8c5af66eb594bce8ee8ada913523efb`
+- GitHub `production` environment: deployments restricted to `main`; Cloudflare credentials stored as encrypted environment secrets; Turnstile site key stored as an environment variable
+- Cloudflare deployment token: account-owned, scoped to Worker scripts/account reads and Worker routes for `orchhapalace.com`, expiring 2027-09-12
 
 The Resend and Turnstile secret values are stored only in the two Cloudflare Worker environments. They must not be copied into GitHub variables, local environment files, or this runbook.
 
@@ -27,6 +29,13 @@ The Resend and Turnstile secret values are stored only in the two Cloudflare Wor
 3. Rebuild GitHub Pages with the preflight endpoint and production Turnstile site key.
 4. Submit one clearly labelled controlled enquiry from GitHub Pages. Confirm the sales message reaches only `sales@orchhapalace.com`, contains every field, and replies to the guest. Confirm the guest acknowledgement arrives and replies to sales.
 5. Confirm invalid origin, invalid Turnstile, sixth same-hour attempt, and simulated provider failure return safe JSON errors and expose no secrets.
+
+### Preflight evidence
+
+- 2026-09-11: GitHub Pages submitted a controlled enquiry through the preflight Worker and displayed the sales-team receipt confirmation.
+- Resend reported the staff message delivered only to `sales@orchhapalace.com`; it contained every submitted field and used the guest address as `Reply-To`.
+- Resend reported the separate guest acknowledgement delivered; it used `sales@orchhapalace.com` as `Reply-To`.
+- The public preflight endpoint accepted the exact GitHub Pages origin and rejected an unapproved origin. Automated tests cover the remaining validation, Turnstile, rate-limit, timeout, idempotency, and provider-failure cases.
 
 ## Cutover
 
