@@ -43,8 +43,8 @@ The Resend and Turnstile secret values are stored only in the two Cloudflare Wor
 1. Export or screenshot the current apex and `www` DNS records, proxy state, SSL/TLS mode, redirect rules and current origin values. Record the latest working Worker deployment/version ID. The 2026-09-11 pre-cutover Cloudflare zone export is archived at `content/deployment-snapshots/cloudflare-dns-before-cutover-2026-09-11.txt`.
 2. Keep the current web origin running. Do not alter apex mail MX/TXT records.
 3. Configure the protected GitHub `production` environment with `CLOUDFLARE_ACCOUNT_ID`, the least-privilege `CLOUDFLARE_API_TOKEN`, and `PUBLIC_TURNSTILE_SITE_KEY`.
-4. Manually dispatch `Deploy production to Cloudflare`. The final Wrangler configuration attaches both Custom Domains and disables production `workers.dev` access.
-5. Verify `https://orchhapalace.com`, the `www` 308 redirect, representative legacy redirects, `robots.txt`, sitemap, 404, cache/security headers, booking handoff, and a real production enquiry.
+4. Manually dispatch `Deploy production to Cloudflare`. The final Wrangler configuration attaches the canonical `orchhapalace.com` Custom Domain and disables production `workers.dev` access. The imported legacy `www` CNAME remains untouched unless the owner separately approves replacing it with a managed Worker domain.
+5. Verify `https://orchhapalace.com`, representative legacy redirects, `robots.txt`, sitemap, 404, cache/security headers, booking handoff, and a real production enquiry. Verify the existing `www` behavior separately without changing its DNS record.
 6. Change GitHub `PUBLIC_LEAD_API_URL` to `https://orchhapalace.com/api/event-leads`, rebuild Pages, and remove the preflight Worker after the production endpoint is confirmed.
 
 ## Rollback
