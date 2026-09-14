@@ -29,7 +29,7 @@ const { bookingUrl, source, room, variant = "inline" } = Astro.props;
 >
   <div class="booking-form__room" data-booking-room-preference hidden={!room}>
     <Icon name="ph:bed" size={20} aria-hidden="true" />
-    <span>Preferred stay: <strong data-booking-room-name>{room?.name}</strong></span>
+    <span>Exploring: <strong data-booking-room-name>{room?.name}</strong>. Confirm room and bed choice in live booking.</span>
     <button type="button" data-booking-room-clear hidden={!room}>View every room</button>
   </div>
 
@@ -75,6 +75,8 @@ const { bookingUrl, source, room, variant = "inline" } = Astro.props;
     </label>
   </details>
 
-  <p class="booking-form__note">Room selection and secure payment continue in the hotel's official booking system. You can add another room in the next step.</p>
+  <p class="booking-summary" data-booking-summary aria-live="polite">Choose your dates to see the length of your stay.</p>
+  <p class="booking-form__note">Select your final room and bed choice in live booking. Add extra rooms there. For infants or help with child age bands, <a href="tel:+919516006201">ask reservations</a> before booking.</p>
   <p class="form-message" data-booking-message role="status" aria-live="polite"></p>
+  <noscript><a class="button button--primary" href={bookingUrl}>Open the official booking engine</a></noscript>
 </form>

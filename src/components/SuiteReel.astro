@@ -1,0 +1,66 @@
+---
+import type { Room } from "@/lib/types";
+const { room } = Astro.props as { room: Room };
+const url = "https://www.instagram.com/reel/DcQzGTNS48I/";
+---
+<section class="suite-tour" aria-label="Presidential Suite video tour" data-suite-tour>
+  <h2>Tour the Presidential Suite</h2>
+    <div class="suite-tour__frame" data-tour-frame>
+      <img src={room.image.src} alt="The Presidential Suite bedroom" width="500" height="700" loading="lazy" data-tour-poster />
+      <div class="suite-tour__embed" data-tour-embed hidden></div>
+      <button class="button button--primary" type="button" data-tour-load>Watch the suite tour</button>
+    </div>
+    <p class="small-copy">The Instagram player loads when you choose to watch.</p>
+  <a class="text-link" href={url} target="_blank" rel="noreferrer" data-tour-external>Watch the original on Instagram ↗</a>
+  <p class="small-copy" data-tour-status role="status"></p>
+</section>
+<script>
+declare global { interface Window { instgrm?: { Embeds: { process: () => void } } } }
+let instagramLoader: Promise<void> | undefined;
+const loadInstagram = () => {
+  if (window.instgrm) return Promise.resolve();
+  if (instagramLoader) return instagramLoader;
+  instagramLoader = new Promise<void>((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://www.instagram.com/embed.js"; script.async = true;
+    const timer = window.setTimeout(() => reject(new Error("Instagram timed out")), 12000);
+    script.onload = () => { clearTimeout(timer); window.instgrm ? resolve() : reject(new Error("Instagram is unavailable")); };
+    script.onerror = () => { clearTimeout(timer); reject(new Error("Instagram was blocked")); };
+    document.head.append(script);
+  }).catch(error => { instagramLoader = undefined; throw error; });
+  return instagramLoader;
+};
+document.querySelectorAll<HTMLElement>("[data-suite-tour]").forEach(root => {
+  const button=root.querySelector<HTMLButtonElement>("[data-tour-load]");
+  const status=root.querySelector<HTMLElement>("[data-tour-status]")!;
+  const external=root.querySelector<HTMLAnchorElement>("[data-tour-external]")!;
+  button?.addEventListener("click",async()=>{
+    const embed=root.querySelector<HTMLElement>("[data-tour-embed]")!;
+    const poster=root.querySelector<HTMLImageElement>("[data-tour-poster]")!;
+    button.disabled=true;button.textContent="Loading the tour…";status.textContent="Connecting to Instagram. The original reel is also available using the link below.";
+    const quote=document.createElement("blockquote");quote.className="instagram-media";quote.dataset.instgrmPermalink=external.href;quote.dataset.instgrmVersion="14";
+    const link=external.cloneNode(true) as HTMLAnchorElement;link.removeAttribute("data-tour-external");quote.append(link);embed.replaceChildren(quote);
+    // Keep the player measurable while loading, with the photograph above it.
+    embed.hidden=false;embed.classList.add("is-loading");embed.inert=true;
+    try{
+      await loadInstagram();
+      const ready=new Promise<void>((resolve,reject)=>{
+        const timer=window.setTimeout(()=>{observer.disconnect();reject(new Error("Player timed out"));},12000);
+        const observeFrame=()=>{
+          const iframe=embed.querySelector<HTMLIFrameElement>("iframe");if(!iframe)return;
+          iframe.title="Presidential Suite at Orchha Palace — Instagram video";
+          iframe.addEventListener("load",()=>{clearTimeout(timer);observer.disconnect();resolve();},{once:true});
+        };
+        const observer=new MutationObserver(observeFrame);observer.observe(embed,{childList:true,subtree:true});
+      });
+      window.instgrm!.Embeds.process();await ready;
+      embed.classList.remove("is-loading");embed.inert=false;poster.hidden=true;button.hidden=true;
+      status.textContent="If Instagram does not play here or asks you to sign in, watch the original using the link below.";
+      embed.querySelector<HTMLIFrameElement>("iframe")?.focus({preventScroll:true});
+    }catch{
+      embed.hidden=true;embed.classList.remove("is-loading");embed.inert=false;poster.hidden=false;button.disabled=false;button.textContent="Try loading the tour again";
+      status.textContent="Instagram could not load here. You can watch the original reel on Instagram or continue exploring the photographs.";
+    }
+  });
+});
+</script>

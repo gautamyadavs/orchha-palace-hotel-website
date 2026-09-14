@@ -1,0 +1,20 @@
+---
+type Props = { image: string; mobileImage?: string; mobileSrcset?: string; avifImage?: string; mobileAvifImage?: string; mobileAvifSrcset?: string; alt: string; eyebrow: string; title: string; emphasis: string; description: string; action: string; href: string; variant?: "home" | "wedding" };
+const { image, mobileImage, mobileSrcset, avifImage, mobileAvifImage, mobileAvifSrcset, alt, eyebrow, title, emphasis, description, action, href, variant = "home" } = Astro.props;
+---
+<section class:list={["palace-hero", `palace-hero--${variant}`]} aria-labelledby="palace-hero-title">
+  <picture class="palace-hero__picture">
+    {mobileAvifImage && <source media="(max-width: 640px)" srcset={mobileAvifSrcset || mobileAvifImage} sizes={mobileAvifSrcset ? "100vw" : undefined} type="image/avif" />}
+    {mobileImage && <source media="(max-width: 640px)" srcset={mobileSrcset || mobileImage} sizes={mobileSrcset ? "100vw" : undefined} />}
+    {avifImage && <source srcset={avifImage} type="image/avif" />}
+    <img src={image} alt={alt} width="1920" height="1080" fetchpriority="high" />
+  </picture>
+  <div class="palace-hero__shade"></div>
+  <div class="shell palace-hero__content">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 id="palace-hero-title">{title}<em>{emphasis}</em></h1>
+    <p class="palace-hero__description">{description}</p>
+    <a class="palace-hero__action" href={href}>{action}<span aria-hidden="true">↗</span></a>
+  </div>
+  <p class="palace-hero__signature">Orchha Palace <span>Hotel & Convention Centre</span></p>
+</section>

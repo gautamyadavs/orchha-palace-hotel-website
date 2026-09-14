@@ -2,6 +2,9 @@ export const eventTypes = [
   "Wedding",
   "Engagement or reception",
   "Corporate conference",
+  "Business meeting",
+  "Team offsite",
+  "Seminar or association conference",
   "Product launch",
   "Private celebration",
   "Other"

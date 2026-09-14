@@ -10,6 +10,18 @@ https://gautamyadavs.github.io/orchha-palace-hotel-website/
 
 The GitHub Pages build automatically applies the repository subpath. It remains `noindex` and uses preview media. Event submission is enabled only when the repository variables `PUBLIC_LEAD_API_URL` and `PUBLIC_TURNSTILE_SITE_KEY` are both configured; otherwise the form is disabled and direct sales email, call and WhatsApp paths remain visible.
 
+## Interactive guest journeys
+
+The September redesign adds an immersive palace homepage with one editorial rooms-and-suites photograph and description, leading to all five choices on `/rooms/`; shared room-search dates and occupancy; bed/bathtub filters and two-room comparison; separate `/weddings/` and `/corporate-events/` pages with venue selection and two-step enquiries; and a nine-logo corporate carousel with reduced-motion and static alternatives. `/weddings-events/` remains a legacy journey chooser.
+
+`/explore-orchha/` leads with suggested two- and three-night stays in expandable chronological day cards. Customise opens contextual Change pickers, with Move/Remove under More, saved ideas and one-step Undo. The 21-experience catalogue stays collapsed until requested. It saves actual changes locally, exports the full itinerary through the browser print/PDF dialog and supports copy/WhatsApp sharing. Missing arrival dates are requested in context; date conflicts appear only when a valid room search differs from the itinerary. Both suggested stays include arrival-evening aarti, the fort, a short sanctuary outing and Chhatris sunset followed by Betwa View Dining at the sister property, Orchha Resort, by the river. The three-night stay adds morning rafting, one pool/garden period and the Sound & Light Show on day 3. After rafting, summer pool time is labelled early evening; October–January and undated plans use afternoon. Breakfast, lunch breaks, dinner and packed-lunch guidance remain in shared and printed plans. One-night searches remain available in the normal booking form. The Presidential Suite retains assisted reservations and adds the supplied Instagram reel on demand alongside its photographs.
+
+`src/data/activities.ts` and `src/data/clients.ts` contain the source-backed catalogues. Venue finders start with Any layout and every space in that journey. After a selection, capacity is numeric only for verified seating layouts; other layouts require confirmation. The Sanity schemas and read mappings support the new content while retaining approved repository fallbacks.
+
+The owner-selected palace exterior introduces the homepage rooms section. The wedding gallery has six complete photographs, with the indoor floral mandap following daytime celebration and fireworks. Betwa View Dining has visible content, directions, its own telephone and Restaurant structured data on `/dining/#betwa-view-dining`; it is clearly identified as a sister-property venue.
+
+See `design/redesign-plan.md`, `design/corporate-logo-register.md` and `design-qa.md` for implementation scope, asset provenance and current QA evidence. The redesign was deployed to https://orchhapalace.com on 14 September 2026. Release and rollback details are in `content/deployment-snapshots/release-2026-09-14/`. A local test CAPTCHA key must never be used for deployment; `verify:production` rejects recognised test keys unless `ALLOW_TEST_CAPTCHA=true` is explicitly set for a local verification run.
+
 ## Local development
 
 1. Copy `.env.example` to `.env` and keep all secrets out of Git.
@@ -28,7 +40,7 @@ The GitHub Pages build automatically applies the repository subpath. It remains 
 - `content/room-image-audit.md` records the Standard/Deluxe cross-check, excluded people-visible photographs, Presidential Suite correction and room-size discrepancy.
 - `content/launch-handoff.md` is the management sign-off checklist for booking parameters, room/venue mapping, policies and production integrations.
 
-Each room detail page has a category-specific gallery with previous/next controls, swipe support, keyboard navigation, captions, a photo count and a full-screen view.
+Each room detail page has a category-specific gallery with previous/next controls, swipe support, keyboard navigation, captions, a photo count and a full-screen view. The wedding gallery opts into complete, uncropped images in a responsive 3:2/16:9 frame, beginning with the daytime celebration. Photo, caption and thumbnail selection update together after decoding; choosing a thumbnail scrolls only its strip.
 
 ## Booking handoff
 
@@ -38,7 +50,7 @@ The public engine currently exposes only Standard and Deluxe. Do not populate `m
 
 A production build uses the approved repository content when Sanity is absent or incomplete. It still fails if selected production content is incomplete or references media that is not publication-approved.
 
-Payment completion has not been tested by design. Staff must complete a controlled production booking before the site can be promoted from staging.
+Payment completion has not been tested by design. A controlled payment-completion check remains a staff task; the live room-search handoff is verified separately.
 
 ## Event leads
 

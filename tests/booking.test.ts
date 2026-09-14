@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createBookingUrl, validateBookingSearch } from "../src/lib/booking.ts";
 
-const validSearch = { checkIn: "2026-09-18", checkOut: "2026-09-20", adults: 2, children: 0 };
+const validSearch = { checkIn: "2099-09-18", checkOut: "2099-09-20", adults: 2, children: 0 };
 const today = new Date("2026-09-01T09:00:00+05:30");
 
 test("accepts a valid future booking search", () => {
@@ -19,8 +19,8 @@ test("appends the verified search contract", () => {
     baseUrl: "https://bookingengine.maximojo.com/?hid=India-hotel-id"
   });
   assert.equal(url.searchParams.get("hid"), "India-hotel-id");
-  assert.equal(url.searchParams.get("checkin"), "2026-09-18");
-  assert.equal(url.searchParams.get("checkout"), "2026-09-20");
+  assert.equal(url.searchParams.get("checkin"), "2099-09-18");
+  assert.equal(url.searchParams.get("checkout"), "2099-09-20");
   assert.equal(url.searchParams.get("nAdults"), "2");
   assert.equal(url.searchParams.get("nChildrens"), "0");
   assert.equal(url.searchParams.has("adults"), false);
@@ -51,4 +51,11 @@ test("removes legacy guessed keys from the base URL", () => {
 test("rejects invalid occupancy", () => {
   assert.equal(validateBookingSearch({ ...validSearch, adults: 0 }, today).valid, false);
   assert.equal(validateBookingSearch({ ...validSearch, children: 9 }, today).valid, false);
+});
+
+test("one-night stays remain valid while impossible dates and fractional guests fail",()=>{
+  assert.equal(validateBookingSearch({...validSearch,checkOut:"2099-09-19"},today).valid,true);
+  assert.equal(validateBookingSearch({...validSearch,checkIn:"2099-02-30"},today).valid,false);
+  assert.equal(validateBookingSearch({...validSearch,adults:1.5},today).valid,false);
+  assert.equal(validateBookingSearch({...validSearch,children:0.5},today).valid,false);
 });

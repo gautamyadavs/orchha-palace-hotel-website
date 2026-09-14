@@ -1,6 +1,7 @@
+import { restoreItinerary } from "./itinerary";
 import { createClient } from "@sanity/client";
 import { fallbackSiteData } from "@/data/site";
-import type { Amenity, DiningVenue, EventVenue, ImageAsset, Room, SiteData } from "./types";
+import type { ImageAsset, SiteData } from "./types";
 
 const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID;
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET || "production";
@@ -9,13 +10,7 @@ const client = projectId
   ? createClient({ projectId, dataset, apiVersion: "2026-08-31", useCdn: true })
   : null;
 
-type CmsSiteData = {
-  rooms?: Room[];
-  dining?: DiningVenue[];
-  venues?: EventVenue[];
-  amenities?: Amenity[];
-  media?: ImageAsset[];
-};
+type CmsSiteData = Partial<SiteData>;
 
 const mediaProjection = `{
   "id": _id,
@@ -44,6 +39,9 @@ const referencedImageProjection = (category: ImageAsset["category"], subjectExpr
 }`;
 
 const query = `{
+  "clients": *[_type == "corporateClient" && status == "ready"] | order(order asc) { "id": slug.current, name, order, logo, sourceUrl, reviewedAt, status },
+  "activities": *[_type == "activity" && active != false] | order(order asc) { "id": slug.current, name, categories, description, duration, block, bookingStatus, sourceUrl, bookingUrl, actionLabel, reviewedAt, note, variantOf },
+  "itineraryTemplates": *[_type == "itineraryTemplate"] | order(nights asc) { nights, days[]{ earlyMorning, morning, afternoon, evening } },
   "rooms": *[_type == "room" && active != false] | order(order asc) {
     "slug": slug.current,
     name,
@@ -56,7 +54,7 @@ const query = `{
     bathroom,
     view,
     "bookingMode": coalesce(bookingMode, "online"),
-    maximojoRoomCode,
+    maximojoRoomCode, category, bedType, featureTags, tour,
     "image": ${referencedImageProjection("room", "name")},
     "gallery": gallery[]->${mediaProjection},
     "highlights": coalesce(highlights, []),
@@ -81,6 +79,7 @@ const query = `{
     capacity,
     description,
     "image": ${referencedImageProjection("venue", "name")},
+    journeys, capacities,
     "layouts": coalesce(layouts, [])
   },
   "amenities": *[_type == "amenity" && active != false] | order(order asc) {
@@ -103,19 +102,39 @@ const hasApprovedImage = (value: { image?: ImageAsset }) => Boolean(
 );
 
 function sanitizeCmsData(data: CmsSiteData): SiteData {
-  const media = (data.media || []).filter((asset) => asset.src && asset.publishApproved && asset.rightsStatus !== "verify");
+  const approvedMedia = (data.media || []).filter((asset) => asset.src && asset.publishApproved && asset.rightsStatus !== "verify");
+  const media = [...fallbackSiteData.media.filter(asset => !approvedMedia.some(m => m.id === asset.id)), ...approvedMedia];
   const rooms = (data.rooms || [])
     .filter((room) => room.slug && room.name && hasApprovedImage(room))
     .map((room) => ({
       ...room,
+      category: room.category || fallbackSiteData.rooms.find(r => r.slug === room.slug)?.category,
+      bedType: room.bedType || fallbackSiteData.rooms.find(r => r.slug === room.slug)?.bedType,
+      featureTags: room.featureTags || fallbackSiteData.rooms.find(r => r.slug === room.slug)?.featureTags || [],
+      tour: room.slug === "presidential-suite" ? fallbackSiteData.rooms.find(r => r.slug === room.slug)?.tour : undefined,
       maximojoRoomCode: room.bookingMode === "assisted" ? undefined : room.maximojoRoomCode,
-      gallery: (room.gallery || []).filter((asset) => media.some((item) => item.id === asset.id))
+      gallery: (room.gallery || []).filter((asset) => media.some((item) => item.id === asset.id)).length ? (room.gallery || []).filter((asset) => media.some((item) => item.id === asset.id)) : [room.image]
     }));
   const dining = (data.dining || []).filter((venue) => venue.slug && venue.name && hasApprovedImage(venue));
-  const venues = (data.venues || []).filter((venue) => venue.slug && venue.name && hasApprovedImage(venue));
+  const venues = (data.venues || []).filter((venue) => venue.slug && venue.name && hasApprovedImage(venue)).map(venue => ({ ...venue,
+    journeys: venue.journeys || fallbackSiteData.venues.find(v => v.slug === venue.slug)?.journeys || [],
+    capacities: venue.capacities || fallbackSiteData.venues.find(v => v.slug === venue.slug)?.capacities || {}
+  }));
   const amenities = (data.amenities || []).filter((amenity) => amenity.name && (!amenity.image || hasApprovedImage(amenity)));
 
-  return { rooms, dining, venues, amenities, media };
+  const clients = (data.clients || []).filter(client => fallbackSiteData.clients.some(c => c.id === client.id) && client.status === "ready").map(client => ({ ...client, logo: fallbackSiteData.clients.find(c => c.id === client.id)!.logo }));
+  const validActivities = (data.activities || []).filter(a => a.id && a.name && Array.isArray(a.categories) && ["earlyMorning", "morning", "afternoon", "evening"].includes(a.block) && /^(https:\/\/|\/[^\/])/.test(a.sourceUrl || ""));
+  // An incomplete CMS catalogue must not remove owner-requested experiences.
+  const activities = fallbackSiteData.activities.map(fallback => {
+    const activity = validActivities.find(a => a.id === fallback.id) || fallback;
+    return { ...activity, bookingUrl: activity.bookingUrl && /^https:\/\//.test(activity.bookingUrl) ? activity.bookingUrl : undefined };
+  });
+  const itineraryTemplates = fallbackSiteData.itineraryTemplates.map(fallback => {
+    const template = data.itineraryTemplates?.find(t => t.nights === fallback.nights);
+    const restored = template && restoreItinerary({ ...template, version: 1, arrival: "", unscheduled: [] }, activities);
+    return restored ? { nights: restored.nights, days: restored.days } : fallback;
+  });
+  return { rooms, dining, venues, amenities, media, clients: clients.length ? clients : fallbackSiteData.clients, activities, itineraryTemplates };
 }
 
 function validateProductionData(data: SiteData): SiteData {

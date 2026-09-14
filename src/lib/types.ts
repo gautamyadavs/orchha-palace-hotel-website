@@ -13,6 +13,10 @@ export type ImageAsset = {
 };
 
 export type Room = {
+  category?: "Standard" | "Deluxe" | "Presidential";
+  bedType?: "double" | "twin" | "two-bedroom";
+  featureTags?: string[];
+  tour?: { provider: "instagram"; url: string; title: string };
   slug: string;
   name: string;
   shortName: string;
@@ -47,6 +51,8 @@ export type DiningVenue = {
 };
 
 export type EventVenue = {
+  journeys?: EventJourney[];
+  capacities?: Partial<Record<SeatingLayout, number>>;
   slug: string;
   name: string;
   type: "Indoor" | "Outdoor" | "Boardroom";
@@ -56,6 +62,20 @@ export type EventVenue = {
   image: ImageAsset;
   layouts: string[];
 };
+
+export type EventJourney = "wedding" | "corporate";
+export type SeatingLayout = "Theatre" | "Banquet" | "Classroom" | "Boardroom" | "Outdoor";
+export type CorporateClient = { id: string; name: string; order: number; logo: string; sourceUrl: string; reviewedAt: string; status: "ready" | "pending" };
+export type ActivityCategory = "Heritage" | "Spiritual" | "Nature" | "Adventure" | "Rural & food" | "At the hotel";
+export type TimeBlock = "earlyMorning" | "morning" | "afternoon" | "evening";
+export type Activity = {
+  id: string; name: string; categories: ActivityCategory[]; description: string;
+  duration: string; block: TimeBlock; bookingStatus: string; sourceUrl: string;
+  actionLabel: string; bookingUrl?: string; reviewedAt: string; note: string;
+  variantOf?: string;
+};
+export type ItineraryTemplate = { nights: 2 | 3; days: Record<TimeBlock, string[]>[] };
+export type SavedItinerary = ItineraryTemplate & { version: 2; arrival: string; unscheduled: string[] };
 
 export type Amenity = {
   name: string;
@@ -74,6 +94,12 @@ export type BookingSearch = {
 };
 
 export type EventLead = {
+  journey?: EventJourney;
+  organisation?: string;
+  functions?: string;
+  seatingLayout?: SeatingLayout;
+  avNeeds?: string;
+  guestRooms?: number;
   name: string;
   phone: string;
   email: string;
@@ -87,6 +113,9 @@ export type EventLead = {
 };
 
 export type SiteData = {
+  clients: CorporateClient[];
+  activities: Activity[];
+  itineraryTemplates: ItineraryTemplate[];
   rooms: Room[];
   dining: DiningVenue[];
   venues: EventVenue[];

@@ -7,38 +7,20 @@ import type { JourneyMode } from "@/lib/types";
 type Props = { journey?: JourneyMode };
 const { journey = "stay" } = Astro.props;
 
-const navGroups = [
-  {
-    label: "Stay & dine",
-    items: [
-      { href: withBase("/rooms/"), label: "Rooms & suites" },
-      { href: withBase("/dining/"), label: "Dining" },
-      { href: withBase("/hotel-amenities/"), label: "Hotel & amenities" }
-    ]
-  },
-  {
-    label: "Gather & explore",
-    items: [
-      { href: withBase("/weddings-events/"), label: "Weddings & events" },
-      { href: withBase("/explore-orchha/"), label: "Explore Orchha" },
-      { href: withBase("/gallery/"), label: "Gallery" }
-    ]
-  },
-  {
-    label: "Plan your visit",
-    items: [
-      { href: withBase("/offers/"), label: "Offers" },
-      { href: withBase("/contact/"), label: "Contact & directions" }
-    ]
-  }
-];
-
 const primaryNav = [
-  navGroups[0].items[0],
-  navGroups[0].items[1],
-  navGroups[1].items[0],
-  navGroups[0].items[2],
-  navGroups[1].items[1]
+  { href: withBase("/rooms/"), label: "Rooms & suites" },
+  { href: withBase("/weddings/"), label: "Weddings" },
+  { href: withBase("/corporate-events/"), label: "Corporate events" },
+  { href: withBase("/dining/"), label: "Dining" },
+  { href: withBase("/explore-orchha/"), label: "Explore Orchha" }
+];
+const navGroups = [
+  { label: "Make it your stay", items: primaryNav },
+  { label: "Plan your visit", items: [
+    { href: withBase("/hotel-amenities/"), label: "Hotel & amenities" },
+    { href: withBase("/gallery/"), label: "Gallery" },
+    { href: withBase("/contact/"), label: "Contact & directions" }
+  ] }
 ];
 
 const normalizePath = (path: string) => path.replace(/\/$/, "") || "/";
@@ -50,7 +32,7 @@ const isCurrent = (href: string) => {
 ---
 
 <header class="site-header" data-header>
-  <a class="wordmark" href={withBase("/")} aria-label="Orchha Palace home">
+  <a class="wordmark" href={withBase("/")} aria-label="Orchha Palace Hotel & Convention Centre home">
     <span class="wordmark__name">Orchha Palace</span>
     <span class="wordmark__sub">Hotel & Convention Centre</span>
   </a>

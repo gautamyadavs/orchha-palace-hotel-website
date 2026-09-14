@@ -1,21 +1,20 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import PageHero from "@/components/PageHero.astro";
-import SectionHeading from "@/components/SectionHeading.astro";
+import RoomGallery from "@/components/RoomGallery.astro";
 import { getSiteData } from "@/lib/cms";
-
 const { media } = await getSiteData();
-const previewMode = import.meta.env.DEV || import.meta.env.PUBLIC_MEDIA_PREVIEW === "true";
-const approved = media.filter((item) => !item.peopleVisible && (previewMode || item.publishApproved));
-const hero = approved.find((item) => item.id === "property-exterior") || approved[0] || media[0];
+const categories = [{ id: "property", name: "The hotel" }, { id: "room", name: "Rooms & suites" }, { id: "dining", name: "Dining" }, { id: "wellness", name: "Wellness" }, { id: "venue", name: "Events" }, { id: "destination", name: "Orchha" }].filter(c => media.some(m => m.category === c.id));
 ---
-
-<BaseLayout title="Gallery | Orchha Palace" description="Explore approved photography of Orchha Palace rooms, dining, pool, wellness, gardens and event venues." image={hero.src}>
-  <PageHero eyebrow="Gallery" title="See the stay before you choose it" copy="Rooms, gardens, dining and gathering spaces—selected from the hotel's approved property library." image={hero.src} alt={hero.alt} />
-  <section class="section shell">
-    <SectionHeading eyebrow={previewMode ? "Curated preview library" : "Approved property library"} title="A closer look around" copy="Identifiable guest, wedding attendee and VIP photography is intentionally excluded. Preview-only assets remain blocked from public launch until hotel approval is recorded." />
-    <div class="gallery-grid">
-      {approved.map((item) => <figure><img src={item.src} alt={item.alt} width="1200" height="900" loading="lazy" style={`object-position:${item.focalPoint}`} /></figure>)}
-    </div>
-  </section>
+<BaseLayout title="Photo Gallery | Orchha Palace" description="Look around Orchha Palace: rooms, gardens, dining, wellness and event settings.">
+  <div class="page-intro shell"><p class="eyebrow">A closer look</p><h1>Picture your time here</h1><p>Choose a part of the hotel to explore. Open any photograph for a full-screen view.</p></div>
+  <section class="shell section--compact" data-property-gallery><div class="gallery-filters" hidden>{categories.map((category,i) => <button class="button button--secondary button--small" type="button" data-gallery-filter={category.id} aria-pressed={i === 0}>{category.name}</button>)}</div>{categories.map(category => <section data-gallery-category={category.id}><h2>{category.name}</h2><RoomGallery room={`property-${category.id}`} label={category.name.toLowerCase()} images={media.filter(m => m.category === category.id)} /></section>)}</section>
 </BaseLayout>
+<script>
+const root=document.querySelector<HTMLElement>("[data-property-gallery]");
+if(root){
+ const controls=root.querySelector<HTMLElement>(".gallery-filters")!;controls.hidden=false;
+ const buttons=[...root.querySelectorAll<HTMLButtonElement>("[data-gallery-filter]")];
+ const select=(id:string)=>{root.querySelectorAll<HTMLElement>("[data-gallery-category]").forEach(panel=>panel.hidden=panel.dataset.galleryCategory!==id);buttons.forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.galleryFilter===id)));};
+ buttons.forEach(button=>button.addEventListener("click",()=>select(button.dataset.galleryFilter!)));select(buttons[0].dataset.galleryFilter!);
+}
+</script>

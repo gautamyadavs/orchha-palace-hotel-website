@@ -1,0 +1,26 @@
+---
+import type { EventJourney, EventVenue } from "@/lib/types";
+const { venues, journey } = Astro.props as { venues: EventVenue[]; journey: EventJourney };
+const choices = venues.filter(v => v.journeys?.includes(journey));
+---
+<section data-venue-finder data-journey={journey} aria-labelledby="venue-heading">
+  <p class="eyebrow">Find your setting</p><h2 id="venue-heading">A space that fits your plans</h2>
+  <div class="filter-bar" data-venue-controls hidden>
+    <label>{journey === "corporate" ? "Delegates" : "Guests"}<input type="number" min="2" max="5000" inputmode="numeric" placeholder="How many?" data-venue-guests /></label>
+    <label>Setting<select data-venue-setting><option value="">Any setting</option><option>Indoor</option><option>Outdoor</option>{journey === "corporate" && <option>Boardroom</option>}</select></label>
+    <label>Seating layout<select data-venue-layout><option value="">Any layout</option>{(journey === "wedding" ? ["Banquet", "Outdoor", "Theatre"] : ["Theatre", "Classroom", "Banquet", "Boardroom", "Outdoor"]).map(layout => <option>{layout}</option>)}</select></label>
+    <button class="button button--secondary" data-venue-reset type="button">Clear filters</button>
+  </div>
+  <p class="small-copy">Explore every setting, then choose your guest count, setting or seating layout to refine the possibilities.</p>
+  <p data-venue-status role="status">{choices.length} spaces to explore.</p>
+  <h3 data-matched-heading hidden>Matches for your layout</h3>
+  <div class="venue-results" data-matched-results>
+    {choices.map(venue => <article class="venue-card" data-venue-card data-slug={venue.slug}>
+      <img src={venue.image.src} alt={venue.image.alt} width="640" height="400" loading="lazy" />
+      <div class="venue-card__body"><p class="eyebrow">{venue.type} · {venue.size}</p><h3>{venue.name}</h3><p>{venue.description}</p><span class="venue-match" data-match-label>{venue.capacity}</span><p class="small-copy">{venue.image.subject === venue.name || venue.slug === "boardroom" ? "" : "Hotel setting shown; ask our team for this venue's layout and photographs."}</p><a class="button button--secondary" href="#event-enquiry" data-select-venue={venue.name}>Enquire about this space →</a></div>
+    </article>)}
+  </div>
+  <h3 data-confirm-heading hidden>Confirm layout with our team</h3><div class="venue-results" data-confirm-results></div>
+  <script is:inline type="application/json" data-venue-data set:html={JSON.stringify(choices).replace(/</g, "\\u003c")} />
+</section>
+<script>import "../scripts/venue-finder";</script>

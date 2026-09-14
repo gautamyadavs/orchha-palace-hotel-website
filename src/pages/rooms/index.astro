@@ -1,22 +1,12 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import PageHero from "@/components/PageHero.astro";
-import RoomCard from "@/components/RoomCard.astro";
+import RoomChooser from "@/components/RoomChooser.astro";
 import AvailabilityBar from "@/components/AvailabilityBar.astro";
-import SectionHeading from "@/components/SectionHeading.astro";
 import { getSiteData } from "@/lib/cms";
-
-const { rooms, media } = await getSiteData();
-const hero = media.find((item) => item.id === "presidential-suite") || rooms[0].image;
+const { rooms } = await getSiteData();
 ---
-
-<BaseLayout title="Rooms & Suites | Orchha Palace" description="Compare all five room and suite categories at Orchha Palace, including space, beds, bathrooms, inclusions and key amenities.">
-  <PageHero eyebrow="Rooms & suites" title="Choose the space that feels right" copy="Five considered stays, from generous standard rooms to a private two-bedroom Presidential Suite." image={hero.src} alt={hero.alt} />
-  <section class="section shell">
-    <SectionHeading eyebrow="Compare before you reserve" title="Every stay, clearly explained" copy="Standard and Deluxe availability continues in the live booking engine. The Presidential Suite is reserved directly with the hotel by call or WhatsApp." />
-    <div class="room-grid">
-      {rooms.map((room, index) => <RoomCard room={room} featured={index === 4} />)}
-    </div>
-  </section>
-  <section class="section section--paper"><div class="shell"><AvailabilityBar compact heading="Check live room availability" /></div></section>
+<BaseLayout title="Rooms & Suites | Orchha Palace" description="Compare beds, bathrooms and space across Standard, Deluxe and the Presidential Suite at Orchha Palace.">
+  <div class="page-intro shell"><p class="eyebrow">Make yourself at home</p><h1>Find your kind of stay</h1><p>Generous rooms, thoughtful comforts. Compare the details, then choose your dates.</p></div>
+  <div class="shell section--compact"><RoomChooser rooms={rooms} /></div>
+  <section class="section section--paper"><div class="shell"><AvailabilityBar compact heading="Your dates. Your time away." /></div></section>
 </BaseLayout>

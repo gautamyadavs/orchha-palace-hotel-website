@@ -1,0 +1,13 @@
+---
+import type { CorporateClient } from "@/lib/types";
+import { withBase } from "@/lib/paths";
+const { clients } = Astro.props as { clients: CorporateClient[] };
+const ready = clients.filter(c => c.status === "ready").sort((a,b) => a.order-b.order);
+---
+{ready.length > 0 && <section class="client-strip" data-client-carousel aria-label="Organisations hosted by Orchha Palace">
+  <h2>Organisations we've hosted</h2>
+  <div class="client-window" data-client-window hidden><ul class="client-track" data-client-track>{ready.map(client => <li><img src={withBase(client.logo)} alt={client.name} width="180" height="80" loading="lazy" /></li>)}</ul></div>
+  <div class="client-controls" hidden><button class="button button--secondary button--small" data-client-prev type="button" aria-label="Previous organisations">←</button><button class="button button--secondary button--small" data-client-play type="button">Pause rotation</button><button class="button button--secondary button--small" data-client-next type="button" aria-label="Next organisations">→</button></div>
+  <details class="client-all" open><summary>View all organisations</summary><ol class="client-grid">{ready.map(client => <li><img src={withBase(client.logo)} alt="" width="180" height="80" loading="lazy" /><span>{client.name}</span></li>)}</ol></details>
+</section>}
+<script>import "../scripts/client-carousel";</script>

@@ -7,13 +7,14 @@ type Props = {
   images: ImageAsset[];
   label?: string;
   trackEvent?: string;
+  presentation?: "default" | "complete";
 };
 
-const { room, images, label = "room", trackEvent = "room_gallery_opened" } = Astro.props;
+const { room, images, label = "room", trackEvent = "room_gallery_opened", presentation = "default" } = Astro.props;
 const titleId = `gallery-title-${room}`;
 ---
 
-<div class="room-gallery" data-room-gallery data-room={room}>
+<div class:list={["room-gallery", presentation === "complete" && "room-gallery--complete"]} data-room-gallery data-room={room}>
   <div class="room-gallery__stage" tabindex="0" aria-labelledby={titleId}>
     <button class="room-gallery__open" type="button" data-gallery-open data-track={trackEvent} data-room={room} aria-haspopup="dialog" aria-label={`Open ${images[0].subject} full screen`}>
       <img
@@ -35,6 +36,7 @@ const titleId = `gallery-title-${room}`;
     <span class="room-gallery__count" data-gallery-count aria-live="polite">1 / {images.length}</span>
   </div>
 
+  <p class="visually-hidden" data-gallery-status role="status"></p>
   <div class="room-gallery__summary">
     <p id={titleId} data-gallery-caption>{images[0].subject}</p>
     <span>Swipe, use the arrows or choose a thumbnail</span>
@@ -66,7 +68,7 @@ const titleId = `gallery-title-${room}`;
           <Icon name="ph:x" size={22} />
         </button>
       </form>
-      <img data-gallery-dialog-image src={images[0].src} alt={images[0].alt} width="1600" height="1200" />
+      <img data-gallery-dialog-image src={images[0].src} alt={images[0].alt} width="1600" height="1200" loading="lazy" />
       <button class="room-gallery-dialog__arrow room-gallery-dialog__arrow--previous" type="button" data-gallery-dialog-previous aria-label={`Previous ${label} photo`}>
         <Icon name="ph:caret-left-bold" size={24} />
       </button>

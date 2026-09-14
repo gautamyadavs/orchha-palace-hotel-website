@@ -1,4 +1,6 @@
 import type { Amenity, DiningVenue, EventVenue, ImageAsset, Room, SiteData } from "@/lib/types";
+import { activities, itineraryTemplates } from "./activities";
+import { clients } from "./clients";
 import { withBase } from "@/lib/paths";
 export { contact } from "@/lib/contact";
 
@@ -52,6 +54,10 @@ export const media: ImageAsset[] = [
     ...image("presidential-bedroom-two", "/images/presidential-bedroom-two.webp", "Presidential Suite second bedroom with a double bed, timber headboard and television", "room", "Presidential Suite second bedroom"),
     rightsStatus: "approved",
     publishApproved: true
+  },
+  {
+    ...image("rooms-editorial", "/images/rooms-editorial.webp", "Carved pink palace doorways opening onto a garden and chequered terrace", "room", "Palace rooms and suites", "landscape"),
+    mobileSrc: withBase("/images/rooms-editorial-mobile.webp")
   },
   image("suite-living", "/images/suite-living.jpg", "Presidential Suite private living room with carved sofas around a coffee table", "room", "Presidential Suite living room"),
   image("presidential-dining", "/images/presidential-dining.jpg", "Presidential Suite dining room with a six-seat table and adjoining lounge", "room", "Presidential Suite dining room"),
@@ -116,6 +122,10 @@ export const media: ImageAsset[] = [
     publishApproved: true
   },
   {
+    ...image("wedding-indoor-mandap", "/images/wedding-indoor-mandap.webp", "Indoor wedding mandap dressed with pink fabric, flowers and hanging marigolds", "venue", "Indoor floral mandap"),
+    peopleVisible: true
+  },
+  {
     ...image("event-showcase-fireworks", "/images/event-showcase-fireworks.webp", "Wedding couple on a floral stage beneath a coordinated fireworks display", "venue", "Wedding finale with fireworks", "landscape", "50% 46%"),
     peopleVisible: true,
     rightsStatus: "approved",
@@ -150,6 +160,7 @@ const sharedAmenities = [
 export const rooms: Room[] = [
   {
     slug: "standard-room",
+    category: "Standard", bedType: "double", featureTags: [],
     name: "Standard Room",
     shortName: "Standard",
     eyebrow: "Calm, generous comfort",
@@ -168,6 +179,7 @@ export const rooms: Room[] = [
   },
   {
     slug: "standard-room-twin",
+    category: "Standard", bedType: "twin", featureTags: [],
     name: "Standard Room Twin",
     shortName: "Standard Twin",
     eyebrow: "Flexible twin comfort",
@@ -186,6 +198,7 @@ export const rooms: Room[] = [
   },
   {
     slug: "deluxe-room",
+    category: "Deluxe", bedType: "double", featureTags: ["bathtub"],
     name: "Deluxe Room",
     shortName: "Deluxe",
     eyebrow: "More room to settle in",
@@ -204,6 +217,7 @@ export const rooms: Room[] = [
   },
   {
     slug: "deluxe-room-twin",
+    category: "Deluxe", bedType: "twin", featureTags: ["bathtub"],
     name: "Deluxe Room Twin",
     shortName: "Deluxe Twin",
     eyebrow: "Space, shared beautifully",
@@ -222,6 +236,7 @@ export const rooms: Room[] = [
   },
   {
     slug: "presidential-suite",
+    category: "Presidential", bedType: "two-bedroom", featureTags: ["bathtub", "private-pool"],
     name: "Presidential Suite",
     shortName: "Presidential Suite",
     eyebrow: "The palace at its most private",
@@ -236,7 +251,8 @@ export const rooms: Room[] = [
     highlights: ["Private pool", "Dedicated butler", "Living and dining room", "Jacuzzi and steam bath"],
     amenities: [...sharedAmenities, "56-inch television", "Media console", "Pantry", "Private pool"],
     inclusions: ["Welcome cake or wine", "Fruit basket", "Floral arrangement", "Butler service"],
-    bookingMode: "assisted"
+    bookingMode: "assisted",
+    tour: { provider: "instagram", url: "https://www.instagram.com/reel/DcQzGTNS48I/", title: "Tour the Presidential Suite" }
   }
 ];
 
@@ -273,13 +289,13 @@ export const dining: DiningVenue[] = [
 ];
 
 export const venues: EventVenue[] = [
-  { slug: "indramani-bagh", name: "Indramani Bagh", type: "Outdoor", size: "140,000 sq. ft.", capacity: "Custom by event layout", description: "The estate's largest lawn for destination weddings, exhibitions and large-format celebrations.", image: byId("indramani"), layouts: ["Wedding", "Reception", "Exhibition", "Festival"] },
-  { slug: "jeja-bagh", name: "Jeja Bagh", type: "Outdoor", size: "15,000 sq. ft.", capacity: "Custom by event layout", description: "A landscaped lawn with a heritage backdrop for ceremonies, cocktails and private dinners.", image: byId("jeja"), layouts: ["Ceremony", "Cocktail", "Dinner", "Reception"] },
-  { slug: "rudra-bagh", name: "Rudra Bagh", type: "Outdoor", size: "10,000 sq. ft.", capacity: "Custom by event layout", description: "An intimate outdoor venue for focused celebrations and open-air corporate gatherings.", image: byId("rudra"), layouts: ["Ceremony", "Dinner", "Team event"] },
-  { slug: "samrat-hall", name: "Samrat Hall", type: "Indoor", size: "9,000 sq. ft.", capacity: "Up to 700 theatre style", description: "A large, flexible hall for conferences, launches, banquets and wedding functions.", image: byId("samrat"), layouts: ["Theatre", "Banquet", "Classroom", "Exhibition"] },
-  { slug: "bundela-darbar", name: "Bundela Darbar", type: "Indoor", size: "9,000 sq. ft.", capacity: "Up to 700 theatre style", description: "A generous banquet and convention space with flexible staging and service access.", image: byId("bundela"), layouts: ["Theatre", "Banquet", "Classroom", "Exhibition"] },
-  { slug: "diwan-e-khas", name: "Diwan-e-Khas", type: "Indoor", size: "4,500 sq. ft.", capacity: "Up to 250 theatre style", description: "A more intimate hall for private celebrations, seminars and mid-sized conferences.", image: byId("diwan"), layouts: ["Theatre", "Banquet", "Classroom"] },
-  { slug: "boardroom", name: "Boardroom", type: "Boardroom", size: "Fixed boardroom", capacity: "14 guests", description: "A private meeting room with display, video-conferencing and high-speed internet facilities.", image: byId("boardroom"), layouts: ["Boardroom"] }
+  { slug: "indramani-bagh", journeys: ["wedding", "corporate"], capacities: {}, name: "Indramani Bagh", type: "Outdoor", size: "140,000 sq. ft.", capacity: "Custom by event layout", description: "The estate's largest lawn for destination weddings, exhibitions and large-format celebrations.", image: byId("indramani"), layouts: ["Wedding", "Reception", "Exhibition", "Festival"] },
+  { slug: "jeja-bagh", journeys: ["wedding", "corporate"], capacities: {}, name: "Jeja Bagh", type: "Outdoor", size: "15,000 sq. ft.", capacity: "Custom by event layout", description: "A landscaped lawn with a heritage backdrop for ceremonies, cocktails and private dinners.", image: byId("jeja"), layouts: ["Ceremony", "Cocktail", "Dinner", "Reception"] },
+  { slug: "rudra-bagh", journeys: ["wedding", "corporate"], capacities: {}, name: "Rudra Bagh", type: "Outdoor", size: "10,000 sq. ft.", capacity: "Custom by event layout", description: "An intimate outdoor venue for focused celebrations and open-air corporate gatherings.", image: byId("rudra"), layouts: ["Ceremony", "Dinner", "Team event"] },
+  { slug: "samrat-hall", journeys: ["wedding", "corporate"], capacities: { Theatre: 700 }, name: "Samrat Hall", type: "Indoor", size: "9,000 sq. ft.", capacity: "Up to 700 theatre style", description: "A large, flexible hall for conferences, launches, banquets and wedding functions.", image: byId("samrat"), layouts: ["Theatre", "Banquet", "Classroom", "Exhibition"] },
+  { slug: "bundela-darbar", journeys: ["wedding", "corporate"], capacities: { Theatre: 700 }, name: "Bundela Darbar", type: "Indoor", size: "9,000 sq. ft.", capacity: "Up to 700 theatre style", description: "A generous banquet and convention space with flexible staging and service access.", image: byId("bundela"), layouts: ["Theatre", "Banquet", "Classroom", "Exhibition"] },
+  { slug: "diwan-e-khas", journeys: ["wedding", "corporate"], capacities: { Theatre: 250 }, name: "Diwan-e-Khas", type: "Indoor", size: "4,500 sq. ft.", capacity: "Up to 250 theatre style", description: "A more intimate hall for private celebrations, seminars and mid-sized conferences.", image: byId("diwan"), layouts: ["Theatre", "Banquet", "Classroom"] },
+  { slug: "boardroom", journeys: ["corporate"], capacities: { Boardroom: 14 }, name: "Boardroom", type: "Boardroom", size: "Fixed boardroom", capacity: "14 guests", description: "A private meeting room with display, video-conferencing and high-speed internet facilities.", image: byId("boardroom"), layouts: ["Boardroom"] }
 ];
 
 export const amenities: Amenity[] = [
@@ -293,7 +309,7 @@ export const amenities: Amenity[] = [
   { name: "Wi-Fi", icon: "ph:wifi-high", description: "Wireless internet access across rooms and key guest areas." }
 ];
 
-export const fallbackSiteData: SiteData = { rooms, dining, venues, amenities, media };
+export const fallbackSiteData: SiteData = { rooms, dining, venues, amenities, media, activities, itineraryTemplates, clients };
 
 export const propertyFacts = [
   { value: "12 acres", label: "landscaped estate" },

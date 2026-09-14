@@ -41,7 +41,7 @@ const { room, featured = false, showBookingAction = true } = Astro.props;
         </a>
         {showBookingAction && (
           <a class="button button--primary button--small" href="#availability" data-booking-open data-booking-source="room_card" data-booking-room={room.slug} data-booking-room-name={room.name} data-booking-room-code={room.maximojoRoomCode || ""}>
-            Check this room <Icon name="ph:calendar-check" size={17} aria-hidden="true" />
+            Check live rates <Icon name="ph:calendar-check" size={17} aria-hidden="true" />
           </a>
         )}
       </div>

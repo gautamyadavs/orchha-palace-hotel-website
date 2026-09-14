@@ -4,7 +4,10 @@ import "@fontsource/cormorant-garamond/600.css";
 import "@fontsource/manrope/400.css";
 import "@fontsource/manrope/500.css";
 import "@fontsource/manrope/600.css";
+import displayFont from "@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2?url";
+import bodyFont from "@fontsource/manrope/files/manrope-latin-400-normal.woff2?url";
 import "@/styles/global.css";
+import "@/styles/redesign.css";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import ConsentBanner from "@/components/ConsentBanner.astro";
@@ -14,6 +17,7 @@ import { basePath, withBase } from "@/lib/paths";
 import type { JourneyMode } from "@/lib/types";
 
 type Props = {
+  immersive?: boolean;
   title: string;
   description: string;
   image?: string;
@@ -24,9 +28,12 @@ type Props = {
   journey?: JourneyMode;
   preloadImage?: string;
   preloadMobileImage?: string;
+  preloadImageType?: string;
+  preloadMobileSrcset?: string;
 };
 
 const {
+  immersive = false,
   title,
   description,
   image = withBase("/images/hero-orchha.jpg"),
@@ -36,7 +43,9 @@ const {
   stickyBooking = true,
   journey = "stay",
   preloadImage,
-  preloadMobileImage
+  preloadMobileImage,
+  preloadImageType,
+  preloadMobileSrcset
 } = Astro.props;
 const site = Astro.site || new URL(import.meta.env.PUBLIC_SITE_URL || "https://orchhapalace.com");
 const canonical = new URL(canonicalPath, site);
@@ -54,9 +63,12 @@ const effectiveNoindex = noindex || siteStatus !== "production";
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#4f0f16" />
     <meta name="description" content={description} />
-    <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
-    {preloadMobileImage && <link rel="preload" as="image" href={withBase(preloadMobileImage)} media="(max-width: 640px)" fetchpriority="high" />}
-    {preloadImage && <link rel="preload" as="image" href={withBase(preloadImage)} media="(min-width: 641px)" fetchpriority="high" />}
+    <link rel="icon" href={withBase("/favicon-32.png")} type="image/png" sizes="32x32" />
+    <link rel="icon" href={withBase("/favicon-64.png")} type="image/png" sizes="64x64" />
+    <link rel="apple-touch-icon" href={withBase("/apple-touch-icon.png")} />
+    {preloadMobileImage && <link rel="preload" as="image" href={withBase(preloadMobileImage)} imagesrcset={preloadMobileSrcset} imagesizes={preloadMobileSrcset ? "100vw" : undefined} media="(max-width: 640px)" type={preloadImageType} fetchpriority="high" />}
+    {preloadImage && <link rel="preload" as="image" href={withBase(preloadImage)} media="(min-width: 641px)" type={preloadImageType} fetchpriority="high" />}
+    {immersive && <><link rel="preload" as="font" href={displayFont} type="font/woff2" crossorigin /><link rel="preload" as="font" href={bodyFont} type="font/woff2" crossorigin /></>}
     {effectiveNoindex && <meta name="robots" content="noindex,nofollow" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -70,16 +82,16 @@ const effectiveNoindex = noindex || siteStatus !== "production";
     <meta name="twitter:image" content={socialImage} />
     <title>{title}</title>
     {schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
-    {turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+    {turnstileSiteKey && journey === "event" && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
   </head>
-  <body data-turnstile-site-key={turnstileSiteKey || ""} data-gtm-id={gtmId || ""} data-base-path={basePath} data-journey={journey}>
+  <body class:list={[immersive && "immersive-page"]} data-turnstile-site-key={turnstileSiteKey || ""} data-gtm-id={gtmId || ""} data-base-path={basePath} data-journey={journey}>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <Header journey={journey} />
+    <ConsentBanner />
     <main id="main-content">
       <slot />
     </main>
     <Footer journey={journey} />
-    <ConsentBanner />
     <BookingSheet />
     {stickyBooking && <MobileStickyBar journey={journey} />}
     <script>

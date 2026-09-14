@@ -1,0 +1,56 @@
+---
+import type { Activity, ItineraryTemplate } from "@/lib/types";
+import { blockLabels, dayHeading } from "@/lib/itinerary";
+import { withBase } from "@/lib/paths";
+const { activities, templates } = Astro.props as { activities: Activity[]; templates: ItineraryTemplate[] };
+const categories = ["All", "Heritage", "Spiritual", "Nature", "Adventure", "Rural & food", "At the hotel"];
+---
+<section id="planner" data-planner aria-label="Your suggested Orchha stay">
+  <fieldset class="stay-choices" data-planner-tools hidden>
+    <legend class="visually-hidden">Choose your stay length</legend>
+    {[2, 3].map(nights => <label><input type="radio" name="stay-length" value={nights} data-plan-nights checked={nights === 2} /><span><strong>{nights} nights</strong><span>{nights + 1} days in Orchha</span></span></label>)}
+  </fieldset>
+  <details class="travel-dates" data-travel-dates data-planner-tools hidden>
+    <summary>Add travel dates <span class="small-copy" data-travel-label>Optional</span></summary>
+    <div class="planner-tools"><label>Arrival date<input type="date" data-plan-arrival /></label><p class="small-copy" data-travel-note>Pool suggestions adapt to the season. Check in from 2pm; check out by 10am.</p></div>
+  </details>
+  <div class="planner-toolbar" data-planner-tools hidden>
+    <span class="plan-kind" data-plan-kind>Suggested stay</span>
+    <button type="button" class="button button--secondary button--small" data-plan-edit aria-pressed="false">Customise this stay</button>
+    <details class="plan-options" data-plan-options hidden><summary aria-label="Plan options">Options</summary><div class="plan-options-menu"><button type="button" class="text-action" data-plan-reset>Reset to suggested stay</button><button type="button" class="text-action" data-plan-undo hidden>Undo last change</button></div></details>
+  </div>
+  <p class="visually-hidden" data-plan-status role="status"></p>
+  <div class="planner-days" data-plan-days>
+    {templates[0].days.map((day, index) => <details class="planner-day" open={index === 0}><summary><h3>{dayHeading(index, 2)}</h3><span class="day-preview">{Object.values(day).flat().map(id => activities.find(a => a.id === id)?.name).join(" · ") || "Breakfast and onward travel"}</span></summary><div class="planner-day-body">{Object.entries(day).filter(([,ids])=>ids.length).map(([block,ids])=><div class="planner-slot"><p class="planner-time">{blockLabels[block as keyof typeof blockLabels]}</p><h4>{activities.find(a=>a.id===ids[0])?.name}</h4></div>)}</div></details>)}
+  </div>
+  <div class="planner-actions" data-planner-actions hidden>
+    <button id="planner-book" class="button button--primary" type="button" data-plan-book>Check rooms for this stay →</button>
+    <button class="button button--secondary" type="button" data-plan-pdf>Save as PDF</button>
+  </div>
+  <div class="planner-share" data-planner-actions hidden><button class="text-action" type="button" data-plan-copy>Copy itinerary</button><a data-plan-whatsapp target="_blank" rel="noreferrer">Ask the hotel to arrange this ↗</a></div>
+  <label class="copy-fallback" data-copy-fallback hidden>Copy your itinerary<textarea readonly rows="10" data-copy-text></textarea></label>
+  <details class="saved-ideas" data-plan-unscheduled hidden><summary>Saved ideas <span data-saved-count></span></summary><p class="small-copy">Experiences set aside while you shape your stay. Add them back whenever you like.</p><div data-unscheduled-list></div></details>
+  <details class="activity-library"><summary>Browse all {activities.length} experiences</summary>
+    <div class="filter-bar" data-activity-filters hidden><label>Interests<select data-activity-category>{categories.map(c=><option>{c}</option>)}</select></label><label>Find an experience<input type="search" data-activity-search placeholder="Temple, river, village…" /></label></div>
+    <p class="small-copy" data-activity-count role="status">{activities.length} experiences</p>
+    <button class="text-action" type="button" data-filter-clear hidden>Clear filters</button>
+    <div class="activity-grid">{activities.map(activity => <article class="activity-card" data-activity-id={activity.id} data-categories={activity.categories.join("|")}>
+      <p class="eyebrow">{activity.categories.join(" · ")}</p><h3>{activity.name}</h3><p>{activity.description}</p><p class="small-copy">{activity.duration} · Suggested {blockLabels[activity.block].toLowerCase()}</p><p class="activity-scheduled" data-scheduled={activity.id}></p><details><summary>Details</summary><p>{activity.bookingStatus}. {activity.note}</p><a href={withBase(activity.bookingUrl || activity.sourceUrl)} target={activity.sourceUrl.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{activity.actionLabel} ↗</a>{activity.id === "chhatris" && <p><a href={withBase("/dining/#betwa-view-dining")}>Discover Betwa View Dining →</a></p>}</details><button class="button button--secondary button--small" type="button" data-add-activity={activity.id} hidden>Add to stay</button>
+    </article>)}</div>
+  </details>
+  <p class="small-copy planner-caveat">A suggested stay, with arrangements to confirm. Activities, transport, tickets and meals may carry separate charges.</p>
+
+  <dialog class="planner-dialog experience-picker" data-picker-dialog aria-labelledby="picker-title">
+    <div class="picker-heading"><h2 id="picker-title">Change experience</h2><p class="picker-context" data-picker-context></p><div class="filter-bar"><label>Find an experience<input type="search" data-picker-search placeholder="Search" /></label><label>Interests<select data-picker-category>{categories.map(c=><option>{c}</option>)}</select></label></div><p class="small-copy" data-picker-count role="status"></p></div>
+    <div class="picker-results" data-picker-results role="radiogroup" aria-label="Choose a replacement experience"></div>
+    <div class="picker-footer"><p class="small-copy" data-picker-message aria-live="polite">Choose an experience to see how it fits.</p><div class="form-navigation"><button class="button button--secondary" type="button" data-picker-cancel>Cancel</button><button class="button button--primary" type="button" data-picker-save disabled>Confirm change</button></div></div>
+  </dialog>
+  <dialog class="planner-dialog" data-place-dialog aria-labelledby="place-title"><form method="dialog" data-place-form><h2 id="place-title">Add to your stay</h2><p data-place-note></p><div class="planner-tools"><label>Day<select data-place-day></select></label><label>Time of day<select data-place-block>{Object.entries(blockLabels).map(([value,label])=><option value={value}>{label}</option>)}</select></label></div><p class="small-copy" data-place-conflict aria-live="polite"></p><div class="form-navigation"><button class="button button--secondary" value="cancel">Cancel</button><button class="button button--primary" value="save" data-place-save>Add experience</button></div></form></dialog>
+  <dialog class="planner-dialog" data-arrival-dialog aria-labelledby="arrival-title"><form data-arrival-form><h2 id="arrival-title">When will you arrive?</h2><p data-arrival-summary></p><div class="planner-tools"><label>Arrival date<input type="date" data-book-arrival required /></label></div><p class="small-copy" data-arrival-error role="status"></p><div class="form-navigation"><button type="button" class="button button--secondary" data-arrival-cancel>Cancel</button><button class="button button--primary" type="submit">Check rooms →</button></div></form></dialog>
+  <dialog class="planner-dialog" data-date-dialog aria-labelledby="dates-title"><h2 id="dates-title">Which dates would you like?</h2><p data-date-summary></p><div class="form-navigation"><button class="button button--primary" data-dates-use type="button">Use itinerary dates</button><button class="button button--secondary" data-dates-keep type="button">Keep room-search dates</button><button class="text-action" data-dates-close type="button">Cancel</button></div></dialog>
+  <button type="button" data-booking-open data-booking-source="itinerary" data-plan-booking-proxy hidden>Open room search</button>
+  <aside class="planner-undo-notice" data-undo-notice hidden aria-label="Itinerary updated"><span>Stay updated</span><button type="button" class="text-action" data-plan-undo>Undo</button><button type="button" class="text-action" data-undo-dismiss aria-label="Dismiss update; Undo remains in Options">×</button></aside>
+  <div class="mobile-sticky planner-sticky" data-mobile-sticky data-sticky-target="#planner-book" data-planner-actions hidden><span data-sticky-length>2 nights · 3 days</span><button type="button" data-plan-book>Check rooms <span aria-hidden="true">→</span></button></div>
+  <script is:inline type="application/json" data-plan-data set:html={JSON.stringify({ activities, templates }).replace(/</g, "\\u003c")} />
+</section>
+<script>import "../scripts/itinerary-planner";</script>

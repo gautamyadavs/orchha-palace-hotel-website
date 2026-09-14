@@ -1,0 +1,178 @@
+[
+  {
+    "url": "https://orchhapalace.com/",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=0, must-revalidate",
+    "csp": true,
+    "robots": null,
+    "passed": true
+  },
+  {
+    "url": "https://orchhapalace.com/explore-orchha/",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=0, must-revalidate",
+    "csp": true,
+    "robots": null,
+    "passed": true
+  },
+  {
+    "url": "https://orchhapalace.com/weddings/",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=0, must-revalidate",
+    "csp": true,
+    "robots": null,
+    "passed": true,
+    "realCaptcha": true
+  },
+  {
+    "url": "https://orchhapalace.com/corporate-events/",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=0, must-revalidate",
+    "csp": true,
+    "robots": null,
+    "passed": true,
+    "realCaptcha": true
+  },
+  {
+    "url": "https://orchhapalace.com/dining/",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=0, must-revalidate",
+    "csp": true,
+    "robots": null,
+    "passed": true
+  },
+  {
+    "url": "https://orchhapalace.com/rooms/",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=0, must-revalidate",
+    "csp": true,
+    "robots": null,
+    "passed": true
+  },
+  {
+    "url": "https://orchhapalace.com/rooms/presidential-suite/",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=0, must-revalidate",
+    "csp": true,
+    "robots": null,
+    "passed": true
+  },
+  {
+    "url": "https://orchhapalace.com/robots.txt",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=0, must-revalidate",
+    "csp": true,
+    "robots": null,
+    "passed": true
+  },
+  {
+    "url": "https://orchhapalace.com/sitemap-0.xml",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=0, must-revalidate",
+    "csp": true,
+    "robots": null,
+    "passed": true
+  },
+  {
+    "url": "https://orchhapalace.com/does-not-exist-release-check/",
+    "status": 404,
+    "expected": 404,
+    "location": null,
+    "cache": "public, max-age=0, must-revalidate",
+    "csp": true,
+    "robots": null,
+    "passed": true
+  },
+  {
+    "url": "https://orchhapalace.com/meeting-conferences/",
+    "status": 301,
+    "expected": 301,
+    "location": "https://orchhapalace.com/corporate-events/",
+    "cache": "public, max-age=3600",
+    "csp": true,
+    "robots": null,
+    "passed": true
+  },
+  {
+    "url": "https://orchhapalace.com/wedding-blog/",
+    "status": 301,
+    "expected": 301,
+    "location": "https://orchhapalace.com/weddings/",
+    "cache": "public, max-age=3600",
+    "csp": true,
+    "robots": null,
+    "passed": true
+  },
+  {
+    "url": "https://www.orchhapalace.com/explore-orchha/?nights=3",
+    "status": 308,
+    "expected": 308,
+    "location": "https://orchhapalace.com/explore-orchha/?nights=3",
+    "cache": "public, max-age=3600",
+    "csp": true,
+    "robots": null,
+    "passed": true
+  },
+  {
+    "url": "https://orchhapalace.com/images/rooms-editorial.webp",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=604800, stale-while-revalidate=86400",
+    "csp": true,
+    "robots": null,
+    "passed": true,
+    "assetMatchesBuild": true
+  },
+  {
+    "url": "https://orchhapalace.com/images/rooms-editorial-mobile.webp",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=604800, stale-while-revalidate=86400",
+    "csp": true,
+    "robots": null,
+    "passed": true,
+    "assetMatchesBuild": true
+  },
+  {
+    "url": "https://orchhapalace.com/images/wedding-indoor-mandap.webp",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=604800, stale-while-revalidate=86400",
+    "csp": true,
+    "robots": null,
+    "passed": true,
+    "assetMatchesBuild": true
+  },
+  {
+    "url": "https://orchhapalace.com/favicon-32.png",
+    "status": 200,
+    "expected": 200,
+    "location": null,
+    "cache": "public, max-age=0, must-revalidate",
+    "csp": true,
+    "robots": null,
+    "passed": true,
+    "assetMatchesBuild": true
+  }
+]

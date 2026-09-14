@@ -28,12 +28,12 @@ const siteSecurityHeaders: Record<string, string> = {
     "object-src 'none'",
     "frame-ancestors 'none'",
     "form-action 'self'",
-    "img-src 'self' data:",
+    "img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com",
     "font-src 'self' data:",
     "style-src 'self' 'unsafe-inline'",
-    "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",
-    "connect-src 'self' https://challenges.cloudflare.com",
-    "frame-src https://challenges.cloudflare.com",
+    "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com https://www.instagram.com",
+    "connect-src 'self' https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com",
+    "frame-src https://challenges.cloudflare.com https://www.instagram.com",
     "upgrade-insecure-requests"
   ].join("; "),
   "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
@@ -48,10 +48,9 @@ const legacyRedirects = new Map<string, string>([
   ["/rooms/standard-room-2/", "/rooms/standard-room/"],
   ["/facilities-2/", "/hotel-amenities/"],
   ["/why-visit-orchha/", "/explore-orchha/"],
-  ["/meeting-conferences/", "/weddings-events/"],
-  ["/meetings-incentives-conferences-events/", "/weddings-events/"],
-  ["/weddings/", "/weddings-events/"],
-  ["/wedding-blog/", "/weddings-events/"],
+  ["/meeting-conferences/", "/corporate-events/"],
+  ["/meetings-incentives-conferences-events/", "/corporate-events/"],
+  ["/wedding-blog/", "/weddings/"],
   ["/events/", "/weddings-events/"],
   ["/annajal/", "/dining/"],
   ["/dragon/", "/dining/"],
@@ -153,6 +152,9 @@ export async function deliverLead(lead: ValidLead, env: Env, requestFetch: Fetch
   const submissionId = lead.submissionId || crypto.randomUUID();
   const safe = Object.fromEntries(Object.entries(lead).map(([key, value]) => [key, typeof value === "string" ? escapeHtml(value) : value])) as Record<string, string | number>;
   const subject = `New ${safe.eventType} enquiry · ${safe.guestCount} guests`;
+  const requirements = [["Journey", lead.journey], ["Organisation", lead.organisation], ["Functions", lead.functions], ["Seating layout", lead.seatingLayout], ["AV and connectivity", lead.avNeeds], ["Guest rooms", lead.guestRooms === undefined ? "" : String(lead.guestRooms)]].filter(([,value]) => value);
+  const requirementsText = requirements.map(([label,value]) => `${label}: ${value}`).join("\n");
+  const requirementsHtml = requirements.map(([label,value]) => `<p><strong>${label}:</strong> ${escapeHtml(value)}</p>`).join("");
   const staffText = [
     "New event enquiry",
     `Name: ${lead.name}`,
@@ -162,12 +164,13 @@ export async function deliverLead(lead: ValidLead, env: Env, requestFetch: Fetch
     `Date: ${lead.tentativeDate || "Not fixed"}`,
     `Guests: ${lead.guestCount}`,
     `Venue: ${lead.preferredVenue || "Help me choose"}`,
+    requirementsText,
     `Message: ${lead.message || "No message"}`,
     `Submission ID: ${submissionId}`
   ].join("\n");
-  const staffHtml = `<h1>New event enquiry</h1><p><strong>Name:</strong> ${safe.name}</p><p><strong>Phone:</strong> ${safe.phone}</p><p><strong>Email:</strong> ${safe.email}</p><p><strong>Event:</strong> ${safe.eventType}</p><p><strong>Date:</strong> ${safe.tentativeDate || "Not fixed"}</p><p><strong>Guests:</strong> ${safe.guestCount}</p><p><strong>Venue:</strong> ${safe.preferredVenue || "Help me choose"}</p><p><strong>Message:</strong><br>${String(safe.message || "No message").replace(/\n/g, "<br>")}</p><p><small>Submission ID: ${submissionId}</small></p>`;
-  const guestText = `Thank you, ${lead.name}.\n\nWe have received your ${lead.eventType} enquiry for approximately ${lead.guestCount} guests. The Orchha Palace sales team will review the details and reply using the contact information you provided.\n\nIf the matter is urgent, call ${contact.primaryPhone}.`;
-  const guestHtml = `<h1>Thank you, ${safe.name}</h1><p>We have received your ${safe.eventType} enquiry for approximately ${safe.guestCount} guests.</p><p>The Orchha Palace sales team will review the details and reply using the contact information you provided.</p><p>If the matter is urgent, call ${contact.primaryPhone}.</p>`;
+  const staffHtml = `<h1>New event enquiry</h1>${requirementsHtml}<p><strong>Name:</strong> ${safe.name}</p><p><strong>Phone:</strong> ${safe.phone}</p><p><strong>Email:</strong> ${safe.email}</p><p><strong>Event:</strong> ${safe.eventType}</p><p><strong>Date:</strong> ${safe.tentativeDate || "Not fixed"}</p><p><strong>Guests:</strong> ${safe.guestCount}</p><p><strong>Venue:</strong> ${safe.preferredVenue || "Help me choose"}</p><p><strong>Message:</strong><br>${String(safe.message || "No message").replace(/\n/g, "<br>")}</p><p><small>Submission ID: ${submissionId}</small></p>`;
+  const guestText = `Thank you, ${lead.name}.\n\n${requirementsText}\n\nWe have received your ${lead.eventType} enquiry for approximately ${lead.guestCount} guests. The Orchha Palace sales team will review the details and reply using the contact information you provided.\n\nIf the matter is urgent, call ${contact.primaryPhone}.`;
+  const guestHtml = `<h1>Thank you, ${safe.name}</h1>${requirementsHtml}<p>We have received your ${safe.eventType} enquiry for approximately ${safe.guestCount} guests.</p><p>The Orchha Palace sales team will review the details and reply using the contact information you provided.</p><p>If the matter is urgent, call ${contact.primaryPhone}.</p>`;
   const salesEmail = env.LEAD_TO_EMAIL.trim().toLowerCase();
   const fromEmail = env.LEAD_FROM_EMAIL.trim();
   if (salesEmail !== contact.salesEmail) throw new Error("The sales recipient is not configured correctly.");

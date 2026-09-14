@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import PageHero from "@/components/PageHero.astro";
+import SuiteReel from "@/components/SuiteReel.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import AvailabilityBar from "@/components/AvailabilityBar.astro";
 import RoomCard from "@/components/RoomCard.astro";
@@ -32,51 +32,25 @@ const schema = {
 };
 ---
 
-<BaseLayout title={`${room.name} | Orchha Palace`} description={room.description} image={room.image.src} preloadImage={room.image.src} preloadMobileImage={room.image.mobileSrc || room.image.src} schema={schema} journey={assisted ? "assisted-suite" : "stay"}>
-  <PageHero eyebrow={room.eyebrow} title={room.name} copy={room.description} image={room.image.src} mobileImage={room.image.mobileSrc} alt={room.image.alt} position={room.image.focalPoint} />
+<BaseLayout title={`${room.name} | Orchha Palace`} description={room.description} image={room.image.src} schema={schema} journey={assisted ? "assisted-suite" : "stay"}>
   <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Rooms", href: "/rooms/" }, { label: room.name }]} />
-
-  <section class="section shell">
-    <div class="room-detail-intro">
-      <div class="room-detail-intro__copy">
-        <p class="eyebrow">The essentials</p>
-        <h2>Know your room before you arrive</h2>
-        <p>{room.description}</p>
-        {assisted ? (
-          <div class="room-detail-intro__actions">
-            <a class="button button--primary" href={contact.primaryPhoneHref} data-track="assisted_reservation_call_clicked" data-room={room.slug} data-sticky-suppress>Call to reserve <Icon name="ph:phone" size={18} /></a>
-            <a class="button button--secondary" href={contact.whatsapp.presidentialSuite} target="_blank" rel="noreferrer" data-track="assisted_reservation_whatsapp_clicked" data-room={room.slug} data-sticky-suppress>WhatsApp <Icon name="ph:whatsapp-logo" size={18} /></a>
-          </div>
-        ) : (
-          <a class="button button--primary" href="#availability" data-booking-open data-booking-source="room_detail" data-booking-room={room.slug} data-booking-room-name={room.name} data-booking-room-code={room.maximojoRoomCode || ""}>Check this room <Icon name="ph:calendar-check" size={18} /></a>
-        )}
-      </div>
-      <dl class="detail-facts">
-        <div><dt>Space</dt><dd>{room.size}</dd></div>
-        <div><dt>Bed</dt><dd>{room.bed}</dd></div>
-        <div><dt>Best for</dt><dd>{room.idealFor}</dd></div>
-        <div><dt>Bathroom</dt><dd>{room.bathroom}</dd></div>
-        <div><dt>Aspect</dt><dd>{room.view}</dd></div>
-      </dl>
-    </div>
+  <section class="detail-header shell"><p class="eyebrow">{room.eyebrow}</p><h1>{room.name}</h1><p>{room.description}</p>
+    <div class="choice-links">{assisted ? <><a class="button button--primary" href={contact.primaryPhoneHref} data-sticky-suppress>Call to reserve</a><a class="button button--secondary" href={contact.whatsapp.presidentialSuite} target="_blank" rel="noreferrer" data-sticky-suppress>WhatsApp</a></> : <a class="button button--primary" href="#availability" data-booking-open data-booking-source="room_detail" data-booking-room={room.slug} data-booking-room-name={room.name} data-booking-room-code={room.maximojoRoomCode || ""}>Check live rates →</a>}</div>
+    <dl class="detail-facts"><div><dt>Space</dt><dd>{room.size}</dd></div><div><dt>Bed</dt><dd>{room.bed}</dd></div><div><dt>Best for</dt><dd>{room.idealFor}</dd></div><div><dt>Bathroom</dt><dd>{room.bathroom}</dd></div><div><dt>Aspect</dt><dd>{room.view}</dd></div></dl>
   </section>
 
   <section class="section section--paper">
     <div class="shell">
       <div class="room-gallery-heading">
         <div><p class="eyebrow">Room gallery</p><h2>{assisted ? "Explore the suite before you call" : "Look around before you book"}</h2></div>
-        <p>{room.gallery.length} category-matched views show the available angles and verified features without reusing photographs from another room category.</p>
+        <p>Explore the bedroom, living spaces and details of your stay.</p>
       </div>
-      <RoomGallery room={room.slug} images={room.gallery} />
+      <div class:list={[assisted && "suite-media"]}><RoomGallery room={room.slug} images={room.gallery} />{assisted && <SuiteReel room={room} />}</div>
     </div>
   </section>
 
   <section class="section shell">
-    <div class="list-columns">
-      <div><p class="eyebrow">Highlights</p><ul class="feature-list">{room.highlights.map((item) => <li><Icon name="ph:check" size={18} /> {item}</li>)}</ul></div>
-      <div><p class="eyebrow">Room amenities</p><ul class="feature-list">{room.amenities.map((item) => <li><Icon name="ph:check" size={18} /> {item}</li>)}</ul></div>
-      <div><p class="eyebrow">Included</p><ul class="feature-list">{room.inclusions.map((item) => <li><Icon name="ph:check" size={18} /> {item}</li>)}</ul></div>
-    </div>
+    <div class="disclosures">{[["Highlights",room.highlights],["Room amenities",room.amenities],["Included",room.inclusions]].map(([title,items]) => <details><summary>{title}</summary><ul class="feature-list">{(items as string[]).map(item => <li><Icon name="ph:check" size={18} /> {item}</li>)}</ul></details>)}</div>
   </section>
 
   <section class="section section--paper"><div class="shell">

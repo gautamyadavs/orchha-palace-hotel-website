@@ -279,6 +279,28 @@ test("adds security and path-aware cache headers to static assets", async () => 
   assert.equal(response.headers.get("cache-control"), "public, max-age=31536000, immutable");
 });
 
+test("keeps the distinct event routes and sends legacy conference links to corporate events", async () => {
+  for (const path of ["/weddings/", "/corporate-events/", "/weddings-events/"]) {
+    const response=await handleRequest(new Request(`https://orchhapalace.com${path}`),makeEnv(),context);
+    assert.equal(response.status,200);
+  }
+  const response=await handleRequest(new Request("https://orchhapalace.com/meeting-conferences/?guests=200"),makeEnv(),context);
+  assert.equal(response.headers.get("location"),"https://orchhapalace.com/corporate-events/?guests=200");
+});
+
+test("passes structured event requirements into escaped staff and guest messages",async()=>{
+  const emails:StoredEmail[]=[];
+  const lead={...validLead,journey:"corporate",eventType:"Corporate conference",organisation:"Example <Group>",seatingLayout:"Theatre",avNeeds:"Projector & microphones",guestRooms:80};
+  const response=await handleLead(request(origin,lead),makeEnv(),provider(emails));
+  assert.equal(response.status,200);
+  for(const email of emails){
+    assert.match(String(email.text),/Example <Group>/);
+    assert.match(String(email.html),/Example &lt;Group&gt;/);
+    assert.match(String(email.text),/80/);
+    assert.match(String(email.html),/Projector &amp; microphones/);
+  }
+});
+
 test("keeps preflight workers.dev hosts out of search indexes", async () => {
   const response = await handleRequest(new Request("https://orchha-palace-hotel-preflight.example.workers.dev/robots.txt"), makeEnv(), context);
   assert.equal(response.status, 200);

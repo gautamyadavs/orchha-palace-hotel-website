@@ -58,6 +58,13 @@ export const room = defineType({
     defineField({ name: "size", title: "Room size", type: "string" }),
     defineField({ name: "bed", title: "Bed configuration", type: "string" }),
     defineField({ name: "idealFor", title: "Ideal for", type: "string" }),
+    defineField({ name: "category", type: "string", options: { list: ["Standard", "Deluxe", "Presidential"] } }),
+    defineField({ name: "bedType", type: "string", options: { list: ["double", "twin", "two-bedroom"] } }),
+    defineField({ name: "featureTags", type: "array", of: [{ type: "string" }], options: { list: ["bathtub", "private-pool"] } }),
+    defineField({ name: "tour", title: "Room tour", type: "object", fields: [
+      { name: "provider", type: "string", options: { list: ["instagram"] } },
+      { name: "url", type: "url" }, { name: "title", type: "string" }
+    ], description: "The website currently supports only the owner-selected Presidential Suite reel." }),
     defineField({ name: "bathroom", title: "Bathroom", type: "string" }),
     defineField({ name: "view", title: "View / aspect", type: "string" }),
     defineField({
@@ -121,6 +128,8 @@ export const eventVenue = defineType({
     defineField({ name: "type", title: "Venue type", type: "string", options: { list: ["Indoor", "Outdoor", "Boardroom"] } }),
     defineField({ name: "size", title: "Verified size", type: "string" }),
     defineField({ name: "capacity", title: "Verified capacity", type: "string" }),
+    defineField({ name: "journeys", type: "array", of: [{ type: "string" }], options: { list: ["wedding", "corporate"] } }),
+    defineField({ name: "capacities", title: "Confirmed capacities by layout", type: "object", description: "Leave unknown layouts empty. Never use theatre capacity for banquet seating.", fields: ["Theatre", "Banquet", "Classroom", "Boardroom", "Outdoor"].map(name => defineField({ name, type: "number", validation: rule => rule.integer().min(1).max(5000) })) }),
     defineField({ name: "description", title: "Description", type: "text", rows: 4 }),
     approvedMediaReference(),
     defineField({ name: "gallery", title: "Gallery", type: "array", of: [defineArrayMember({ type: "reference", to: [{ type: "mediaAsset" }] })] }),
@@ -190,4 +199,34 @@ export const globalSettings = defineType({
   ]
 });
 
-export const schemaTypes = [mediaAsset, room, diningVenue, eventVenue, amenity, offer, policy, globalSettings];
+export const corporateClient = defineType({
+  name: "corporateClient", title: "Corporate event clients", type: "document", fields: [
+    defineField({ name: "name", type: "string", validation: r => r.required() }),
+    defineField({ name: "slug", type: "slug", options: { source: "name" }, validation: r => r.required() }),
+    defineField({ name: "order", type: "number", validation: r => r.required().integer().min(1) }),
+    defineField({ name: "logo", title: "Local logo path", type: "string", description: "Use an inspected file under /images/clients/." }),
+    defineField({ name: "sourceUrl", type: "url" }), defineField({ name: "reviewedAt", type: "date" }),
+    defineField({ name: "status", type: "string", options: { list: ["ready", "pending"] }, initialValue: "pending" })
+  ]
+});
+export const activity = defineType({
+  name: "activity", title: "Orchha experiences", type: "document", fields: [
+    defineField({ name: "name", type: "string", validation: r => r.required() }),
+    defineField({ name: "slug", type: "slug", options: { source: "name" }, validation: r => r.required() }),
+    defineField({ name: "active", type: "boolean", initialValue: true }), defineField({ name: "order", type: "number" }),
+    defineField({ name: "categories", type: "array", of: [{ type: "string" }], options: { list: ["Heritage", "Spiritual", "Nature", "Adventure", "Rural & food", "At the hotel"] } }),
+    defineField({ name: "description", type: "text", rows: 3 }), defineField({ name: "duration", type: "string" }),
+    defineField({ name: "block", title: "Suggested time", type: "string", options: { list: ["earlyMorning", "morning", "afternoon", "evening"] } }),
+    defineField({ name: "bookingStatus", type: "string" }), defineField({ name: "sourceUrl", type: "string", description: "Official https URL or local page path." }),
+    defineField({ name: "bookingUrl", type: "url", description: "Optional; verify the booking or permit destination before publishing." }),
+    defineField({ name: "actionLabel", type: "string" }), defineField({ name: "reviewedAt", type: "date" }),
+    defineField({ name: "note", type: "text", rows: 3 }), defineField({ name: "variantOf", type: "string" })
+  ]
+});
+export const itineraryTemplate = defineType({
+  name: "itineraryTemplate", title: "Stay itinerary templates", type: "document", fields: [
+    defineField({ name: "nights", type: "number", options: { list: [2, 3] }, validation: r => r.required() }),
+    defineField({ name: "days", type: "array", of: [defineArrayMember({ name: "itineraryDay", type: "object", fields: ["earlyMorning", "morning", "afternoon", "evening"].map(name => defineField({ name, type: "array", of: [{ type: "string" }], description: "Activity slug; one main outing per block.", validation: r => r.max(1) })) })] })
+  ]
+});
+export const schemaTypes = [mediaAsset, room, diningVenue, eventVenue, amenity, offer, policy, globalSettings, corporateClient, activity, itineraryTemplate];

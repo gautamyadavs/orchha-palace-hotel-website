@@ -42,3 +42,10 @@ test("keeps submission IDs optional for backwards-compatible clients", () => {
   const { submissionId: _, ...legacyLead } = valid;
   assert.equal(validateEventLead(legacyLead).ok, true);
 });
+
+test("accepts structured requirements and rejects malformed or overlong new fields", () => {
+  const lead={...valid,journey:"corporate",organisation:"Example Ltd",seatingLayout:"Theatre",avNeeds:"Projector",guestRooms:80};
+  const result=validateEventLead(lead);assert.equal(result.ok,true);
+  if(result.ok)assert.equal(result.value.guestRooms,80);
+  for(const fields of [{guestRooms:[]},{guestRooms:true},{guestRooms:501},{guestRooms:1.5},{avNeeds:"x".repeat(501)},{seatingLayout:"Unverified"},{organisation:{}},{journey:"unknown"}]) assert.equal(validateEventLead({...lead,...fields}).ok,false);
+});

@@ -1,0 +1,21 @@
+{
+  "releasedAt": "2026-09-14T14:00:25.556658+00:00",
+  "worker": "orchha-palace-hotel",
+  "version": "b121fb25-9392-4d63-9194-cad9c1768601",
+  "previousVersion": "369414a2-7fa1-4cb4-8678-6321efd391d4",
+  "domains": [
+    "https://orchhapalace.com",
+    "https://www.orchhapalace.com"
+  ],
+  "method": "Existing authenticated Wrangler CLI; production environment; strict deployment",
+  "assets": 159,
+  "testsPassed": 68,
+  "types": {
+    "errors": 0,
+    "warnings": 0,
+    "hints": 0
+  },
+  "productionArtifactVerifier": "passed without test CAPTCHA override",
+  "httpChecks": 17,
+  "serverSecrets": "Existing Cloudflare secrets retained; no values exported"
+}

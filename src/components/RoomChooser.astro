@@ -1,0 +1,23 @@
+---
+import RoomCard from "./RoomCard.astro";
+import type { Room } from "@/lib/types";
+const { rooms } = Astro.props as { rooms: Room[] };
+---
+<section data-room-chooser aria-label="Choose and compare rooms">
+  <div class="filter-bar" data-room-filters hidden>
+    <label>Bed configuration<select data-bed-filter><option value="">Any bed</option><option value="double">Double bed</option><option value="twin">Twin beds</option><option value="two-bedroom">Two bedrooms</option></select></label>
+    <label class="check-control"><input type="checkbox" data-bath-filter /> Bathtub / jacuzzi</label>
+    <button class="button button--secondary" type="button" data-clear-filters>Clear filters</button>
+  </div>
+  <p data-room-count role="status">{rooms.length} room choices. Select two to compare.</p>
+  <div class="room-grid chooser-grid">
+    {rooms.map((room) => <div data-room-option data-slug={room.slug} data-bed={room.bedType || ""} data-bath={String(room.featureTags?.includes("bathtub") || false)}>
+      <RoomCard room={room} />
+      <label class="compare-select" hidden><input type="checkbox" data-compare value={room.slug} /> Compare {room.shortName}</label>
+    </div>)}
+  </div>
+  <p class="empty-state" data-room-empty hidden>No rooms match those filters. Try another bed configuration or clear the filters.</p>
+  <section class="comparison" data-comparison hidden aria-labelledby="compare-heading"><h2 id="compare-heading">Your rooms, side by side</h2><div data-comparison-content></div><button class="button button--secondary" data-clear-comparison type="button">Clear comparison</button></section>
+  <script is:inline type="application/json" data-room-data set:html={JSON.stringify(rooms.map(({ slug, name, size, bed, bathroom, view, inclusions, bookingMode }) => ({ slug, name, size, bed, bathroom, view, inclusions, bookingMode }))).replace(/</g, "\\u003c")} />
+</section>
+<script>import "../scripts/room-chooser";</script>

@@ -1,6 +1,12 @@
 import { eventTypes, eventVenueNames } from "../src/lib/enquiry-options.ts";
 
 export type LeadInput = {
+  journey?: unknown;
+  organisation?: unknown;
+  functions?: unknown;
+  seatingLayout?: unknown;
+  avNeeds?: unknown;
+  guestRooms?: unknown;
   name?: unknown;
   phone?: unknown;
   email?: unknown;
@@ -16,6 +22,12 @@ export type LeadInput = {
 };
 
 export type ValidLead = {
+  journey: string;
+  organisation: string;
+  functions: string;
+  seatingLayout: string;
+  avNeeds: string;
+  guestRooms?: number;
   name: string;
   phone: string;
   email: string;
@@ -58,6 +70,19 @@ export function validateEventLead(input: LeadInput): LeadValidation {
   const turnstileToken = clean(input.turnstileToken, 2048);
   const submissionId = clean(input.submissionId, 36).toLowerCase();
   const guestCount = Number(input.guestCount);
+  const journey = clean(input.journey, 20);
+  const organisation = clean(input.organisation, 160);
+  const functions = clean(input.functions, 500);
+  const seatingLayout = clean(input.seatingLayout, 30);
+  const avNeeds = clean(input.avNeeds, 500);
+  const guestRooms = input.guestRooms === undefined || input.guestRooms === "" || input.guestRooms === null ? undefined : Number(input.guestRooms);
+  for (const key of ["journey", "organisation", "functions", "seatingLayout", "avNeeds"] as const) {
+    if (input[key] !== undefined && typeof input[key] !== "string") return { ok: false, message: "Review your event requirements." };
+  }
+  if (exceeds(input.journey, 20) || exceeds(input.organisation, 160) || exceeds(input.functions, 500) || exceeds(input.seatingLayout, 30) || exceeds(input.avNeeds, 500)) return { ok: false, message: "One or more event requirements are too long." };
+  if (journey && !["wedding", "corporate"].includes(journey)) return { ok: false, message: "Choose a valid event journey." };
+  if (seatingLayout && !["Theatre", "Banquet", "Classroom", "Boardroom", "Outdoor"].includes(seatingLayout)) return { ok: false, message: "Choose a valid seating layout." };
+  if (guestRooms !== undefined && (!Number.isInteger(guestRooms) || guestRooms < 0 || guestRooms > 500 || !["number", "string"].includes(typeof input.guestRooms))) return { ok: false, message: "Enter a room requirement between 0 and 500." };
 
   if (
     exceeds(input.name, 100) || exceeds(input.phone, 30) || exceeds(input.email, 160) ||
@@ -78,6 +103,6 @@ export function validateEventLead(input: LeadInput): LeadValidation {
 
   return {
     ok: true,
-    value: { name, phone, email, eventType, tentativeDate, guestCount, preferredVenue, message, consent: true, turnstileToken, submissionId }
+    value: { name, phone, email, eventType, tentativeDate, guestCount, preferredVenue, message, consent: true, turnstileToken, submissionId, journey, organisation, functions, seatingLayout, avNeeds, guestRooms }
   };
 }

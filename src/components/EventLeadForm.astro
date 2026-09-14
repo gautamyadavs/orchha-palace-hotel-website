@@ -3,6 +3,9 @@ import { Icon } from "astro-icon/components";
 import { contact } from "@/data/site";
 import { eventTypes, eventVenueNames } from "@/lib/enquiry-options";
 import { withBase } from "@/lib/paths";
+import type { EventJourney } from "@/lib/types";
+const { journey } = Astro.props as { journey?: EventJourney };
+const options = journey === "wedding" ? eventTypes.filter(t => ["Wedding", "Engagement or reception", "Private celebration", "Other"].includes(t)) : journey === "corporate" ? eventTypes.filter(t => !["Wedding", "Engagement or reception", "Private celebration"].includes(t)) : eventTypes;
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 const configuredEndpoint = import.meta.env.PUBLIC_LEAD_API_URL?.trim();
 const sameOriginEndpoint = import.meta.env.PUBLIC_SITE_STATUS === "production" ? withBase("/api/event-leads") : "";
@@ -12,53 +15,36 @@ const formEnabled = Boolean(leadEndpoint && turnstileSiteKey);
 
 <form class="lead-form" data-event-lead-form data-lead-endpoint={leadEndpoint} data-lead-enabled={String(formEnabled)} novalidate>
   <fieldset class="lead-form__fields" disabled={!formEnabled}>
-    <div class="field-grid">
-      <label>
-        <span>Name *</span>
-        <input name="name" autocomplete="name" required maxlength="100" />
-      </label>
-      <label>
-        <span>Phone *</span>
-        <input name="phone" type="tel" autocomplete="tel" required maxlength="30" />
-      </label>
-      <label>
-        <span>Email *</span>
-        <input name="email" type="email" autocomplete="email" required maxlength="160" />
-      </label>
-      <label>
-        <span>Event type *</span>
-        <select name="eventType" required>
-          <option value="">Choose one</option>
-          {eventTypes.map((eventType) => <option value={eventType}>{eventType}</option>)}
-        </select>
-      </label>
-      <label>
-        <span>Tentative date</span>
-        <input name="tentativeDate" type="date" />
-      </label>
-      <label>
-        <span>Expected guests *</span>
-        <input name="guestCount" type="number" inputmode="numeric" min="2" max="5000" value="100" required />
-      </label>
-      <label class="field-grid__wide">
-        <span>Preferred venue</span>
-        <select name="preferredVenue">
-          <option value="">Help me choose</option>
-          {eventVenueNames.map((venueName) => <option value={venueName}>{venueName}</option>)}
-        </select>
-      </label>
-      <label class="field-grid__wide">
-        <span>Tell us what you are planning</span>
-        <textarea name="message" rows="5" maxlength="2000" placeholder="Functions, room requirements, food preferences or anything that helps us understand the occasion"></textarea>
-      </label>
-    </div>
+    <input name="journey" type="hidden" value={journey || ""} />
+    <section data-lead-step="1" aria-label="Event requirements">
+      <p class="step-label">1. Your event</p>
+      <div class="field-grid">
+        <label><span>Event type *</span><select name="eventType" required><option value="">Choose one</option>{options.map(type => <option>{type}</option>)}</select></label>
+        <label><span>Tentative date (optional)</span><input name="tentativeDate" type="date" /></label>
+        <label><span>{journey === "corporate" ? "Expected delegates *" : "Expected guests *"}</span><input name="guestCount" type="number" inputmode="numeric" min="2" max="5000" required /></label>
+        <label><span>Preferred venue</span><select name="preferredVenue"><option value="">Help me choose</option>{eventVenueNames.filter(name => journey !== "wedding" || name !== "Boardroom").map(name => <option>{name}</option>)}</select></label>
+        <label><span>Seating layout</span><select name="seatingLayout"><option value="">Help me choose</option>{["Theatre", "Banquet", "Classroom", "Boardroom", "Outdoor"].map(layout => <option>{layout}</option>)}</select></label>
+        <label><span>Guest rooms needed (optional)</span><input name="guestRooms" type="number" min="0" max="500" inputmode="numeric" /></label>
+        {journey !== "wedding" && <label class="field-grid__wide"><span>Organisation (optional)</span><input name="organisation" maxlength="160" autocomplete="organization" /></label>}
+        {journey !== "corporate" && <label class="field-grid__wide"><span>Functions (optional)</span><input name="functions" maxlength="500" placeholder="For example: mehendi, ceremony, reception" /></label>}
+        {journey !== "wedding" && <label class="field-grid__wide"><span>AV and connectivity needs (optional)</span><textarea name="avNeeds" rows="2" maxlength="500" placeholder="Presentations, microphones, video calls, internet requirements…"></textarea></label>}
+        <label class="field-grid__wide"><span>Anything else to help us plan?</span><textarea name="message" rows="3" maxlength="2000" placeholder="Food, travel, accessibility or other requests"></textarea></label>
+      </div>
+      <div class="form-navigation" data-lead-next-wrap hidden><button class="button button--primary" type="button" data-lead-next>Continue to contact details →</button></div>
+    </section>
+    <section data-lead-step="2" aria-label="Contact and review">
+      <p class="step-label">2. Contact & review</p>
+      <div class="lead-review" data-lead-review hidden></div>
+      <div class="field-grid">
+        <label><span>Name *</span><input name="name" autocomplete="name" required maxlength="100" /></label>
+        <label><span>Phone *</span><input name="phone" type="tel" autocomplete="tel" required minlength="7" maxlength="30" pattern={String.raw`[+\(\)\-\s0-9]{7,30}`} /></label>
+        <label class="field-grid__wide"><span>Email *</span><input name="email" type="email" autocomplete="email" required maxlength="160" /></label>
+      </div>
+      <label class="checkbox-field"><input name="consent" type="checkbox" required /><span>I agree that Orchha Palace may contact me about this enquiry. *</span></label>
+      <button class="button button--secondary" type="button" data-lead-back hidden>← Back to event details</button>
+    </section>
 
-    <label class="checkbox-field">
-      <input name="consent" type="checkbox" required />
-      <span>I agree that Orchha Palace may contact me about this enquiry. *</span>
-    </label>
-
-    {formEnabled && <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light" data-action="event-enquiry"></div>}
+    {formEnabled && <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-size="compact" data-theme="light" data-action="event-enquiry"></div>}
     <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
   </fieldset>
 

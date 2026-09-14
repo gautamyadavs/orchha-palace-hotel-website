@@ -53,3 +53,12 @@ The Resend and Turnstile secret values are stored only in the two Cloudflare Wor
 - Routing or platform failure: detach the Worker Custom Domains, restore the captured apex/`www` DNS and redirect configuration exactly, and confirm the previous origin is serving HTTPS again.
 - Email-only failure: leave the site online, disable the form by removing its public Turnstile key on the next build, keep the visible sales email/call/WhatsApp fallbacks, and repair Resend or Turnstile without resubmitting ambiguous leads.
 - Do not enable HSTS preload or decommission the previous origin during the initial stabilization period.
+
+## 14 September 2026 redesign release
+
+- Published the owner-approved redesign with the existing authenticated Wrangler CLI after production build, strict dry run, tests, type checks and artifact verification passed.
+- Live Worker version: `b121fb25-9392-4d63-9194-cad9c1768601`.
+- Previous working version: `369414a2-7fa1-4cb4-8678-6321efd391d4`.
+- Existing custom domains, KV, Turnstile/Resend secrets and mail DNS are retained.
+- Source/artifact evidence: `deployment-snapshots/release-2026-09-14/`.
+- Roll back the application if needed with `npx wrangler rollback 369414a2-7fa1-4cb4-8678-6321efd391d4 --env=""`, then repeat live checks. This command is a recovery instruction and was not executed.

@@ -32,11 +32,12 @@ const { journey = "stay" } = Astro.props;
       <a href={withBase("/hotel-amenities/")}>Hotel & amenities</a>
       <a href={withBase("/dining/")}>Dining</a>
       <a href={withBase("/gallery/")}>Gallery</a>
-      <a href={withBase("/offers/")}>Offers</a>
+
     </div>
     <div>
       <p class="footer-label">Gather</p>
-      <a href={withBase("/weddings-events/")}>Weddings & events</a>
+      <a href={withBase("/weddings/")}>Weddings & celebrations</a>
+      <a href={withBase("/corporate-events/")}>Meetings & corporate events</a>
       <a href={withBase("/explore-orchha/")}>Explore Orchha</a>
       <a href={withBase("/contact/")}>Contact</a>
       <a href={journey === "event" ? contact.whatsapp.event : journey === "assisted-suite" ? contact.whatsapp.presidentialSuite : contact.whatsapp.stay} target="_blank" rel="noreferrer" data-track={journey === "event" ? "event_whatsapp_clicked" : journey === "assisted-suite" ? "assisted_reservation_whatsapp_clicked" : "whatsapp_clicked"} data-room={journey === "assisted-suite" ? "presidential-suite" : undefined}>WhatsApp</a>
@@ -51,6 +52,7 @@ const { journey = "stay" } = Astro.props;
     <p>© {new Date().getFullYear()} Orchha Palace Hotel & Convention Centre</p>
     <div>
       <a href={withBase("/privacy/")}>Privacy</a>
+      {import.meta.env.PUBLIC_GTM_ID && <button type="button" class="text-button" data-consent-settings>Privacy preferences</button>}
       <a href={withBase("/terms/")}>Terms</a>
       <a href={withBase("/booking-policies/")}>Booking policies</a>
     </div>

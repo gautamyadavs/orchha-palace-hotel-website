@@ -17,15 +17,19 @@ async function filesBelow(directory) {
 }
 
 const homepage = await readFile(new URL("index.html", dist), "utf8");
-const enquiryPage = await readFile(new URL("weddings-events/index.html", dist), "utf8");
+const enquiryPages = await Promise.all(["weddings", "corporate-events", "weddings-events"].map(path => readFile(new URL(`${path}/index.html`, dist), "utf8")));
 const robots = await readFile(new URL("robots.txt", dist), "utf8");
 const sitemap = await readFile(new URL("sitemap-index.xml", dist), "utf8");
 await readFile(new URL("404.html", dist), "utf8");
 
 assert.match(homepage, /<link rel="canonical" href="https:\/\/orchhapalace\.com\/?"/);
 assert.doesNotMatch(homepage, /noindex,nofollow/);
-assert.match(enquiryPage, /data-lead-endpoint="\/api\/event-leads"/);
-assert.match(enquiryPage, /data-action="event-enquiry"/);
+for (const enquiryPage of enquiryPages) {
+  assert.match(enquiryPage, /data-lead-endpoint="\/api\/event-leads"/);
+  assert.match(enquiryPage, /data-action="event-enquiry"/);
+  assert.match(enquiryPage, /data-lead-enabled="true"/);
+  if (process.env.ALLOW_TEST_CAPTCHA !== "true") assert.doesNotMatch(enquiryPage, /data-sitekey="[123]x0{10,}/, "Use a real Turnstile key before deployment.");
+}
 assert.match(robots, /Allow: \//);
 assert.match(robots, /https:\/\/orchhapalace\.com\/sitemap-index\.xml/);
 assert.match(sitemap, /https:\/\/orchhapalace\.com\//);

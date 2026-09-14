@@ -1,0 +1,34 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import VenueFinder from "@/components/VenueFinder.astro";
+import EventLeadForm from "@/components/EventLeadForm.astro";
+import RoomGallery from "@/components/RoomGallery.astro";
+import ClientCarousel from "@/components/ClientCarousel.astro";
+import PalaceHero from "@/components/PalaceHero.astro";
+import { getSiteData } from "@/lib/cms";
+import { contact } from "@/data/site";
+import { withBase } from "@/lib/paths";
+import type { EventJourney } from "@/lib/types";
+const { journey } = Astro.props as { journey: EventJourney };
+const wedding = journey === "wedding";
+const { venues, media, clients } = await getSiteData();
+const hero = media.find(m => m.id === (wedding ? "wedding-showcase" : "boardroom"))!;
+// Explicit ordering is intentional: filtering the media catalogue inherited its unrelated order.
+const pictureIds = wedding ? ["event-showcase-one", "event-showcase-fireworks", "wedding-indoor-mandap", "event-showcase-two", "dining-groups", "private-date"] : ["boardroom", "event-lawn-setup", "dining-groups"];
+const pictures = pictureIds.flatMap(id => { const asset = media.find(m => m.id === id); return asset ? [asset] : []; });
+const title = wedding ? "Weddings & Celebrations" : "Meetings & Corporate Events";
+---
+<BaseLayout title={`${title} | Orchha Palace`} description={wedding ? "Plan your wedding in Orchha with garden ceremonies, indoor celebrations, guest rooms and tailored catering." : "Plan a conference, meeting, association gathering or team offsite. Compare venue layouts and request a tailored proposal."} journey="event" image={hero.src} immersive={wedding}>
+  {wedding ? <PalaceHero image={hero.src} mobileImage={hero.mobileSrc} alt={hero.alt} eyebrow={title} title="Your forever," emphasis="beautifully begun." description="An extraordinary setting for your celebrations. A palace to bring everyone you love together." action="Imagine your wedding" href="#event-enquiry" variant="wedding" /> : <section class="event-hero shell"><div><p class="eyebrow">{title}</p><h1>Room for ideas. Space to come together.</h1><p>From a focused board meeting to a full conference, find the right space and build the details around your delegates.</p><a class="button button--primary" href="#event-enquiry">Request an event proposal →</a></div><img src={hero.src} alt={hero.alt} width="900" height="600" fetchpriority="high" /></section>}
+  {!wedding && <div class="shell"><ClientCarousel clients={clients} /></div>}
+  <section class="section shell"><VenueFinder venues={venues} journey={journey} /></section>
+  <section class="section section--paper"><div class="shell"><p class="eyebrow">{wedding ? "See the possibilities" : "Plan the complete event"}</p><h2>{wedding ? "Your moments, beautifully brought together" : "Beyond the meeting room"}</h2><p>{wedding ? "Explore celebrations and private dining at the estate, then talk to us about the setting you have in mind." : "Meeting space, dining and outdoor gathering settings at the hotel. Ask for a layout and equipment proposal for your chosen venue."}</p><RoomGallery room={journey} images={pictures} label="event" presentation={wedding ? "complete" : "default"} trackEvent="event_gallery_opened" /></div></section>
+  <section class="section shell"><div class="benefit-grid">{(wedding ? [
+    ["A setting for each function", "Plan ceremonies, mehendi, receptions and private celebrations with indoor and outdoor options."],
+    ["Guests, comfortably together", "Discuss room blocks, arrival arrangements, menus and the flow between your functions."]
+  ] : [
+    ["Layouts, staging & connectivity", "Tell us your seating layout, presentation, microphone, video-conferencing and internet needs. Our team will confirm availability for the selected space."],
+    ["A stay around the agenda", "Discuss accommodation, catering, arrival logistics, breakout requirements and an Orchha outing for your group."]
+  ]).map(([heading, copy]) => <article><h3>{heading}</h3><p>{copy}</p></article>)}</div><a class="text-link" href={withBase(wedding ? "/corporate-events/" : "/weddings/")}>{wedding ? "Planning a business event?" : "Planning a wedding or celebration?"} →</a></section>
+  <section class="section section--paper" id="event-enquiry"><div class="shell lead-layout"><div><p class="eyebrow">Let's plan the details</p><h2>{wedding ? "Tell us about your celebration" : "Tell us about your event"}</h2><p>Share your requirements and the team will respond with suitable spaces and next steps. No payment is collected here.</p><div class="contact-card"><h3>Prefer a conversation?</h3><a href={contact.primaryPhoneHref}>{contact.primaryPhone}</a><a href={contact.whatsapp.event} target="_blank" rel="noreferrer">Ask on WhatsApp</a></div></div><EventLeadForm journey={journey} /></div></section>
+</BaseLayout>
