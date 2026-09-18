@@ -1,0 +1,48 @@
+{
+  "checks": [
+    "Delayed image keeps original image/caption/selection; stale loads cannot overwrite the newest choice; failed image retains current view and retry works",
+    "Horizontal touch-pointer swipe advances; predominantly vertical swipe leaves the photograph unchanged",
+    "Existing room-gallery fit defaults remain unchanged",
+    {
+      "check": "Short mobile viewport keeps context and confirmation controls visible",
+      "sheet": {
+        "dialog": {
+          "x": 0,
+          "y": 24,
+          "width": 390,
+          "height": 476,
+          "top": 24,
+          "right": 390,
+          "bottom": 500,
+          "left": 0
+        },
+        "context": {
+          "x": 17,
+          "y": 66.765625,
+          "width": 356,
+          "height": 21.046875,
+          "top": 66.765625,
+          "right": 373,
+          "bottom": 87.8125,
+          "left": 17
+        },
+        "button": {
+          "x": 200,
+          "y": 431,
+          "width": 173,
+          "height": 44,
+          "top": 431,
+          "right": 373,
+          "bottom": 475,
+          "left": 200
+        },
+        "list": 154
+      }
+    },
+    "Clipboard denial provides a focused, complete selectable summary",
+    "Invalid past room-search dates do not create a date conflict",
+    "A legacy v1 saved plan restores without overwriting storage until the guest changes it",
+    "Disabled storage leaves the planner usable with a visible save warning"
+  ],
+  "errors": []
+}

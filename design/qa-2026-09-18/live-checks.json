@@ -1,0 +1,378 @@
+{
+  "base": "https://orchhapalace.com",
+  "layouts": [
+    {
+      "width": 320,
+      "scrollWidth": 320,
+      "image": {
+        "x": 0,
+        "y": 76,
+        "width": 320,
+        "height": 165,
+        "top": 76,
+        "right": 320,
+        "bottom": 241,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 320,
+        "height": 76,
+        "top": 0,
+        "right": 320,
+        "bottom": 76,
+        "left": 0
+      },
+      "content": {
+        "x": 16,
+        "y": 241,
+        "width": 288,
+        "height": 349.21875,
+        "top": 241,
+        "right": 304,
+        "bottom": 590.21875,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "https://orchhapalace.com/images/palace-hero.avif",
+      "naturalWidth": 1920,
+      "naturalHeight": 990,
+      "preload": [
+        "https://orchhapalace.com/images/palace-hero.avif"
+      ]
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "image": {
+        "x": 0,
+        "y": 76,
+        "width": 390,
+        "height": 201.09375,
+        "top": 76,
+        "right": 390,
+        "bottom": 277.09375,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 76,
+        "top": 0,
+        "right": 390,
+        "bottom": 76,
+        "left": 0
+      },
+      "content": {
+        "x": 16,
+        "y": 277.09375,
+        "width": 358,
+        "height": 324.5,
+        "top": 277.09375,
+        "right": 374,
+        "bottom": 601.59375,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "https://orchhapalace.com/images/palace-hero.avif",
+      "naturalWidth": 1920,
+      "naturalHeight": 990,
+      "preload": [
+        "https://orchhapalace.com/images/palace-hero.avif"
+      ]
+    },
+    {
+      "width": 430,
+      "scrollWidth": 430,
+      "image": {
+        "x": 0,
+        "y": 76,
+        "width": 430,
+        "height": 221.71875,
+        "top": 76,
+        "right": 430,
+        "bottom": 297.71875,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 430,
+        "height": 76,
+        "top": 0,
+        "right": 430,
+        "bottom": 76,
+        "left": 0
+      },
+      "content": {
+        "x": 16,
+        "y": 297.71875,
+        "width": 398,
+        "height": 331.6875,
+        "top": 297.71875,
+        "right": 414,
+        "bottom": 629.40625,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "https://orchhapalace.com/images/palace-hero.avif",
+      "naturalWidth": 1920,
+      "naturalHeight": 990,
+      "preload": [
+        "https://orchhapalace.com/images/palace-hero.avif"
+      ]
+    },
+    {
+      "width": 640,
+      "scrollWidth": 640,
+      "image": {
+        "x": 0,
+        "y": 76,
+        "width": 640,
+        "height": 330,
+        "top": 76,
+        "right": 640,
+        "bottom": 406,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 640,
+        "height": 76,
+        "top": 0,
+        "right": 640,
+        "bottom": 76,
+        "left": 0
+      },
+      "content": {
+        "x": 24,
+        "y": 406,
+        "width": 592,
+        "height": 369.53125,
+        "top": 406,
+        "right": 616,
+        "bottom": 775.53125,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "https://orchhapalace.com/images/palace-hero.avif",
+      "naturalWidth": 1920,
+      "naturalHeight": 990,
+      "preload": [
+        "https://orchhapalace.com/images/palace-hero.avif"
+      ]
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768,
+      "image": {
+        "x": 0,
+        "y": 76,
+        "width": 768,
+        "height": 396,
+        "top": 76,
+        "right": 768,
+        "bottom": 472,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 768,
+        "height": 76,
+        "top": 0,
+        "right": 768,
+        "bottom": 76,
+        "left": 0
+      },
+      "content": {
+        "x": 24,
+        "y": 472,
+        "width": 720,
+        "height": 372.9375,
+        "top": 472,
+        "right": 744,
+        "bottom": 844.9375,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "https://orchhapalace.com/images/palace-hero.avif",
+      "naturalWidth": 1920,
+      "naturalHeight": 990,
+      "preload": [
+        "https://orchhapalace.com/images/palace-hero.avif"
+      ]
+    },
+    {
+      "width": 844,
+      "scrollWidth": 844,
+      "image": {
+        "x": 0,
+        "y": 76,
+        "width": 844,
+        "height": 435.1875,
+        "top": 76,
+        "right": 844,
+        "bottom": 511.1875,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 76,
+        "top": 0,
+        "right": 844,
+        "bottom": 76,
+        "left": 0
+      },
+      "content": {
+        "x": 24,
+        "y": 511.1875,
+        "width": 796,
+        "height": 372.9375,
+        "top": 511.1875,
+        "right": 820,
+        "bottom": 884.125,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "https://orchhapalace.com/images/palace-hero.avif",
+      "naturalWidth": 1920,
+      "naturalHeight": 990,
+      "preload": [
+        "https://orchhapalace.com/images/palace-hero.avif"
+      ]
+    },
+    {
+      "width": 959,
+      "scrollWidth": 959,
+      "image": {
+        "x": 0,
+        "y": 76,
+        "width": 959,
+        "height": 494.484375,
+        "top": 76,
+        "right": 959,
+        "bottom": 570.484375,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 959,
+        "height": 76,
+        "top": 0,
+        "right": 959,
+        "bottom": 76,
+        "left": 0
+      },
+      "content": {
+        "x": 24,
+        "y": 570.484375,
+        "width": 911,
+        "height": 372.9375,
+        "top": 570.484375,
+        "right": 935,
+        "bottom": 943.421875,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "https://orchhapalace.com/images/palace-hero.avif",
+      "naturalWidth": 1920,
+      "naturalHeight": 990,
+      "preload": [
+        "https://orchhapalace.com/images/palace-hero.avif"
+      ]
+    },
+    {
+      "width": 960,
+      "scrollWidth": 960,
+      "image": {
+        "x": 0,
+        "y": 0,
+        "width": 960,
+        "height": 792,
+        "top": 0,
+        "right": 960,
+        "bottom": 792,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 960,
+        "height": 84,
+        "top": 0,
+        "right": 960,
+        "bottom": 84,
+        "left": 0
+      },
+      "content": {
+        "x": 24,
+        "y": 118.140625,
+        "width": 912,
+        "height": 555.703125,
+        "top": 118.140625,
+        "right": 936,
+        "bottom": 673.84375,
+        "left": 24
+      },
+      "fit": "cover",
+      "src": "https://orchhapalace.com/images/palace-hero.avif",
+      "naturalWidth": 1920,
+      "naturalHeight": 990,
+      "preload": [
+        "https://orchhapalace.com/images/palace-hero.avif"
+      ]
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "image": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 880,
+        "top": 0,
+        "right": 1440,
+        "bottom": 880,
+        "left": 0
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 84,
+        "top": 0,
+        "right": 1440,
+        "bottom": 84,
+        "left": 0
+      },
+      "content": {
+        "x": 120,
+        "y": 129.078125,
+        "width": 1200,
+        "height": 621.828125,
+        "top": 129.078125,
+        "right": 1320,
+        "bottom": 750.90625,
+        "left": 120
+      },
+      "fit": "cover",
+      "src": "https://orchhapalace.com/images/palace-hero.avif",
+      "naturalWidth": 1920,
+      "naturalHeight": 990,
+      "preload": [
+        "https://orchhapalace.com/images/palace-hero.avif"
+      ]
+    }
+  ],
+  "errors": [],
+  "kidsZoneGalleryPhoto": true,
+  "menuAndBooking": true,
+  "weddingHeroPreserved": true
+}

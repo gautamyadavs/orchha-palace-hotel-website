@@ -1,0 +1,80 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "check": "home-five-rooms-faq-favicon",
+      "status": "passed",
+      "rectangles": {
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 76,
+          "top": 0,
+          "right": 390,
+          "bottom": 76,
+          "left": 0
+        },
+        "hero": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 742.71875,
+          "top": 0,
+          "right": 390,
+          "bottom": 742.71875,
+          "left": 0
+        }
+      }
+    },
+    {
+      "check": "event-gallery-order-and-unfiltered-venues",
+      "status": "passed",
+      "weddingPhotos": [
+        "/images/event-showcase-fireworks.webp",
+        "/images/event-showcase-one.webp",
+        "/images/event-showcase-two.webp",
+        "/images/dining-groups.webp",
+        "/images/private-date.webp"
+      ],
+      "corporatePhotos": [
+        "/images/boardroom.webp",
+        "/images/event-lawn-setup.webp",
+        "/images/dining-groups.webp"
+      ]
+    },
+    {
+      "check": "ranked-library-seasonal-pool-meals-persistence-pdf",
+      "status": "passed"
+    },
+    {
+      "check": "suite-embed-click-load-failure-retry-success",
+      "status": "passed",
+      "note": "Player lifecycle is mocked; real Instagram playback is a separate check."
+    }
+  ],
+  "overflows": [],
+  "accessibility": [
+    {
+      "path": "/",
+      "violations": []
+    },
+    {
+      "path": "/weddings/",
+      "violations": []
+    },
+    {
+      "path": "/corporate-events/",
+      "violations": []
+    },
+    {
+      "path": "/rooms/presidential-suite/",
+      "violations": []
+    },
+    {
+      "path": "/explore-orchha/",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

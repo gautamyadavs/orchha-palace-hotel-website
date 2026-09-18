@@ -51,7 +51,7 @@ The Resend and Turnstile secret values are stored only in the two Cloudflare Wor
 
 - Application regression: roll back to the recorded previous Cloudflare Worker deployment, then repeat smoke checks.
 - Routing or platform failure: detach the Worker Custom Domains, restore the captured apex/`www` DNS and redirect configuration exactly, and confirm the previous origin is serving HTTPS again.
-- Email-only failure: leave the site online, disable the form by removing its public Turnstile key on the next build, keep the visible sales email/call/WhatsApp fallbacks, and repair Resend or Turnstile without resubmitting ambiguous leads.
+- Email-only failure: leave the site online and use its existing sales email/call/WhatsApp fallbacks while repairing Resend or Turnstile, without resubmitting ambiguous leads. Do not remove the public Turnstile key to disable the form: production builds require that key. If a visible maintenance state is needed, implement and verify a dedicated form-disable flag or rendering change while retaining required production configuration; see `../DEVELOPER_HANDOFF.md`.
 - Do not enable HSTS preload or decommission the previous origin during the initial stabilization period.
 
 ## 14 September 2026 redesign release
@@ -62,3 +62,22 @@ The Resend and Turnstile secret values are stored only in the two Cloudflare Wor
 - Existing custom domains, KV, Turnstile/Resend secrets and mail DNS are retained.
 - Source/artifact evidence: `deployment-snapshots/release-2026-09-14/`.
 - Roll back the application if needed with `npx wrangler rollback 369414a2-7fa1-4cb4-8678-6321efd391d4 --env=""`, then repeat live checks. This command is a recovery instruction and was not executed.
+
+## 15 September 2026 Betwa dining media release
+
+- Live Worker version: `79726066-abe6-4405-b3b3-482385ebcf47`.
+- Previous working version: `09e7ae64-df56-4836-a013-30876bb381d9`.
+- Published the owner-selected responsive riverside photograph and optional Instagram resort reel link on Dining and Explore Orchha.
+- Existing event and group-stay contact corrections remain verified live.
+- Build, tests, type checks, artifact verification, strict dry run, responsive browser review and live page/asset checks passed.
+- Release evidence: `deployment-snapshots/betwa-dining-2026-09-15.json` and `../design/qa-2026-09-15-betwa/`.
+
+## 18 September 2026 mobile hero and Kids Zone release
+
+- Live Worker version: `15507f2c-83f6-4871-b0e0-c9026f8f1c79`.
+- Previous working version: `79726066-abe6-4405-b3b3-482385ebcf47`.
+- The amenities photo feature now shows Kids Zone using the existing gallery photograph.
+- Below 960px, the homepage shows the complete landscape photograph with the welcome copy underneath. Desktop and wedding hero layouts retain their existing treatment.
+- Type checks, 68 tests, production artifact verification, strict deployment dry run and responsive browser checks at nine widths passed.
+- Repeated the nine-width browser checks against the live site; image framing, Kids Zone photo, navigation and booking controls passed with no page errors.
+- Release evidence: `deployment-snapshots/mobile-hero-kids-zone-2026-09-18.json` and `../design/qa-2026-09-18/`.

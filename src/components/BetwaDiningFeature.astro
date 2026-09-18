@@ -1,0 +1,42 @@
+---
+import { betwaViewDining } from "@/data/betwa-view-dining";
+import { withBase } from "@/lib/paths";
+
+type Props = { variant?: "dining" | "explore" };
+const { variant = "dining" } = Astro.props;
+const detailed = variant === "dining";
+const headingId = detailed ? "betwa-dining-heading" : "explore-betwa-dining";
+const photograph = betwaViewDining.image;
+const srcset = photograph.widths.map(width => `${withBase(`/images/betwa-view-dining-${width}.webp`)} ${width}w`).join(", ");
+---
+
+<section class:list={["section", detailed && "section--paper"]} id={detailed ? "betwa-view-dining" : "betwa-riverside-evening"} aria-labelledby={headingId}>
+  <div class="shell riverside-dining">
+    <figure class="riverside-dining__visual">
+      <img src={withBase(photograph.src)} srcset={srcset} sizes="(min-width: 1248px) 600px, (min-width: 960px) 50vw, (min-width: 768px) calc(100vw - 48px), calc(100vw - 32px)" alt={photograph.alt} width={photograph.width} height={photograph.height} loading="lazy" decoding="async" />
+      <figcaption>Betwa View Dining · {betwaViewDining.property}</figcaption>
+    </figure>
+    <div class="riverside-dining__copy">
+      <p class="eyebrow">{detailed ? "At our sister property · Kanchan Ghat" : "Stay for the evening"}</p>
+      <h2 id={headingId}>{detailed ? betwaViewDining.name : "A table by the Betwa"}</h2>
+      {detailed ? <>
+        <p class="riverside-dining__property">At {betwaViewDining.property}</p>
+        <p>Let your evening linger by the Betwa. After visiting the Royal Chhatris and watching the sunset, continue to Betwa View Dining for a relaxed meal with river views at our sister property, Orchha Resort, by the river.</p>
+        <p>Ask for a river-facing table and confirm the day's service. Our team can help plan your visit and transport back to Orchha Palace; dining is arranged separately.</p>
+        <p class="small-copy">{betwaViewDining.address}</p>
+        <div class="riverside-dining__actions">
+          <a class="text-link" href={`tel:${betwaViewDining.telephone}`}>Ask about a table · {betwaViewDining.phone}</a>
+          <a class="text-link" href={betwaViewDining.maps} target="_blank" rel="noopener noreferrer">Directions ↗</a>
+        </div>
+      </> : <>
+        <p>Pair the Royal Chhatris and Betwa sunset with dinner at <strong>Betwa View Dining at Orchha Resort, by the river</strong>. Our sister property's riverside setting is a lovely place to slow down after exploring Orchha.</p>
+        <p>You'll find this evening in both suggested stays. Ask about a river-facing table, current service and transport back to Orchha Palace.</p>
+        <a class="text-link riverside-dining__primary" href={withBase(betwaViewDining.path)}>Discover Betwa View Dining →</a>
+      </>}
+      <div class="riverside-dining__more">
+        <a class="riverside-dining__reel" href={betwaViewDining.reelUrl} target="_blank" rel="noopener noreferrer">Watch the resort reel on Instagram <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+        {detailed && <><a href={betwaViewDining.propertyUrl} target="_blank" rel="noopener noreferrer">Explore Orchha Resort ↗</a><a href={withBase("/explore-orchha/")}>Make it part of your Orchha stay →</a></>}
+      </div>
+    </div>
+  </div>
+</section>

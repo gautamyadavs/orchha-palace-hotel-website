@@ -7,6 +7,14 @@ export const betwaViewDining = {
   property: "Orchha Resort, by the river",
   path: "/dining/#betwa-view-dining",
   propertyUrl: "https://orchharesort.com/",
+  reelUrl: "https://www.instagram.com/reel/DbGAPfEIeDg/",
+  image: {
+    src: "/images/betwa-view-dining-1280.webp",
+    widths: [480, 800, 1280, 1600],
+    alt: "Open-air tables on the lawn at Betwa View Dining, overlooking the Betwa River at Orchha Resort",
+    width: 1280,
+    height: 960
+  },
   phone: "+91 99935 42070",
   telephone: "+919993542070",
   address: "Kanchan Ghat, Orchha, Madhya Pradesh 472246",
@@ -18,6 +26,7 @@ export const betwaViewDiningSchema = {
   "@type": "Restaurant",
   "@id": `https://orchhapalace.com${betwaViewDining.path}`,
   name: betwaViewDining.name,
+  image: `https://orchhapalace.com${betwaViewDining.image.src}`,
   url: `https://orchhapalace.com${betwaViewDining.path}`,
   description: "Riverside dining at Orchha Resort, by the river, in Kanchan Ghat, Orchha. A relaxed evening meal after visiting the Royal Chhatris and watching sunset on the Betwa.",
   telephone: betwaViewDining.telephone,

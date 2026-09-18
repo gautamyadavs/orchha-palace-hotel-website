@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "route": "/",
+      "violations": [],
+      "overflow": false
+    },
+    {
+      "route": "/weddings/",
+      "violations": [],
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "avifAndWebp": true
+}

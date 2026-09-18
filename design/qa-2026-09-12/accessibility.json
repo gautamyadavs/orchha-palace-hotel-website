@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/",
+    "violations": []
+  },
+  {
+    "path": "/rooms/",
+    "violations": []
+  },
+  {
+    "path": "/weddings/",
+    "violations": []
+  },
+  {
+    "path": "/corporate-events/",
+    "violations": []
+  },
+  {
+    "path": "/explore-orchha/",
+    "violations": []
+  },
+  {
+    "path": "/rooms/presidential-suite/",
+    "violations": []
+  }
+]

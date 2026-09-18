@@ -17,7 +17,7 @@ import { basePath, withBase } from "@/lib/paths";
 import type { JourneyMode } from "@/lib/types";
 
 type Props = {
-  immersive?: boolean;
+  immersive?: boolean | "desktop";
   title: string;
   description: string;
   image?: string;
@@ -84,7 +84,7 @@ const effectiveNoindex = noindex || siteStatus !== "production";
     {schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />}
     {turnstileSiteKey && journey === "event" && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
   </head>
-  <body class:list={[immersive && "immersive-page"]} data-turnstile-site-key={turnstileSiteKey || ""} data-gtm-id={gtmId || ""} data-base-path={basePath} data-journey={journey}>
+  <body class:list={[immersive && "immersive-page", immersive === "desktop" && "immersive-page--desktop"]} data-turnstile-site-key={turnstileSiteKey || ""} data-gtm-id={gtmId || ""} data-base-path={basePath} data-journey={journey}>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <Header journey={journey} />
     <ConsentBanner />

@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-18",
+  "worker": "orchha-palace-hotel",
+  "version": "15507f2c-83f6-4871-b0e0-c9026f8f1c79",
+  "previousVersion": "79726066-abe6-4405-b3b3-482385ebcf47",
+  "changes": [
+    "Replace the amenities fitness photo feature with Kids Zone, using the existing gallery photograph and matching copy.",
+    "Show the full landscape homepage hero photo below the header, with welcome text below the photo, at widths below 960px. Use the uncropped AVIF/WebP assets and matching image preload."
+  ],
+  "testsPassed": 68,
+  "typeCheck": "passed with zero errors, warnings or hints",
+  "productionBuild": "passed",
+  "artifactVerification": "passed",
+  "strictDryRun": "passed",
+  "responsiveWidths": [320, 390, 430, 640, 768, 844, 959, 960, 1440],
+  "browserEvidence": "design/qa-2026-09-18/checks.json",
+  "liveBrowserVerification": "passed at all nine responsive widths, with no page errors; Kids Zone gallery photo, menu, booking sheet and wedding hero verified",
+  "liveBrowserEvidence": "design/qa-2026-09-18/live-checks.json",
+  "deploymentNote": "The system resolver could not resolve the Cloudflare API hostname. Used Cloudflare public DNS for the Wrangler process only, retaining TLS verification; no system network settings were changed."
+}

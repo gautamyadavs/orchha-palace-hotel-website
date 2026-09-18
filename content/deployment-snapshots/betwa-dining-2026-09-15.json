@@ -1,0 +1,79 @@
+{
+  "date": "2026-09-15",
+  "worker": "orchha-palace-hotel",
+  "version": "79726066-abe6-4405-b3b3-482385ebcf47",
+  "previousVersion": "09e7ae64-df56-4836-a013-30876bb381d9",
+  "change": "Add the owner-selected Betwa View Dining photograph and optional Instagram resort reel link on Dining and Explore Orchha.",
+  "testsPassed": 68,
+  "typeCheck": "passed with zero errors, warnings or hints",
+  "productionBuild": "passed",
+  "artifactVerification": "passed with production CAPTCHA",
+  "strictDryRun": "passed",
+  "responsiveWidths": [
+    320,
+    390,
+    768,
+    1030,
+    1440
+  ],
+  "liveChecks": {
+    "checkedAt": "2026-09-15T15:21:24.952205+00:00",
+    "checks": [
+      {
+        "path": "/dining/",
+        "status": 200,
+        "responsivePhoto": true,
+        "optionalReel": true,
+        "noInstagramEmbed": true,
+        "restaurantImageMetadata": true
+      },
+      {
+        "path": "/explore-orchha/",
+        "status": 200,
+        "responsivePhoto": true,
+        "optionalReel": true,
+        "noInstagramEmbed": true,
+        "afterPlanner": true
+      },
+      {
+        "path": "/weddings/",
+        "status": 200,
+        "eventPhoneCorrect": true
+      },
+      {
+        "path": "/corporate-events/",
+        "status": 200,
+        "eventPhoneCorrect": true
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "groupPhoneCorrect": true
+      },
+      {
+        "path": "/images/betwa-view-dining-480.webp",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 24014
+      },
+      {
+        "path": "/images/betwa-view-dining-800.webp",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 61416
+      },
+      {
+        "path": "/images/betwa-view-dining-1280.webp",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 157544
+      },
+      {
+        "path": "/images/betwa-view-dining-1600.webp",
+        "status": 200,
+        "matchesBuild": true,
+        "bytes": 244882
+      }
+    ]
+  }
+}

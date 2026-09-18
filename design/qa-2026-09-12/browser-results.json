@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "logos": [
+    {
+      "src": "/images/clients/acc-limited.png",
+      "loaded": true
+    },
+    {
+      "src": "/images/clients/ultratech-cement.jpg",
+      "loaded": true
+    },
+    {
+      "src": "/images/clients/state-bank-of-india.png",
+      "loaded": true
+    },
+    {
+      "src": "/images/clients/maruti-suzuki.svg",
+      "loaded": true
+    },
+    {
+      "src": "/images/clients/mp-tourism.webp",
+      "loaded": true
+    },
+    {
+      "src": "/images/clients/iato.png",
+      "loaded": true
+    },
+    {
+      "src": "/images/clients/iadvl.avif",
+      "loaded": true
+    },
+    {
+      "src": "/images/clients/indian-society-of-anaesthesiologists.png",
+      "loaded": true
+    },
+    {
+      "src": "/images/clients/uau.png",
+      "loaded": true
+    }
+  ],
+  "errors": [],
+  "responsive": []
+}

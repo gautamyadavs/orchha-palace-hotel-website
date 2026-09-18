@@ -5,6 +5,8 @@ export const contact = {
   primaryPhone: "+91 95160 06201",
   primaryPhoneHref: `tel:+${primaryPhoneDigits}`,
   primaryPhoneSchema: "+91-95160-06201",
+  salesPhone: "+91 95160 06204",
+  salesPhoneHref: "tel:+919516006204",
   phones: ["+91 95160 06201", "+91 95160 06203", "+91 95160 06204"],
   reservationsEmail: "reservations@orchhapalace.com",
   salesEmail: "sales@orchhapalace.com",

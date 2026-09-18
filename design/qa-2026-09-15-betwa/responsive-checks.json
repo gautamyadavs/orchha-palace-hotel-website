@@ -1,0 +1,87 @@
+[
+  {
+    "afterPlanner": true,
+    "columns": "358px",
+    "image": {
+      "fit": "contain",
+      "height": 268.5,
+      "loaded": true,
+      "width": 358
+    },
+    "linkHeights": [
+      44,
+      44
+    ],
+    "overflow": false,
+    "page": "explore",
+    "width": 390
+  },
+  {
+    "afterPlanner": true,
+    "columns": "288px",
+    "image": {
+      "fit": "contain",
+      "height": 216,
+      "loaded": true,
+      "width": 288
+    },
+    "linkHeights": [
+      44,
+      44
+    ],
+    "overflow": false,
+    "page": "explore",
+    "width": 320
+  },
+  {
+    "afterPlanner": true,
+    "columns": "720px",
+    "image": {
+      "fit": "contain",
+      "height": 540,
+      "loaded": true,
+      "width": 720
+    },
+    "linkHeights": [
+      44,
+      44
+    ],
+    "overflow": false,
+    "page": "explore",
+    "width": 768
+  },
+  {
+    "afterPlanner": true,
+    "columns": "478.383px 455.617px",
+    "image": {
+      "fit": "contain",
+      "height": 358.78125,
+      "loaded": true,
+      "width": 478.3828125
+    },
+    "linkHeights": [
+      44,
+      44
+    ],
+    "overflow": false,
+    "page": "explore",
+    "width": 1030
+  },
+  {
+    "afterPlanner": true,
+    "columns": "590.047px 561.953px",
+    "image": {
+      "fit": "contain",
+      "height": 442.53125,
+      "loaded": true,
+      "width": 590.046875
+    },
+    "linkHeights": [
+      44,
+      44
+    ],
+    "overflow": false,
+    "page": "explore",
+    "width": 1440
+  }
+]

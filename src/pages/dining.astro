@@ -3,7 +3,8 @@ import { Icon } from "astro-icon/components";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageHero from "@/components/PageHero.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
-import { betwaViewDining, betwaViewDiningSchema } from "@/data/betwa-view-dining";
+import BetwaDiningFeature from "@/components/BetwaDiningFeature.astro";
+import { betwaViewDiningSchema } from "@/data/betwa-view-dining";
 import { contact } from "@/data/site";
 import { getSiteData } from "@/lib/cms";
 import { withBase } from "@/lib/paths";
@@ -44,12 +45,7 @@ const schema = dining.map((venue) => ({
     </div>
   </section>
 
-  <section class="section section--paper" id="betwa-view-dining" aria-labelledby="betwa-dining-heading">
-    <div class="shell riverside-dining">
-      <div><p class="eyebrow">At our sister property · Kanchan Ghat</p><h2 id="betwa-dining-heading">{betwaViewDining.name}</h2><p class="riverside-dining__property">At {betwaViewDining.property}</p></div>
-      <div><p>Let your evening linger by the Betwa. After visiting the Royal Chhatris and watching the sunset, continue to Betwa View Dining for a relaxed meal with river views at our sister property, Orchha Resort, by the river.</p><p>Ask for a river-facing table and confirm the day's service. Our team can help plan your visit and transport back to Orchha Palace; dining is arranged separately.</p><p class="small-copy">{betwaViewDining.address}</p><div class="choice-links"><a href={`tel:${betwaViewDining.telephone}`}>Call Betwa View Dining · {betwaViewDining.phone}</a><a href={betwaViewDining.maps} target="_blank" rel="noreferrer">Directions ↗</a><a href={betwaViewDining.propertyUrl} target="_blank" rel="noreferrer">Explore Orchha Resort ↗</a></div><a class="text-link" href={withBase("/explore-orchha/")}>Make it part of your Orchha stay →</a></div>
-    </div>
-  </section>
+  <BetwaDiningFeature />
 
   <section class="section section--dark">
     <div class="shell editorial-split">

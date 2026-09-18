@@ -1,0 +1,16 @@
+[
+  {
+    "deviceScaleFactor": 1,
+    "src": "/images/palace-hero-mobile-480.avif",
+    "requests": [
+      "/images/palace-hero-mobile-480.avif"
+    ]
+  },
+  {
+    "deviceScaleFactor": 2,
+    "src": "/images/palace-hero-mobile.avif",
+    "requests": [
+      "/images/palace-hero-mobile.avif"
+    ]
+  }
+]

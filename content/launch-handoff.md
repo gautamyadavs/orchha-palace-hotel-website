@@ -69,7 +69,7 @@ All current manifest entries meet the owner's production approval. For new media
 ## 6. Public details and policies
 
 - Reservations phone and email: `+91 95160 06201`, `reservations@orchhapalace.com`.
-- Wedding/events phone and email: `+91 95160 06201`, `sales@orchhapalace.com`.
+- Wedding/event enquiry-card and group-stay Call links: `+91 95160 06204` (owner correction, 15 September 2026). Sales email: `sales@orchhapalace.com`.
 - WhatsApp number: `+91 95160 06201` with intent-specific messages.
 - Postal address and Maps link: centralized in `src/lib/contact.ts` and approved.
 - Check-in/check-out times: 2:00 PM / 10:00 AM.

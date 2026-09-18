@@ -261,6 +261,23 @@ body.menu-open .mobile-sticky, body.booking-open .mobile-sticky { display: none;
   .home-reservations .availability { padding:28px 36px; }
 }
 @media(max-height:500px) and (min-width:640px) { .palace-hero { min-height:580px; } }
+/* Keep the complete palace photograph visible above the welcome on phones. */
+@media(max-width:959px) {
+  .immersive-page--desktop .site-header:not(.is-scrolled) { background:var(--paper); border-color:var(--line); color:var(--ink); }
+  .immersive-page--desktop .site-header:not(.is-scrolled) .wordmark { color:var(--ink); }
+  .immersive-page--desktop .site-header:not(.is-scrolled) .header-call,
+  .immersive-page--desktop .site-header:not(.is-scrolled) .menu-button { color:var(--maroon); border-color:var(--line); }
+  .palace-hero--home { display:block; margin-top:0; min-height:0; height:auto; max-height:none; background:var(--maroon); }
+  .palace-hero--home .palace-hero__picture { display:block; position:relative; inset:auto; z-index:auto; }
+  .palace-hero--home .palace-hero__picture img { height:auto; object-fit:contain; }
+  .palace-hero--home .palace-hero__shade,
+  .palace-hero--home .palace-hero__signature { display:none; }
+  .palace-hero--home .palace-hero__content { padding-block:32px 40px; text-shadow:none; }
+  .palace-hero--home .eyebrow { margin-bottom:16px; }
+  .palace-hero--home h1 { font-size:clamp(2rem,8.5vw,3.5rem); margin-bottom:18px; }
+  .palace-hero--home .palace-hero__description { margin-bottom:24px; }
+  .home-reservations { margin-top:0; }
+}
 .planner-activity-description { font-size:15px; line-height:1.65; }
 .planner-meal-note { padding-left:12px; border-left:2px solid var(--line-strong); }
 .itinerary-print { display:none; }
@@ -440,10 +457,17 @@ html:has([data-planner]) { scroll-padding-bottom:100px; }
 .rooms-editorial__link:hover { border-color:var(--maroon); }
 @media(min-width:768px) { .rooms-editorial__copy { margin-top:52px; } .rooms-editorial__copy h2 { margin-bottom:40px; } .rooms-editorial__link { margin-top:36px; } }
 
-.riverside-dining { display:grid; gap:24px; }
+.riverside-dining { display:grid; gap:28px; align-items:center; }
+.riverside-dining > * { min-width:0; }
+.riverside-dining__visual { margin:0; }
+.riverside-dining__visual img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:contain; background:var(--ivory-deep); }
+.riverside-dining__visual figcaption { margin-top:12px; color:var(--ink-soft); font-size:12px; line-height:1.6; }
 .riverside-dining p:first-child { margin-top:0; }
-.riverside-dining h2 { margin-bottom:12px; }
+.riverside-dining h2 { margin-bottom:12px; font-size:clamp(2.3rem,4vw,3.6rem); }
 .riverside-dining__property { color:var(--ink-soft); }
-.riverside-dining .choice-links { display:flex; flex-wrap:wrap; gap:12px 24px; margin:24px 0; }
-.riverside-dining .choice-links a { min-height:44px; display:inline-flex; align-items:center; }
-@media(min-width:960px) { .riverside-dining { grid-template-columns:.8fr 1.2fr; gap:72px; } }
+.riverside-dining__actions { display:flex; flex-wrap:wrap; gap:4px 24px; margin-top:20px; }
+.riverside-dining a { min-height:44px; display:inline-flex; align-items:center; overflow-wrap:anywhere; }
+.riverside-dining__more { display:flex; flex-wrap:wrap; gap:4px 24px; border-top:1px solid var(--line); padding-top:12px; margin-top:16px; }
+.riverside-dining__more a { color:var(--ink-soft); font-size:14px; text-underline-offset:4px; }
+.riverside-dining__reel { gap:6px; }
+@media(min-width:960px) { .riverside-dining { grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:48px; } }

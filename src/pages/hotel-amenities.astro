@@ -9,7 +9,7 @@ import { getSiteData } from "@/lib/cms";
 const { amenities, media } = await getSiteData();
 const hero = media.find((item) => item.id === "property-courtyard") || media[0];
 const spa = media.find((item) => item.id === "spa-salon") || hero;
-const gym = media.find((item) => item.id === "gym") || hero;
+const kidsZone = media.find((item) => item.id === "kids-zone") || hero;
 ---
 
 <BaseLayout title="Hotel & Amenities | Orchha Palace" description="Explore Orchha Palace's spa and salon, fitness centre, outdoor pool, 4,100 sq. ft. Kids Zone, dining, concierge and guest services." image={hero.src}>
@@ -24,15 +24,15 @@ const gym = media.find((item) => item.id === "gym") || hero;
 
   <section class="section section--paper">
     <div class="shell">
-      <SectionHeading eyebrow="Wellness, your way" title="Reset gently or keep your routine" copy="The pool remains part of the stay, while dedicated spaces for treatments, salon appointments and exercise give the rest of the hotel equal room to shine." />
+      <SectionHeading eyebrow="Time for everyone" title="Room to unwind, space to play" copy="Take time for a spa or salon appointment, enjoy the pool, or make room for outdoor fun at the Kids Zone." />
       <div class="wellness-grid">
         <article class="wellness-card wellness-card--spa">
           <div class="wellness-card__image"><img src={spa.src} alt={spa.alt} width="1080" height="1080" loading="lazy" /></div>
           <div class="wellness-card__body"><p class="eyebrow">Spa & salon</p><h3>A full spa-and-salon pause</h3><p>Kairali Spa and Vanity Durbar bring massage and facial treatments together with hair, beauty and grooming services. Advance appointments are recommended.</p><a class="text-link" href="https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%20would%20like%20to%20ask%20about%20a%20spa%20or%20salon%20appointment." target="_blank" rel="noreferrer">Ask about an appointment →</a></div>
         </article>
         <article class="wellness-card">
-          <div class="wellness-card__image"><img src={gym.src} alt={gym.alt} width="1200" height="900" loading="lazy" /></div>
-          <div class="wellness-card__body"><p class="eyebrow">Fitness</p><h3>Keep your routine in view</h3><p>The dedicated fitness room includes treadmills, an elliptical trainer, free weights, benches and floor space for stretching or yoga.</p></div>
+          <div class="wellness-card__image"><img src={kidsZone.src} alt={kidsZone.alt} width="1600" height="1066" loading="lazy" /></div>
+          <div class="wellness-card__body"><p class="eyebrow">Kids Zone</p><h3>A little world of outdoor fun</h3><p>Our 4,100 sq. ft. outdoor play area gives younger guests space to explore, with slides, swings, climbing frames and trampolines.</p></div>
         </article>
       </div>
       <div class="wellness-action"><a class="text-link" href="#availability" data-booking-open data-booking-source="amenities">Plan a stay <Icon name="ph:calendar-check" size={18} /></a></div>

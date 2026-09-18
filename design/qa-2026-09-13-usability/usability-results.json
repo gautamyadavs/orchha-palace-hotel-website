@@ -1,0 +1,1082 @@
+{
+  "checks": [
+    "Change/search/empty state/clear/Cancel retain focus and scroll; reading and editing-mode toggles do not save",
+    "Replacement retains its target slot; existing outing explicitly moves; displaced idea saved; one-step Undo restores all",
+    "Undo and dismissing its notification retain visible keyboard focus; Undo remains available in Options",
+    "Move confirms target and restores focus to source; multiple days remain expanded",
+    "Remove retains saved ideas; Reset is conditional, reversible and retains arrival dates",
+    "Seasonal dates, restored plans, explicit two-night links, saved ideas and length Undo",
+    "Catalogue search and interests retain a recoverable empty state",
+    "PDF and WhatsApp include all days, meal notes and saved ideas while day cards are closed",
+    "Missing arrival is requested in context; conflicts appear only for differing valid room dates; both choices and equal-date handoff work",
+    "Picker layouts work from 320 to 1440; seasonal timing incompatibility is explained before confirmation",
+    "All five wedding images retain complete frames at six widths; caption/selection match; thumbnail changes do not move the page; keyboard/fullscreen work"
+  ],
+  "layouts": [
+    {
+      "page": "explore",
+      "width": 320,
+      "scrollWidth": 320,
+      "height": 3165,
+      "firstActivity": 701.265625,
+      "choices": 468.265625,
+      "imageHeight": 140,
+      "dayColumns": "288px"
+    },
+    {
+      "page": "explore",
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 2952,
+      "firstActivity": 676.96875,
+      "choices": 443.96875,
+      "imageHeight": 140,
+      "dayColumns": "358px"
+    },
+    {
+      "page": "explore",
+      "width": 611,
+      "scrollWidth": 611,
+      "height": 2709,
+      "firstActivity": 676.96875,
+      "choices": 443.96875,
+      "imageHeight": 140,
+      "dayColumns": "579px"
+    },
+    {
+      "page": "explore",
+      "width": 768,
+      "scrollWidth": 768,
+      "height": 2629,
+      "firstActivity": 670.171875,
+      "choices": 423.578125,
+      "imageHeight": 210,
+      "dayColumns": "720px"
+    },
+    {
+      "page": "explore",
+      "width": 1030,
+      "scrollWidth": 1030,
+      "height": 2386,
+      "firstActivity": 678.171875,
+      "choices": 431.578125,
+      "imageHeight": 210,
+      "dayColumns": "920px"
+    },
+    {
+      "page": "explore",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 2401,
+      "firstActivity": 678.171875,
+      "choices": 431.578125,
+      "imageHeight": 210,
+      "dayColumns": "920px"
+    },
+    {
+      "page": "wedding",
+      "width": 320,
+      "scrollWidth": 320,
+      "frame": {
+        "x": 16,
+        "y": 369.71875,
+        "width": 288,
+        "height": 192,
+        "top": 369.71875,
+        "right": 304,
+        "bottom": 561.71875,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 369.71875,
+        "width": 288,
+        "height": 192,
+        "top": 369.71875,
+        "right": 304,
+        "bottom": 561.71875,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-one.webp",
+      "caption": "Daytime wedding celebration",
+      "selected": "Daytime wedding celebration",
+      "natural": [
+        2256,
+        1565
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 320,
+      "scrollWidth": 320,
+      "frame": {
+        "x": 16,
+        "y": 369.71875,
+        "width": 288,
+        "height": 192,
+        "top": 369.71875,
+        "right": 304,
+        "bottom": 561.71875,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 369.71875,
+        "width": 288,
+        "height": 192,
+        "top": 369.71875,
+        "right": 304,
+        "bottom": 561.71875,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-fireworks.webp",
+      "caption": "Wedding finale with fireworks",
+      "selected": "Wedding finale with fireworks",
+      "natural": [
+        2400,
+        1350
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 320,
+      "scrollWidth": 320,
+      "frame": {
+        "x": 16,
+        "y": 369.71875,
+        "width": 288,
+        "height": 192,
+        "top": 369.71875,
+        "right": 304,
+        "bottom": 561.71875,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 369.71875,
+        "width": 288,
+        "height": 192,
+        "top": 369.71875,
+        "right": 304,
+        "bottom": 561.71875,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-two.webp",
+      "caption": "Open-air amphitheatre",
+      "selected": "Open-air amphitheatre",
+      "natural": [
+        2318,
+        1535
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 320,
+      "scrollWidth": 320,
+      "frame": {
+        "x": 16,
+        "y": 369.71875,
+        "width": 288,
+        "height": 192,
+        "top": 369.71875,
+        "right": 304,
+        "bottom": 561.71875,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 369.71875,
+        "width": 288,
+        "height": 192,
+        "top": 369.71875,
+        "right": 304,
+        "bottom": 561.71875,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/dining-groups.webp",
+      "caption": "Celebration dining place setting",
+      "selected": "Celebration dining place setting",
+      "natural": [
+        1800,
+        1079
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 320,
+      "scrollWidth": 320,
+      "frame": {
+        "x": 16,
+        "y": 369.71875,
+        "width": 288,
+        "height": 192,
+        "top": 369.71875,
+        "right": 304,
+        "bottom": 561.71875,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 369.71875,
+        "width": 288,
+        "height": 192,
+        "top": 369.71875,
+        "right": 304,
+        "bottom": 561.71875,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/private-date.webp",
+      "caption": "Private date-night setup",
+      "selected": "Private date-night setup",
+      "natural": [
+        2310,
+        1529
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 390,
+      "scrollWidth": 390,
+      "frame": {
+        "x": 16,
+        "y": 334.578125,
+        "width": 358,
+        "height": 238.65625,
+        "top": 334.578125,
+        "right": 374,
+        "bottom": 573.234375,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 334.578125,
+        "width": 358,
+        "height": 238.65625,
+        "top": 334.578125,
+        "right": 374,
+        "bottom": 573.234375,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-one.webp",
+      "caption": "Daytime wedding celebration",
+      "selected": "Daytime wedding celebration",
+      "natural": [
+        2256,
+        1565
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 390,
+      "scrollWidth": 390,
+      "frame": {
+        "x": 16,
+        "y": 334.578125,
+        "width": 358,
+        "height": 238.65625,
+        "top": 334.578125,
+        "right": 374,
+        "bottom": 573.234375,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 334.578125,
+        "width": 358,
+        "height": 238.65625,
+        "top": 334.578125,
+        "right": 374,
+        "bottom": 573.234375,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-fireworks.webp",
+      "caption": "Wedding finale with fireworks",
+      "selected": "Wedding finale with fireworks",
+      "natural": [
+        2400,
+        1350
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 390,
+      "scrollWidth": 390,
+      "frame": {
+        "x": 16,
+        "y": 334.578125,
+        "width": 358,
+        "height": 238.65625,
+        "top": 334.578125,
+        "right": 374,
+        "bottom": 573.234375,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 334.578125,
+        "width": 358,
+        "height": 238.65625,
+        "top": 334.578125,
+        "right": 374,
+        "bottom": 573.234375,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-two.webp",
+      "caption": "Open-air amphitheatre",
+      "selected": "Open-air amphitheatre",
+      "natural": [
+        2318,
+        1535
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 390,
+      "scrollWidth": 390,
+      "frame": {
+        "x": 16,
+        "y": 334.578125,
+        "width": 358,
+        "height": 238.65625,
+        "top": 334.578125,
+        "right": 374,
+        "bottom": 573.234375,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 334.578125,
+        "width": 358,
+        "height": 238.65625,
+        "top": 334.578125,
+        "right": 374,
+        "bottom": 573.234375,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/dining-groups.webp",
+      "caption": "Celebration dining place setting",
+      "selected": "Celebration dining place setting",
+      "natural": [
+        1800,
+        1079
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 390,
+      "scrollWidth": 390,
+      "frame": {
+        "x": 16,
+        "y": 334.578125,
+        "width": 358,
+        "height": 238.65625,
+        "top": 334.578125,
+        "right": 374,
+        "bottom": 573.234375,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 334.578125,
+        "width": 358,
+        "height": 238.65625,
+        "top": 334.578125,
+        "right": 374,
+        "bottom": 573.234375,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/private-date.webp",
+      "caption": "Private date-night setup",
+      "selected": "Private date-night setup",
+      "natural": [
+        2310,
+        1529
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 611,
+      "scrollWidth": 611,
+      "frame": {
+        "x": 16,
+        "y": 273.390625,
+        "width": 579,
+        "height": 386,
+        "top": 273.390625,
+        "right": 595,
+        "bottom": 659.390625,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 273.390625,
+        "width": 579,
+        "height": 386,
+        "top": 273.390625,
+        "right": 595,
+        "bottom": 659.390625,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-one.webp",
+      "caption": "Daytime wedding celebration",
+      "selected": "Daytime wedding celebration",
+      "natural": [
+        2256,
+        1565
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 611,
+      "scrollWidth": 611,
+      "frame": {
+        "x": 16,
+        "y": 273.390625,
+        "width": 579,
+        "height": 386,
+        "top": 273.390625,
+        "right": 595,
+        "bottom": 659.390625,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 273.390625,
+        "width": 579,
+        "height": 386,
+        "top": 273.390625,
+        "right": 595,
+        "bottom": 659.390625,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-fireworks.webp",
+      "caption": "Wedding finale with fireworks",
+      "selected": "Wedding finale with fireworks",
+      "natural": [
+        2400,
+        1350
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 611,
+      "scrollWidth": 611,
+      "frame": {
+        "x": 16,
+        "y": 273.390625,
+        "width": 579,
+        "height": 386,
+        "top": 273.390625,
+        "right": 595,
+        "bottom": 659.390625,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 273.390625,
+        "width": 579,
+        "height": 386,
+        "top": 273.390625,
+        "right": 595,
+        "bottom": 659.390625,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-two.webp",
+      "caption": "Open-air amphitheatre",
+      "selected": "Open-air amphitheatre",
+      "natural": [
+        2318,
+        1535
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 611,
+      "scrollWidth": 611,
+      "frame": {
+        "x": 16,
+        "y": 273.390625,
+        "width": 579,
+        "height": 386,
+        "top": 273.390625,
+        "right": 595,
+        "bottom": 659.390625,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 273.390625,
+        "width": 579,
+        "height": 386,
+        "top": 273.390625,
+        "right": 595,
+        "bottom": 659.390625,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/dining-groups.webp",
+      "caption": "Celebration dining place setting",
+      "selected": "Celebration dining place setting",
+      "natural": [
+        1800,
+        1079
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 611,
+      "scrollWidth": 611,
+      "frame": {
+        "x": 16,
+        "y": 273.390625,
+        "width": 579,
+        "height": 386,
+        "top": 273.390625,
+        "right": 595,
+        "bottom": 659.390625,
+        "left": 16
+      },
+      "image": {
+        "x": 16,
+        "y": 273.390625,
+        "width": 579,
+        "height": 386,
+        "top": 273.390625,
+        "right": 595,
+        "bottom": 659.390625,
+        "left": 16
+      },
+      "fit": "contain",
+      "src": "/images/private-date.webp",
+      "caption": "Private date-night setup",
+      "selected": "Private date-night setup",
+      "natural": [
+        2310,
+        1529
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 768,
+      "scrollWidth": 768,
+      "frame": {
+        "x": 24,
+        "y": 225.703125,
+        "width": 720,
+        "height": 480,
+        "top": 225.703125,
+        "right": 744,
+        "bottom": 705.703125,
+        "left": 24
+      },
+      "image": {
+        "x": 24,
+        "y": 225.703125,
+        "width": 720,
+        "height": 480,
+        "top": 225.703125,
+        "right": 744,
+        "bottom": 705.703125,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-one.webp",
+      "caption": "Daytime wedding celebration",
+      "selected": "Daytime wedding celebration",
+      "natural": [
+        2256,
+        1565
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 768,
+      "scrollWidth": 768,
+      "frame": {
+        "x": 24,
+        "y": 225.703125,
+        "width": 720,
+        "height": 480,
+        "top": 225.703125,
+        "right": 744,
+        "bottom": 705.703125,
+        "left": 24
+      },
+      "image": {
+        "x": 24,
+        "y": 225.703125,
+        "width": 720,
+        "height": 480,
+        "top": 225.703125,
+        "right": 744,
+        "bottom": 705.703125,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-fireworks.webp",
+      "caption": "Wedding finale with fireworks",
+      "selected": "Wedding finale with fireworks",
+      "natural": [
+        2400,
+        1350
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 768,
+      "scrollWidth": 768,
+      "frame": {
+        "x": 24,
+        "y": 225.703125,
+        "width": 720,
+        "height": 480,
+        "top": 225.703125,
+        "right": 744,
+        "bottom": 705.703125,
+        "left": 24
+      },
+      "image": {
+        "x": 24,
+        "y": 225.703125,
+        "width": 720,
+        "height": 480,
+        "top": 225.703125,
+        "right": 744,
+        "bottom": 705.703125,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-two.webp",
+      "caption": "Open-air amphitheatre",
+      "selected": "Open-air amphitheatre",
+      "natural": [
+        2318,
+        1535
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 768,
+      "scrollWidth": 768,
+      "frame": {
+        "x": 24,
+        "y": 225.703125,
+        "width": 720,
+        "height": 480,
+        "top": 225.703125,
+        "right": 744,
+        "bottom": 705.703125,
+        "left": 24
+      },
+      "image": {
+        "x": 24,
+        "y": 225.703125,
+        "width": 720,
+        "height": 480,
+        "top": 225.703125,
+        "right": 744,
+        "bottom": 705.703125,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "/images/dining-groups.webp",
+      "caption": "Celebration dining place setting",
+      "selected": "Celebration dining place setting",
+      "natural": [
+        1800,
+        1079
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 768,
+      "scrollWidth": 768,
+      "frame": {
+        "x": 24,
+        "y": 225.703125,
+        "width": 720,
+        "height": 480,
+        "top": 225.703125,
+        "right": 744,
+        "bottom": 705.703125,
+        "left": 24
+      },
+      "image": {
+        "x": 24,
+        "y": 225.703125,
+        "width": 720,
+        "height": 480,
+        "top": 225.703125,
+        "right": 744,
+        "bottom": 705.703125,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "/images/private-date.webp",
+      "caption": "Private date-night setup",
+      "selected": "Private date-night setup",
+      "natural": [
+        2310,
+        1529
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 1030,
+      "scrollWidth": 1030,
+      "frame": {
+        "x": 24,
+        "y": 187.09375,
+        "width": 982,
+        "height": 552.375,
+        "top": 187.09375,
+        "right": 1006,
+        "bottom": 739.46875,
+        "left": 24
+      },
+      "image": {
+        "x": 24,
+        "y": 187.09375,
+        "width": 982,
+        "height": 552.375,
+        "top": 187.09375,
+        "right": 1006,
+        "bottom": 739.46875,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-one.webp",
+      "caption": "Daytime wedding celebration",
+      "selected": "Daytime wedding celebration",
+      "natural": [
+        2256,
+        1565
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 1030,
+      "scrollWidth": 1030,
+      "frame": {
+        "x": 24,
+        "y": 187.09375,
+        "width": 982,
+        "height": 552.375,
+        "top": 187.09375,
+        "right": 1006,
+        "bottom": 739.46875,
+        "left": 24
+      },
+      "image": {
+        "x": 24,
+        "y": 187.09375,
+        "width": 982,
+        "height": 552.375,
+        "top": 187.09375,
+        "right": 1006,
+        "bottom": 739.46875,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-fireworks.webp",
+      "caption": "Wedding finale with fireworks",
+      "selected": "Wedding finale with fireworks",
+      "natural": [
+        2400,
+        1350
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 1030,
+      "scrollWidth": 1030,
+      "frame": {
+        "x": 24,
+        "y": 187.09375,
+        "width": 982,
+        "height": 552.375,
+        "top": 187.09375,
+        "right": 1006,
+        "bottom": 739.46875,
+        "left": 24
+      },
+      "image": {
+        "x": 24,
+        "y": 187.09375,
+        "width": 982,
+        "height": 552.375,
+        "top": 187.09375,
+        "right": 1006,
+        "bottom": 739.46875,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-two.webp",
+      "caption": "Open-air amphitheatre",
+      "selected": "Open-air amphitheatre",
+      "natural": [
+        2318,
+        1535
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 1030,
+      "scrollWidth": 1030,
+      "frame": {
+        "x": 24,
+        "y": 187.09375,
+        "width": 982,
+        "height": 552.375,
+        "top": 187.09375,
+        "right": 1006,
+        "bottom": 739.46875,
+        "left": 24
+      },
+      "image": {
+        "x": 24,
+        "y": 187.09375,
+        "width": 982,
+        "height": 552.375,
+        "top": 187.09375,
+        "right": 1006,
+        "bottom": 739.46875,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "/images/dining-groups.webp",
+      "caption": "Celebration dining place setting",
+      "selected": "Celebration dining place setting",
+      "natural": [
+        1800,
+        1079
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 1030,
+      "scrollWidth": 1030,
+      "frame": {
+        "x": 24,
+        "y": 187.09375,
+        "width": 982,
+        "height": 552.375,
+        "top": 187.09375,
+        "right": 1006,
+        "bottom": 739.46875,
+        "left": 24
+      },
+      "image": {
+        "x": 24,
+        "y": 187.09375,
+        "width": 982,
+        "height": 552.375,
+        "top": 187.09375,
+        "right": 1006,
+        "bottom": 739.46875,
+        "left": 24
+      },
+      "fit": "contain",
+      "src": "/images/private-date.webp",
+      "caption": "Private date-night setup",
+      "selected": "Private date-night setup",
+      "natural": [
+        2310,
+        1529
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "frame": {
+        "x": 120,
+        "y": 168.6875,
+        "width": 1200,
+        "height": 675,
+        "top": 168.6875,
+        "right": 1320,
+        "bottom": 843.6875,
+        "left": 120
+      },
+      "image": {
+        "x": 120,
+        "y": 168.6875,
+        "width": 1200,
+        "height": 675,
+        "top": 168.6875,
+        "right": 1320,
+        "bottom": 843.6875,
+        "left": 120
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-one.webp",
+      "caption": "Daytime wedding celebration",
+      "selected": "Daytime wedding celebration",
+      "natural": [
+        2256,
+        1565
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "frame": {
+        "x": 120,
+        "y": 168.6875,
+        "width": 1200,
+        "height": 675,
+        "top": 168.6875,
+        "right": 1320,
+        "bottom": 843.6875,
+        "left": 120
+      },
+      "image": {
+        "x": 120,
+        "y": 168.6875,
+        "width": 1200,
+        "height": 675,
+        "top": 168.6875,
+        "right": 1320,
+        "bottom": 843.6875,
+        "left": 120
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-fireworks.webp",
+      "caption": "Wedding finale with fireworks",
+      "selected": "Wedding finale with fireworks",
+      "natural": [
+        2400,
+        1350
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "frame": {
+        "x": 120,
+        "y": 168.6875,
+        "width": 1200,
+        "height": 675,
+        "top": 168.6875,
+        "right": 1320,
+        "bottom": 843.6875,
+        "left": 120
+      },
+      "image": {
+        "x": 120,
+        "y": 168.6875,
+        "width": 1200,
+        "height": 675,
+        "top": 168.6875,
+        "right": 1320,
+        "bottom": 843.6875,
+        "left": 120
+      },
+      "fit": "contain",
+      "src": "/images/event-showcase-two.webp",
+      "caption": "Open-air amphitheatre",
+      "selected": "Open-air amphitheatre",
+      "natural": [
+        2318,
+        1535
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "frame": {
+        "x": 120,
+        "y": 168.6875,
+        "width": 1200,
+        "height": 675,
+        "top": 168.6875,
+        "right": 1320,
+        "bottom": 843.6875,
+        "left": 120
+      },
+      "image": {
+        "x": 120,
+        "y": 168.6875,
+        "width": 1200,
+        "height": 675,
+        "top": 168.6875,
+        "right": 1320,
+        "bottom": 843.6875,
+        "left": 120
+      },
+      "fit": "contain",
+      "src": "/images/dining-groups.webp",
+      "caption": "Celebration dining place setting",
+      "selected": "Celebration dining place setting",
+      "natural": [
+        1800,
+        1079
+      ]
+    },
+    {
+      "page": "wedding",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "frame": {
+        "x": 120,
+        "y": 168.6875,
+        "width": 1200,
+        "height": 675,
+        "top": 168.6875,
+        "right": 1320,
+        "bottom": 843.6875,
+        "left": 120
+      },
+      "image": {
+        "x": 120,
+        "y": 168.6875,
+        "width": 1200,
+        "height": 675,
+        "top": 168.6875,
+        "right": 1320,
+        "bottom": 843.6875,
+        "left": 120
+      },
+      "fit": "contain",
+      "src": "/images/private-date.webp",
+      "caption": "Private date-night setup",
+      "selected": "Private date-night setup",
+      "natural": [
+        2310,
+        1529
+      ]
+    }
+  ],
+  "accessibility": [
+    {
+      "state": "suggested-mobile",
+      "violations": []
+    },
+    {
+      "state": "picker-mobile",
+      "violations": []
+    },
+    {
+      "state": "wedding-mobile",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

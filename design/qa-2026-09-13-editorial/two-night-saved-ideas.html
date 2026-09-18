@@ -1,0 +1,450 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>two-night-saved-ideas</title><style>/* Mobile-first guest journeys. Shared colours and type remain in global.css. */
+:root { --section: 48px; --shell: min(1200px, calc(100% - 32px)); }
+[hidden] { display: none !important; }
+html { scroll-padding-top: 88px; }
+h1 { font-size: clamp(2.15rem, 5vw, 3.8rem); line-height: 1.07; }
+h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.15; }
+h3 { font-size: 1.65rem; line-height: 1.2; }
+p { max-width: 70ch; }
+button, select, summary, .button { min-height: 44px; }
+input, select, textarea { max-width: 100%; min-width: 0; font-size: 16px; }
+input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--maroon); flex: 0 0 auto; }
+fieldset { min-width: 0; }
+.eyebrow { font-size: 14px; letter-spacing: .075em; }
+.small-copy, .content-note { font-size: 14px; color: var(--ink-soft); }
+.site-header { position: sticky; top: 0; height: 76px; background: var(--paper); color: var(--ink); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.site-header .header-call, .site-header .menu-button { color: var(--maroon); border-color: var(--line); background: transparent; }
+.wordmark__name { font-size: 24px; }
+.wordmark__sub { font-size: 9px; }
+.header-actions { gap: 8px; }
+.menu-button { padding-inline: 10px; }
+.header-call { display: none; }
+.header-book { display: none; }
+.menu-nav__group a { font-size: 1.65rem; min-height: 44px; }
+.menu-drawer { max-height: 100dvh; overflow-y: auto; }
+.page-intro { padding-block: 32px 28px; }
+.page-intro h1 { margin: 10px 0 14px; }
+.page-intro p { color: var(--ink-soft); }
+.section--compact { padding-bottom: 32px; }
+.section-topline { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 24px; }
+.section-topline h2 { margin-bottom: 0; }
+.stay-hero { display: grid; gap: 20px; padding-top: 24px; }
+.stay-hero__copy h1 { margin: 8px 0 12px; }
+.stay-hero__copy h1 em { font-style: normal; color: var(--maroon); }
+.stay-hero__copy p { margin-bottom: 0; color: var(--ink-soft); }
+.stay-hero__image { width: 100%; height: 175px; object-fit: cover; border-radius: 8px; }
+.stay-hero__booking { grid-row: 2; }
+.availability { padding: 18px; border-radius: 8px; box-shadow: none; }
+.availability__heading { display: block; }
+.availability__heading .eyebrow, .availability__heading > p:last-child, .availability__rooms { display: none; }
+.availability__heading h2 { font-size: 1.65rem; margin: 0; }
+.availability__desktop-form { display: block; }
+.availability__mobile-open { display: none; }
+.availability__support { font-size: 14px; flex-wrap: wrap; }
+.availability__support a { min-height: 44px; display: inline-flex; align-items: center; }
+.booking-form { margin-top: 14px; }
+.booking-form .booking-form__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 0; }
+.booking-form .booking-form__field { min-width: 0; min-height: 80px; padding: 8px 10px; border: 1px solid var(--line); }
+.booking-form__field > span, .booking-form__promo label > span { font-size: 14px; text-transform: none; letter-spacing: 0; gap: 5px; }
+.booking-form__field > span svg { width: 16px; }
+.booking-form__field input, .booking-form__field select, .booking-form__promo input { font: 16px var(--body); min-height: 36px; }
+.booking-form .booking-form__submit { grid-column: 1 / -1; min-height: 48px; margin: 0; font-size: 15px; }
+.booking-form__promo { margin-top: 4px; }
+.booking-form__promo summary { font-size: 14px; padding-block: 10px; }
+.booking-form__note, .booking-summary { font-size: 14px; margin: 8px 0 0; }
+.booking-form__room { font-size: 14px; max-width: none !important; }
+.booking-sheet__header h2 { font-size: 2rem; }
+.booking-sheet__panel { padding: 20px; }
+.form-message:empty { display: none; }
+[aria-invalid=true] { outline: 2px solid var(--maroon); outline-offset: 3px; }
+.category-grid, .event-entry-grid, .benefit-grid, .chooser-grid, .venue-results { display: grid; grid-template-columns: minmax(0,1fr); gap: 24px; }
+.category-card, .event-entry { overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+.category-card > div, .event-entry > div { padding: 20px; }
+.category-card img, .event-entry img, .benefit-card img { width: 100%; aspect-ratio: 1.65; object-fit: cover; }
+.category-card h3, .benefit-card h3, .event-entry h3 { margin: 10px 0; }
+.choice-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.choice-links a { min-height: 44px; display: inline-flex; align-items: center; color: var(--maroon); font-weight: 600; }
+.choice-links a.button--primary { color: var(--white); }
+.benefit-card, .event-entry { text-decoration: none; }
+.benefit-card img { border-radius: 8px; }
+.itinerary-teaser { display: grid; gap: 24px; }
+.itinerary-teaser img { width: 100%; height: 260px; object-fit: cover; border-radius: 8px; }
+.arrival-section { display: grid; gap: 24px; }
+.disclosures details { border-block-end: 1px solid var(--line); padding: 10px 0; }
+.disclosures summary { cursor: pointer; font-weight: 600; padding-block: 10px; }
+.disclosures details p { margin-top: 12px; }
+.filter-bar { display: flex; flex-wrap: wrap; gap: 14px; align-items: end; padding: 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+.filter-bar label, .planner-tools label { display: grid; gap: 6px; font-size: 14px; flex: 1 1 170px; min-width: 0; }
+.filter-bar select, .filter-bar input:not([type=checkbox]), .planner-tools input, .planner-tools select, .planner-slot select { width: 100%; min-height: 44px; background: var(--white); padding: 8px; border: 1px solid var(--line-strong); border-radius: 4px; }
+.filter-bar .check-control, .compare-select { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.room-card { display: block; height: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.room-card__image { aspect-ratio: 1.6; }
+.room-card__body { padding: 20px; }
+.room-card__body h3 { font-size: 1.9rem; }
+.room-card__body > p:not(.eyebrow), .room-card__facts dd { font-size: 16px; }
+.room-card__facts dt { font-size: 14px; }
+.room-card__actions { flex-wrap: wrap; gap: 12px; }
+.compare-select { margin-top: 8px; padding: 8px; font-size: 14px; }
+.comparison { margin-top: 32px; padding: 20px; background: var(--paper); border: 1px solid var(--line); }
+.comparison-row { display: grid; gap: 12px; border-block-start: 1px solid var(--line); padding-block: 16px; }
+.comparison-row h3 { font-family: var(--body); font-size: 16px; margin: 0; }
+.comparison-row p { margin: 0; font-size: 14px; }
+.comparison-row strong { display: block; margin-bottom: 6px; color: var(--maroon); }
+.detail-header { padding-block: 24px; }
+.detail-header h1 { margin: 8px 0 14px; }
+.detail-header .detail-facts { margin-top: 20px; }
+.detail-facts { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.detail-facts dt { font-size: 14px; }
+.detail-facts dd { font-family: var(--body); font-size: 16px; line-height: 1.5; margin-top: 6px; }
+.suite-media { display: grid; gap: 28px; align-items: start; }
+.suite-tour h2 { font-size: 1.7rem; }
+.suite-tour__frame { position: relative; width: 100%; height: 580px; background: var(--ivory-deep); border-radius: 8px; overflow: hidden; }
+.suite-tour__frame > img { width: 100%; height: 100%; object-fit: cover; }
+.suite-tour__frame > button { position: absolute; bottom: 24px; left: 16px; right: 16px; white-space: normal; }
+.suite-tour iframe { width: 100%; height: 100%; border: 0; }
+.event-hero { display: grid; gap: 24px; align-items: center; padding-block: 28px; }
+.event-hero img { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; }
+.event-hero h1 { margin: 12px 0; }
+.venue-card { border: 1px solid var(--line); border-radius: 8px; background: var(--paper); overflow: hidden; }
+.venue-card__body { padding: 20px; }
+.venue-card h3 { margin-bottom: 12px; }
+.venue-card img { width: 100%; height: 190px; object-fit: cover; }
+.venue-card__meta { font-size: 14px; }
+.venue-match { display: block; margin-block: 12px; font-size: 14px; font-weight: 600; color: var(--forest); }
+.venue-card .button { width: 100%; margin-top: 12px; }
+.venue-results { margin-top: 24px; }
+.lead-layout, .lead-form, .lead-form__fields, .field-grid { min-width: 0; }
+.lead-form { padding: 18px; border: 1px solid var(--line); border-radius: 8px; }
+.field-grid { grid-template-columns: minmax(0,1fr); }
+.field-grid label > span, .checkbox-field { font-size: 14px; letter-spacing: 0; }
+.field-grid input, .field-grid select, .field-grid textarea { min-width: 0; font-size: 16px; }
+.step-label { font-size: 14px; color: var(--maroon); font-weight: 600; }
+.form-navigation { display: flex; gap: 12px; flex-wrap: wrap; margin-block: 16px; }
+.lead-review { background: var(--ivory); padding: 14px; margin-bottom: 18px; font-size: 14px; white-space: pre-line; }
+.client-strip { padding-block: 24px; border-block: 1px solid var(--line); }
+.client-strip h2 { font-family: var(--body); font-size: 16px; }
+.client-window { overflow: hidden; touch-action: pan-y; }
+.client-track { display: flex; padding: 0; margin: 0; list-style: none; }
+.client-track li { flex: 0 0 50%; display: grid; place-items: center; padding: 20px 16px; height: 110px; }
+.client-track img { width: 100%; height: 64px; object-fit: contain; }
+.client-controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
+.client-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); padding: 0; list-style: none; gap: 20px; }
+.client-grid li { padding: 12px; font-size: 14px; text-align: center; }
+.client-grid img { width: 100%; height: 65px; object-fit: contain; margin-bottom: 12px; }
+.client-all summary { cursor: pointer; padding-block: 12px; font-size: 14px; }
+.planner-tools, .planner-actions { display:flex; flex-wrap:wrap; gap:12px; align-items:end; margin-block:20px; }
+.planner-days { display:grid; gap:20px; }
+.planner-day { padding:20px; border:1px solid var(--line); background:var(--paper); border-radius:8px; min-width:0; }
+.planner-day h3 { font-size:1.7rem; }
+.planner-slot { border-top:1px solid var(--line); padding-block:16px; }
+.planner-slot h4 { font:600 14px var(--body); color:var(--maroon); margin:0 0 10px; }
+.planner-activity-name { font-weight:600; margin-bottom:8px; }
+.slot-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.slot-actions .button { text-transform:none; letter-spacing:0; font-size:14px; padding:8px 12px; }
+.activity-library { margin-top:32px; border-top:1px solid var(--line); }
+.activity-library > summary { cursor:pointer; padding-block:22px; font:600 24px var(--display); }
+.activity-library > summary span { display:block; }
+.activity-library > summary .small-copy { margin-top:8px; font:14px var(--body); }
+.activity-grid { display:grid; gap:18px; margin-top:20px; }
+.activity-card { border:1px solid var(--line); padding:20px; border-radius:8px; background:var(--paper); min-width:0; }
+.activity-card h3 { font-size:1.6rem; }
+.activity-card .eyebrow { font-size:14px; }
+.activity-status { display:block; font-size:14px; color:var(--forest); }
+.activity-card details { font-size:14px; margin-block:8px; }
+.activity-card summary { cursor:pointer; padding-block:10px; }
+.activity-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+.activity-actions a { font-size:14px; min-height:44px; display:inline-flex; align-items:center; }
+.planner-dialog { width:min(560px,calc(100% - 32px)); max-height:calc(100dvh - 32px); overflow:auto; border:1px solid var(--line); border-radius:12px; padding:24px; background:var(--paper); color:var(--ink); }
+.planner-dialog::backdrop { background:#241c1788; }
+.planner-dialog h2 { font-size:2rem; }
+.unscheduled-item { display:flex; gap:10px; flex-wrap:wrap; align-items:center; padding-block:12px; border-bottom:1px solid var(--line); }
+.unscheduled-item span { flex:1 1 200px; }
+.copy-fallback { display:grid; gap:10px; }
+.copy-fallback textarea { width:100%; padding:14px; }
+.gallery-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+.gallery-filters button[aria-pressed=true] { background:var(--maroon); color:var(--white); }
+.site-footer { padding-bottom: 70px; }
+.footer-intro { display: none; }
+.footer-grid { padding-block: 36px; gap: 24px; grid-template-columns: repeat(2,minmax(0,1fr)); }
+.footer-grid a, .footer-grid address, .footer-bottom { font-size: 14px; overflow-wrap: anywhere; }
+.footer-grid a { min-height: 36px; }
+.text-button { background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; cursor: pointer; }
+.consent-banner { position: static; transform: none; width: var(--shell); max-width: none; margin: 12px auto; padding: 16px; border: 1px solid var(--line); box-shadow: none; }
+.consent-banner p:last-child { font-size: 14px; }
+.consent-banner__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.mobile-sticky { box-shadow: 0 -2px 14px #241c1714; transition: transform 220ms ease; }
+.mobile-sticky.is-hidden { visibility: hidden; }
+.mobile-sticky__booking, .mobile-sticky__assisted-action { font-size: 14px; letter-spacing: 0; }
+body.menu-open .mobile-sticky, body.booking-open .mobile-sticky { display: none; }
+.page-hero { min-height: 340px; }
+.page-hero__content { min-height: 340px; padding-block: 40px; }
+.page-hero__content h1 { font-size: clamp(2.2rem,5vw,3.8rem); max-width: 18ch; }
+.page-hero__content > p:last-of-type { font-size: 16px; }
+@media(min-width:640px) {
+  :root { --shell: min(1200px, calc(100% - 48px)); }
+  .category-grid, .chooser-grid, .event-entry-grid, .benefit-grid, .venue-results { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .header-call, .header-book { display: inline-flex; }
+  .comparison-row { grid-template-columns: 120px 1fr 1fr; }
+  .client-track li { flex-basis: 25%; }
+  .client-grid { grid-template-columns: repeat(4,minmax(0,1fr)); }
+  .field-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .activity-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(min-width:960px) {
+  :root { --section: 64px; }
+  .site-header { height: 84px; padding-inline: 24px; }
+  .desktop-nav { display: flex; gap: 18px; }
+  .desktop-nav a { font-size: 14px; text-transform: none; letter-spacing: 0; }
+  .wordmark__name { font-size: 28px; }
+  .header-book { display: none; }
+  .stay-hero { grid-template-columns: 1fr 1fr; gap: 32px; padding-top: 36px; align-items: center; }
+  .stay-hero__image { height: 340px; grid-column: 2; grid-row: 1; }
+  .stay-hero__booking { grid-column: 1/-1; grid-row: 2; }
+  .booking-form--inline .booking-form__grid { grid-template-columns: 1.2fr 1.2fr .7fr .7fr 1fr; }
+  .booking-form--inline .booking-form__submit { grid-column: auto; }
+  .category-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .itinerary-teaser, .event-hero, .arrival-section { grid-template-columns: 1fr 1fr; gap: 48px; }
+  .itinerary-teaser img { height: 360px; }
+  .event-hero img { height: 340px; }
+  .suite-media { grid-template-columns: minmax(0,1.6fr) minmax(0,1fr); }
+  .client-track li { flex-basis: 16.666667%; }
+  .client-grid { grid-template-columns: repeat(5,minmax(0,1fr)); }
+  .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1.3fr; }
+  .site-footer { padding-bottom: 0; }
+  .detail-facts { grid-template-columns: repeat(5,minmax(0,1fr)); }
+  .planner-days { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .activity-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media(prefers-reduced-motion:reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
+
+/* Immersive arrival: the estate leads, with reservations immediately below. */
+.immersive-page .site-header:not(.is-scrolled) { background: linear-gradient(#17120e70,transparent); border-color:#ffffff30; color:#fffdf8; }
+.immersive-page .site-header:not(.is-scrolled) .wordmark,
+.immersive-page .site-header:not(.is-scrolled) .desktop-nav a,
+.immersive-page .site-header:not(.is-scrolled) .header-call,
+.immersive-page .site-header:not(.is-scrolled) .menu-button { color:#fffdf8; }
+.immersive-page .site-header:not(.is-scrolled) .header-call,
+.immersive-page .site-header:not(.is-scrolled) .menu-button { border-color:#fff8; background:transparent; }
+.palace-hero { position:relative; isolation:isolate; margin-top:-76px; min-height:650px; height:88svh; max-height:1050px; color:#fffdf8; background:#453729; display:flex; align-items:center; text-align:center; }
+.palace-hero__picture, .palace-hero__shade { position:absolute; inset:0; z-index:-2; }
+.palace-hero__picture img { width:100%; height:100%; object-fit:cover; object-position:58% 50%; }
+.palace-hero__shade { z-index:-1; background:radial-gradient(ellipse at 50% 40%,#21140b4d,transparent 72%),linear-gradient(180deg,#160d075c 0%,#1b100e30 25%,#180d0880 62%,#1b110ecc 100%); }
+.palace-hero__content { padding-top:140px; padding-bottom:115px; text-shadow:0 2px 20px #0005; }
+.palace-hero .eyebrow { color:#fffdf8; font-size:12px; letter-spacing:.2em; margin:0 auto 24px; }
+.palace-hero h1 { font-size:clamp(3rem,6.5vw,6.7rem); line-height:1.06; font-weight:500; letter-spacing:-.035em; margin:0 auto 24px; max-width:20ch; }
+.palace-hero h1 em { display:block; font-weight:500; }
+.palace-hero__description { margin:0 auto 28px; max-width:40ch; font-size:16px; line-height:1.7; color:#fffdf8; }
+.palace-hero__action { display:inline-flex; align-items:center; justify-content:center; gap:28px; padding:15px 24px; min-height:50px; color:#fffdf8; border:1px solid #fff9; font-size:13px; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; background:#24110c40; }
+.palace-hero__action:hover { background:#fffdf8; color:var(--maroon); text-shadow:none; }
+.palace-hero__signature { position:absolute; bottom:44px; left:16px; right:16px; margin:0; max-width:none; font-family:var(--display); font-size:20px; letter-spacing:.03em; }
+.palace-hero__signature span { display:block; margin-top:5px; font-family:var(--body); font-size:9px; letter-spacing:.17em; text-transform:uppercase; }
+.home-reservations { position:relative; z-index:2; margin-top:-24px; }
+.home-reservations .availability { border-radius:0; padding:24px; box-shadow:0 16px 38px #3e2b1610; }
+.home-room-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:28px; }
+.home-room-grid .category-card { border-radius:0; }
+.home-room-grid .category-card img { height:auto; aspect-ratio:1.45; }
+.home-room-grid .category-card h3 { font-size:2.1rem; }
+.home-room-grid .category-card .text-link { display:inline-flex; align-items:center; min-height:44px; margin-top:4px; }
+.palace-hero--wedding .palace-hero__picture img { object-position:50% 57%; }
+.palace-hero--wedding .palace-hero__shade { background:linear-gradient(180deg,#1a130f8c,#1a130f36 32%,#1a130f80 72%,#1a130fd9); }
+@media(min-width:640px) {
+  .home-room-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .home-room-grid .category-card--suite { grid-column:1/-1; display:grid; grid-template-columns:1.25fr 1fr; align-items:center; }
+  .home-room-grid .category-card--suite img { height:100%; min-height:300px; }
+}
+@media(min-width:960px) {
+  .palace-hero { margin-top:-84px; min-height:690px; }
+  .palace-hero__content { padding-top:100px; }
+  .palace-hero__description { font-size:18px; max-width:48ch; }
+  .palace-hero .eyebrow { font-size:13px; }
+  .home-reservations { margin-top:-32px; }
+  .home-reservations .availability { padding:28px 36px; }
+}
+@media(max-height:500px) and (min-width:640px) { .palace-hero { min-height:580px; } }
+.planner-activity-description { font-size:15px; line-height:1.65; }
+.planner-meal-note { padding-left:12px; border-left:2px solid var(--line-strong); }
+.itinerary-print { display:none; }
+@media print {
+  @page { size:A4; margin:17mm 16mm; }
+  html,body { background:#fff !important; color:#29211a !important; width:auto !important; height:auto !important; overflow:visible !important; }
+  body > * { display:none !important; }
+  body > .itinerary-print { display:block !important; font:10pt/1.45 Arial,sans-serif; print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+  .itinerary-print p { max-width:none; margin:0 0 6pt; }
+  .itinerary-print__header { border-bottom:1.5pt solid #611520; padding-bottom:10pt; margin-bottom:16pt; }
+  .itinerary-print__brand { color:#611520; letter-spacing:1.4pt; font-size:8pt; }
+  .itinerary-print h1 { font:normal 32pt/1.1 Georgia,serif; color:#611520; margin:10pt 0; }
+  .itinerary-print h2 { font:normal 19pt/1.2 Georgia,serif; color:#611520; margin:0 0 8pt; break-after:avoid; }
+  .itinerary-print h3 { font:bold 9pt/1.3 Arial,sans-serif; text-transform:uppercase; letter-spacing:.8pt; margin:0 0 5pt; color:#6a5140; }
+  .itinerary-print h4 { font:bold 12pt/1.3 Arial,sans-serif; margin:0 0 5pt; }
+  .itinerary-print__day { margin-bottom:18pt; break-inside:auto; }
+  .itinerary-print__note { font-size:8.5pt; color:#514c45; }
+  .itinerary-print__slot { border-top:.6pt solid #d9cbbb; padding-top:8pt; margin-top:8pt; break-inside:avoid; }
+  .itinerary-print__footer { border-top:1pt solid #611520; padding-top:12pt; font-size:9pt; break-inside:avoid; }
+  .itinerary-print h2 + p { break-after:avoid; }
+  .itinerary-print p { orphans:3; widows:3; }
+}
+.suite-tour__embed { position:absolute; inset:0; overflow:auto; background:#fff; }
+.suite-tour__embed.is-loading { opacity:0; pointer-events:none; }
+.suite-tour__embed iframe, .suite-tour__embed .instagram-media { min-width:0 !important; width:100% !important; max-width:100% !important; margin:0 !important; }
+
+/* Suggested stays: read first, customise in context. */
+.visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+.explore-intro { display:grid; gap:16px; padding-block:24px 18px; }
+.explore-intro h1 { font-size:clamp(2.25rem,5vw,3.5rem); line-height:1.05; margin:0 0 10px; }
+.explore-intro p { margin:0; max-width:48ch; font-size:15px; }
+.explore-intro img { width:100%; height:140px; object-fit:cover; object-position:52% 42%; border-radius:3px; }
+.explore-planner-shell { padding-bottom:48px; }
+#planner { max-width:920px; margin-inline:auto; scroll-margin-top:100px; }
+.stay-choices { display:grid; grid-template-columns:1fr 1fr; gap:10px; border:0; padding:0; margin:0; min-width:0; }
+.stay-choices label { position:relative; cursor:pointer; }
+.stay-choices input { position:absolute; opacity:0; width:1px; height:1px; }
+.stay-choices label > span { display:flex; flex-direction:column; gap:3px; padding:10px 14px; border:1px solid var(--line-strong); border-radius:4px; background:var(--paper); }
+.stay-choices strong { font-size:17px; }
+.stay-choices label > span > span { font-size:13px; }
+.stay-choices input:checked + span { border-color:var(--maroon); background:#f0e4df; box-shadow:inset 0 0 0 1px var(--maroon); }
+.stay-choices input:focus-visible + span { outline:2px solid var(--maroon); outline-offset:3px; }
+.travel-dates > summary { cursor:pointer; min-height:44px; padding-block:10px; font-size:14px; }
+.travel-dates > summary span { margin-left:8px; }
+.travel-dates .planner-tools { margin-top:0; align-items:center; }
+.travel-dates .planner-tools > p { flex:2 1 220px; }
+.planner-toolbar { display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; padding-block:4px 14px; }
+.plan-kind { font-size:13px; color:var(--maroon); margin-right:auto; }
+.planner-toolbar .button, .planner-dialog .button, .unscheduled-item .button { letter-spacing:0; text-transform:none; }
+.planner-toolbar .button { font-size:13px; min-height:44px; padding:8px 14px; }
+.plan-options { flex-basis:100%; text-align:right; font-size:13px; }
+.plan-options summary { display:inline-block; padding:10px 0; cursor:pointer; }
+.plan-options summary::after { content:' ⌄'; }
+.plan-options > button { display:block; margin-left:auto; }
+.text-action { appearance:none; background:none; color:var(--maroon); border:0; border-radius:0; padding:10px 0; min-height:44px; font:inherit; font-size:14px; cursor:pointer; text-decoration:underline; text-underline-offset:4px; }
+.plan-feedback { font-size:13px; }
+.plan-feedback > p:empty { display:none; }
+.plan-feedback > p { margin:0 0 4px; }
+.plan-feedback:has(> p:not(:empty)) { padding-bottom:12px; }
+.planner-days { grid-template-columns:minmax(0,1fr); gap:12px; }
+.planner-day { padding:0; border-radius:5px; overflow:visible; }
+.planner-day > summary { position:relative; display:block; padding:16px 42px 16px 16px; cursor:pointer; list-style:none; min-height:64px; }
+.planner-day > summary::-webkit-details-marker { display:none; }
+.planner-day > summary::after { content:'+'; position:absolute; top:18px; right:16px; font-size:22px; line-height:1; color:var(--maroon); }
+.planner-day[open] > summary::after { content:'−'; }
+.planner-day > summary h3 { font-size:1.45rem; margin:0; line-height:1.2; }
+.day-preview { display:block; font-size:13px; line-height:1.6; color:var(--ink-soft); margin-top:8px; }
+.planner-day[open] > summary .day-preview { display:none; }
+.planner-day-body { padding:0 16px 16px; }
+.planner-slot { padding-block:14px; }
+.planner-time { font:600 12px var(--body); color:var(--maroon); margin:0 0 6px; }
+.planner-slot h4.planner-activity-name { font:600 16px/1.5 var(--body); color:var(--ink); margin:0 0 5px; }
+.planner-activity-description { font-size:14px; line-height:1.65; margin:0; }
+.experience-details { font-size:13px; }
+.experience-details summary { cursor:pointer; padding:10px 0; min-height:44px; }
+.experience-details p { margin:0 0 6px; }
+.experience-details a { display:inline-flex; align-items:center; min-height:44px; }
+.planner-meals { padding:14px; background:#eee8de; border-radius:3px; }
+.planner-meals p { margin:0 0 6px; font-size:13px; }
+.planner-meals p:last-child { margin-bottom:0; }
+.slot-actions { align-items:flex-start; margin-top:4px; }
+.slot-options { font-size:14px; display:flex; position:relative; }
+.slot-options summary { padding:10px 14px; min-height:44px; cursor:pointer; color:var(--maroon); }
+.slot-options[open] { padding-bottom:4px; }
+.slot-options .button { margin:4px; }
+.planner-actions { align-items:stretch; margin:22px 0 4px; }
+.planner-actions > .button { flex:1 1 200px; text-transform:none; letter-spacing:0; font-size:14px; }
+.planner-share { display:flex; flex-wrap:wrap; gap:2px 24px; font-size:13px; align-items:center; margin-bottom:12px; }
+.planner-share a { padding-block:12px; min-height:44px; }
+.saved-ideas { border-top:1px solid var(--line); margin-top:24px; }
+.saved-ideas > summary { font-size:1.5rem; font-family:var(--display); cursor:pointer; padding-block:18px; }
+.activity-library { margin-top:16px; }
+.activity-library > summary { font-size:1.6rem; padding-block:18px; }
+.activity-scheduled { display:block; color:var(--forest); font-size:12px; font-weight:600; margin-top:5px; }
+.planner-caveat { margin-block:16px 0; font-size:12px; }
+.planner-sticky { grid-template-columns:1fr auto; align-items:center; background:var(--maroon); padding:0 16px; gap:12px; }
+.planner-sticky > span { font-size:13px; color:var(--white); }
+.planner-sticky > button { min-height:58px; background:none; border:0; padding:10px 0 10px 12px; color:var(--white); font:600 14px var(--body); cursor:pointer; }
+.planner-dialog { overscroll-behavior:contain; }
+.planner-dialog h2 { margin-bottom:12px; }
+.planner-dialog .form-navigation { gap:10px; display:flex; flex-wrap:wrap; }
+.planner-dialog .form-navigation > .button { flex:1 1 130px; min-height:44px; padding:12px; font-size:14px; }
+.experience-picker { padding:0; width:min(640px,calc(100% - 32px)); max-height:min(780px,calc(100dvh - 40px)); overflow:hidden; }
+.experience-picker[open] { display:flex; flex-direction:column; }
+.picker-heading { padding:20px 24px 10px; border-bottom:1px solid var(--line); flex-shrink:0; }
+.picker-heading h2 { font-size:1.8rem; margin:0 0 6px; }
+.picker-context { font-size:13px; color:var(--maroon); margin:0 0 10px; }
+.picker-heading .filter-bar { display:grid; grid-template-columns:1.3fr 1fr; gap:10px; margin:0; }
+.picker-heading .filter-bar label { font-size:12px; }
+.picker-heading > .small-copy { font-size:12px; margin:8px 0 0; }
+.picker-results { overflow-y:auto; overscroll-behavior:contain; padding:8px 24px; min-height:80px; }
+.picker-option { display:flex; align-items:flex-start; gap:12px; padding:14px 4px; border-bottom:1px solid var(--line); cursor:pointer; }
+.picker-option input { accent-color:var(--maroon); width:18px; height:18px; margin:3px 0 0; flex-shrink:0; }
+.picker-option > span { display:grid; gap:3px; }
+.picker-option strong { font-size:14px; }
+.picker-option .small-copy { font-size:12px; }
+.picker-option:has(input:checked) { background:#f0e4df; box-shadow:0 0 0 6px #f0e4df; }
+.picker-footer { padding:12px 24px 20px; border-top:1px solid var(--line); flex-shrink:0; background:var(--paper); }
+.picker-footer p { font-size:12px; line-height:1.5; margin:0 0 10px; max-height:110px; overflow:auto; }
+body:has(.planner-dialog[open]) { overflow:hidden; }
+@media (max-width:639px) {
+  .experience-picker { width:100%; max-width:100%; max-height:calc(100dvh - 24px); margin:auto 0 0; border-radius:16px 16px 0 0; }
+  .picker-heading { padding:18px 16px 10px; }
+  .picker-results { padding:8px 16px; }
+  .picker-footer { padding:12px 16px max(16px,env(safe-area-inset-bottom)); }
+}
+@media (min-width:768px) {
+  .explore-intro { grid-template-columns:1.2fr 1fr; gap:40px; align-items:center; padding-block:36px 28px; }
+  .explore-intro img { height:210px; }
+  .explore-planner-shell { padding-bottom:64px; }
+  .planner-day > summary { padding:20px 52px 20px 24px; }
+  .planner-day > summary h3 { font-size:1.75rem; }
+  .planner-day-body { padding:0 24px 24px; }
+  .planner-slot { padding-block:18px; }
+  .planner-actions > .button { flex:0 1 auto; padding-inline:32px; }
+}
+/* Opt-in event presentation: full photographs; room galleries retain their defaults. */
+.room-gallery--complete .room-gallery__stage { background:#eee8de; aspect-ratio:3/2; }
+.room-gallery--complete .room-gallery__open { height:100%; }
+.room-gallery--complete .room-gallery__open img { width:100%; height:100%; aspect-ratio:auto; object-fit:contain; }
+.room-gallery--complete .room-gallery__thumbnail img { height:auto; object-fit:contain; background:#eee8de; }
+@media (min-width:960px) {
+  .room-gallery--complete .room-gallery__stage { aspect-ratio:16/9; }
+}
+.planner-dialog button:disabled { opacity:.45; cursor:not-allowed; }
+.planner-undo-notice { position:fixed; z-index:44; bottom:84px; right:16px; display:flex; gap:14px; align-items:center; padding:0 12px; background:var(--paper); border:1px solid var(--line-strong); box-shadow:var(--shadow-sm); border-radius:6px; font-size:13px; }
+.planner-undo-notice .text-action { font-size:13px; min-width:44px; }
+.planner-undo-notice [data-undo-dismiss] { width:44px; text-decoration:none; font-size:20px; }
+body:has(dialog[open]) .planner-undo-notice, body.menu-open .planner-undo-notice { display:none; }
+@media(min-width:960px) { .planner-undo-notice { bottom:24px; } }
+/* Plan feedback must not push an activity away while it is being edited. */
+.plan-options { flex-basis:auto; position:relative; }
+.plan-options > summary { min-height:44px; }
+.plan-options-menu { position:absolute; right:0; top:100%; z-index:8; display:grid; min-width:220px; padding:8px 16px; background:var(--paper); border:1px solid var(--line-strong); box-shadow:var(--shadow-sm); border-radius:4px; }
+.plan-options-menu .text-action { text-align:left; }
+.planner-slot > .button { text-transform:none; letter-spacing:0; font-size:14px; }
+html:has([data-planner]) { scroll-padding-bottom:100px; }
+.picker-heading .filter-bar { padding:0; border:0; background:transparent; }
+@media(max-height:600px) {
+  .picker-heading { padding:10px 16px 6px; }
+  .picker-heading h2 { font-size:1.4rem; }
+  .picker-context { margin-bottom:6px; }
+  .picker-footer { padding:8px 16px; }
+  .picker-footer p { max-height:60px; }
+  .picker-results { min-height:48px; }
+}
+
+/* One editorial invitation to the room collection. */
+.rooms-editorial { padding-top:48px; }
+.rooms-editorial figure { margin:0; }
+.rooms-editorial figure img { width:100%; height:auto; aspect-ratio:2400/1347; object-fit:contain; object-position:center; }
+.rooms-editorial figcaption { margin-top:10px; font-size:11px; color:var(--ink-soft); text-align:right; letter-spacing:.04em; }
+.rooms-editorial__copy { max-width:900px; margin:36px auto 0; text-align:center; }
+.rooms-editorial__copy h2 { font:400 clamp(1.5rem,3vw,2.15rem)/1.25 var(--body); letter-spacing:.08em; text-transform:uppercase; margin:0 0 28px; }
+.rooms-editorial__copy p { font-size:clamp(1rem,1.7vw,1.3rem); line-height:1.95; letter-spacing:.025em; margin:0 auto; max-width:55ch; }
+.rooms-editorial__link { display:inline-flex; align-items:center; gap:12px; min-height:44px; margin-top:26px; padding:10px 0; font-size:13px; letter-spacing:.11em; text-transform:uppercase; text-decoration:none; color:var(--maroon); border-bottom:1px solid var(--line-strong); }
+.rooms-editorial__link:hover { border-color:var(--maroon); }
+@media(min-width:768px) { .rooms-editorial__copy { margin-top:52px; } .rooms-editorial__copy h2 { margin-bottom:40px; } .rooms-editorial__link { margin-top:36px; } }
+
+.riverside-dining { display:grid; gap:24px; }
+.riverside-dining p:first-child { margin-top:0; }
+.riverside-dining h2 { margin-bottom:12px; }
+.riverside-dining__property { color:var(--ink-soft); }
+.riverside-dining .choice-links { display:flex; flex-wrap:wrap; gap:12px 24px; margin:24px 0; }
+.riverside-dining .choice-links a { min-height:44px; display:inline-flex; align-items:center; }
+@media(min-width:960px) { .riverside-dining { grid-template-columns:.8fr 1.2fr; gap:72px; } }
+</style><body><article class="itinerary-print"><header class="itinerary-print__header"><p class="itinerary-print__brand">ORCHHA PALACE · HOTEL &amp; CONVENTION CENTRE</p><h1>Your time in Orchha</h1><p>2 nights / 3 days · Arriving 1 May 2099</p></header><section class="itinerary-print__day"><h2>Day 1 · Arrival after 2pm</h2><p class="itinerary-print__note">Check in from 2pm and settle in before exploring.</p><p class="itinerary-print__note">Return to the hotel for dinner after your evening activities.</p><div class="itinerary-print__slot"><h3>Afternoon</h3><h4>Chaturbhuj Temple</h4><p>Explore the monumental temple beside Ram Raja Mandir and its striking architecture.</p><p class="itinerary-print__note">About 1 hour · Confirm entry locally</p><p class="itinerary-print__note">Combine this visit with nearby Ram Raja Mandir. Confirm current entry arrangements with the hotel.</p></div><div class="itinerary-print__slot"><h3>Evening</h3><h4>Ram Raja Mandir &amp; aarti</h4><p>Experience the temple where Lord Ram is worshipped as a king, with an evening visit and aarti.</p><p class="itinerary-print__note">1–2 hours · Confirm today's aarti</p><p class="itinerary-print__note">Ceremony times, queues and access vary. Ask the hotel before leaving.</p></div></section><section class="itinerary-print__day"><h2>Day 2 · Palaces, heritage &amp; the Betwa</h2><p class="itinerary-print__note">Begin with breakfast at the hotel before leaving for your activities.</p><p class="itinerary-print__note">After Chhatris sunset, enjoy dinner at Betwa View Dining at our sister property, Orchha Resort, by the river. Ask about a river-facing table and your return transfer; dining is arranged separately.</p><p class="itinerary-print__note">Pause for lunch and rest after the fort. Choose a short sanctuary visit with transfers, subject to access and weather, and return in time for sunset.</p><p class="itinerary-print__note">We can pack lunch for your outing. Arrange it with the hotel the evening before and confirm your menu and any charges.</p><div class="itinerary-print__slot"><h3>Morning</h3><h4>Orchha Fort with a heritage guide</h4><p>Explore Jahangir Mahal, Raja Mahal and the palace courtyards, brought to life by a local guide.</p><p class="itinerary-print__note">2–3 hours · Arrange a guide ahead</p><p class="itinerary-print__note">Arrange your guide before you travel. The fort involves steps and walking; take lunch and a rest before another outing.</p></div><div class="itinerary-print__slot"><h3>Afternoon</h3><h4>Orchha Wildlife Sanctuary outing</h4><p>Discover the river landscape and wildlife around the Betwa and Jamni on a shorter nature visit. This is not a tiger safari.</p><p class="itinerary-print__note">Short visit; confirm duration · Confirm visit format and permits</p><p class="itinerary-print__note">After a morning at the fort, choose this only when a short visit with suitable transfers can be arranged. Confirm entry, the amount of walking, weather and return time before sunset. A longer trail is better on a separate day. We can pack lunch; arrange it the evening before.</p></div><div class="itinerary-print__slot"><h3>Evening</h3><h4>Royal Chhatris &amp; Betwa sunset</h4><p>Slow down beside the royal cenotaphs as the light changes over the Betwa, then enjoy a riverside dinner at Betwa View Dining at Orchha Resort, by the river.</p><p class="itinerary-print__note">1–2 hours · Confirm monument access</p><p class="itinerary-print__note">Keep the walk as short as you like and allow time to sit by the river. Continue to Betwa View Dining at our sister property, Orchha Resort, by the river, for a relaxed evening meal. Ask about a river-facing table, current service and transport back to Orchha Palace. Dining is a separate arrangement; monument access and river conditions can change.</p></div></section><section class="itinerary-print__day"><h2>Day 3 · Breakfast &amp; check-out by 10am</h2><p class="itinerary-print__note">Enjoy breakfast at the hotel before check-out by 10am. Any visit below is optional afterwards, subject to onward travel and luggage arrangements.</p><div class="itinerary-print__slot"><h3>Optional after check-out</h3><p>Keep this time free for your onward journey, or arrange a short visit if travel allows.</p></div></section><section class="itinerary-print__day"><h2>Saved ideas</h2><ul><li>Rafting on the Betwa</li><li>Pool &amp; garden time</li><li>Sound &amp; Light Show</li></ul></section><footer class="itinerary-print__footer"><p>This is a proposed itinerary, not a reservation. Please confirm access, weather, opening times, transport, tickets, meals and any charges with the hotel.</p><p>Arrange your stay: +91 95160 06201 · orchhapalace.com</p></footer></article></body></html>

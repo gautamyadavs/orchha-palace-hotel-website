@@ -1,0 +1,536 @@
+{
+  "explore": [
+    {
+      "choices": 474.9375,
+      "firstActivity": 707.4375,
+      "imageHeight": 140,
+      "scrollWidth": 320,
+      "width": 320
+    },
+    {
+      "choices": 448.2265625,
+      "firstActivity": 680.7265625,
+      "imageHeight": 140,
+      "scrollWidth": 390,
+      "width": 390
+    },
+    {
+      "choices": 444.3203125,
+      "firstActivity": 676.8203125,
+      "imageHeight": 140,
+      "scrollWidth": 611,
+      "width": 611
+    },
+    {
+      "choices": 423.59375,
+      "firstActivity": 669.6875,
+      "imageHeight": 210,
+      "scrollWidth": 768,
+      "width": 768
+    },
+    {
+      "choices": 423.59375,
+      "firstActivity": 669.6875,
+      "imageHeight": 210,
+      "scrollWidth": 1030,
+      "width": 1030
+    },
+    {
+      "choices": 426.53125,
+      "firstActivity": 672.625,
+      "imageHeight": 210,
+      "scrollWidth": 1440,
+      "width": 1440
+    }
+  ],
+  "wedding": [
+    {
+      "caption": "Daytime wedding celebration",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2256,
+        1565
+      ],
+      "scrollWidth": 320,
+      "selected": "Daytime wedding celebration",
+      "width": 320
+    },
+    {
+      "caption": "Wedding finale with fireworks",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2400,
+        1350
+      ],
+      "scrollWidth": 320,
+      "selected": "Wedding finale with fireworks",
+      "width": 320
+    },
+    {
+      "caption": "Indoor floral mandap",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        1280,
+        960
+      ],
+      "scrollWidth": 320,
+      "selected": "Indoor floral mandap",
+      "width": 320
+    },
+    {
+      "caption": "Open-air amphitheatre",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2318,
+        1535
+      ],
+      "scrollWidth": 320,
+      "selected": "Open-air amphitheatre",
+      "width": 320
+    },
+    {
+      "caption": "Celebration dining place setting",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        1800,
+        1079
+      ],
+      "scrollWidth": 320,
+      "selected": "Celebration dining place setting",
+      "width": 320
+    },
+    {
+      "caption": "Private date-night setup",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2310,
+        1529
+      ],
+      "scrollWidth": 320,
+      "selected": "Private date-night setup",
+      "width": 320
+    },
+    {
+      "caption": "Daytime wedding celebration",
+      "fit": "contain",
+      "frameRatio": 1.5000163671478608,
+      "natural": [
+        2256,
+        1565
+      ],
+      "scrollWidth": 390,
+      "selected": "Daytime wedding celebration",
+      "width": 390
+    },
+    {
+      "caption": "Wedding finale with fireworks",
+      "fit": "contain",
+      "frameRatio": 1.5000163671478608,
+      "natural": [
+        2400,
+        1350
+      ],
+      "scrollWidth": 390,
+      "selected": "Wedding finale with fireworks",
+      "width": 390
+    },
+    {
+      "caption": "Indoor floral mandap",
+      "fit": "contain",
+      "frameRatio": 1.5000163671478608,
+      "natural": [
+        1280,
+        960
+      ],
+      "scrollWidth": 390,
+      "selected": "Indoor floral mandap",
+      "width": 390
+    },
+    {
+      "caption": "Open-air amphitheatre",
+      "fit": "contain",
+      "frameRatio": 1.5000163671478608,
+      "natural": [
+        2318,
+        1535
+      ],
+      "scrollWidth": 390,
+      "selected": "Open-air amphitheatre",
+      "width": 390
+    },
+    {
+      "caption": "Celebration dining place setting",
+      "fit": "contain",
+      "frameRatio": 1.5000163671478608,
+      "natural": [
+        1800,
+        1079
+      ],
+      "scrollWidth": 390,
+      "selected": "Celebration dining place setting",
+      "width": 390
+    },
+    {
+      "caption": "Private date-night setup",
+      "fit": "contain",
+      "frameRatio": 1.5000163671478608,
+      "natural": [
+        2310,
+        1529
+      ],
+      "scrollWidth": 390,
+      "selected": "Private date-night setup",
+      "width": 390
+    },
+    {
+      "caption": "Daytime wedding celebration",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2256,
+        1565
+      ],
+      "scrollWidth": 611,
+      "selected": "Daytime wedding celebration",
+      "width": 611
+    },
+    {
+      "caption": "Wedding finale with fireworks",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2400,
+        1350
+      ],
+      "scrollWidth": 611,
+      "selected": "Wedding finale with fireworks",
+      "width": 611
+    },
+    {
+      "caption": "Indoor floral mandap",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        1280,
+        960
+      ],
+      "scrollWidth": 611,
+      "selected": "Indoor floral mandap",
+      "width": 611
+    },
+    {
+      "caption": "Open-air amphitheatre",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2318,
+        1535
+      ],
+      "scrollWidth": 611,
+      "selected": "Open-air amphitheatre",
+      "width": 611
+    },
+    {
+      "caption": "Celebration dining place setting",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        1800,
+        1079
+      ],
+      "scrollWidth": 611,
+      "selected": "Celebration dining place setting",
+      "width": 611
+    },
+    {
+      "caption": "Private date-night setup",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2310,
+        1529
+      ],
+      "scrollWidth": 611,
+      "selected": "Private date-night setup",
+      "width": 611
+    },
+    {
+      "caption": "Daytime wedding celebration",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2256,
+        1565
+      ],
+      "scrollWidth": 768,
+      "selected": "Daytime wedding celebration",
+      "width": 768
+    },
+    {
+      "caption": "Wedding finale with fireworks",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2400,
+        1350
+      ],
+      "scrollWidth": 768,
+      "selected": "Wedding finale with fireworks",
+      "width": 768
+    },
+    {
+      "caption": "Indoor floral mandap",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        1280,
+        960
+      ],
+      "scrollWidth": 768,
+      "selected": "Indoor floral mandap",
+      "width": 768
+    },
+    {
+      "caption": "Open-air amphitheatre",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2318,
+        1535
+      ],
+      "scrollWidth": 768,
+      "selected": "Open-air amphitheatre",
+      "width": 768
+    },
+    {
+      "caption": "Celebration dining place setting",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        1800,
+        1079
+      ],
+      "scrollWidth": 768,
+      "selected": "Celebration dining place setting",
+      "width": 768
+    },
+    {
+      "caption": "Private date-night setup",
+      "fit": "contain",
+      "frameRatio": 1.5,
+      "natural": [
+        2310,
+        1529
+      ],
+      "scrollWidth": 768,
+      "selected": "Private date-night setup",
+      "width": 768
+    },
+    {
+      "caption": "Daytime wedding celebration",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        2256,
+        1565
+      ],
+      "scrollWidth": 1030,
+      "selected": "Daytime wedding celebration",
+      "width": 1030
+    },
+    {
+      "caption": "Wedding finale with fireworks",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        2400,
+        1350
+      ],
+      "scrollWidth": 1030,
+      "selected": "Wedding finale with fireworks",
+      "width": 1030
+    },
+    {
+      "caption": "Indoor floral mandap",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        1280,
+        960
+      ],
+      "scrollWidth": 1030,
+      "selected": "Indoor floral mandap",
+      "width": 1030
+    },
+    {
+      "caption": "Open-air amphitheatre",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        2318,
+        1535
+      ],
+      "scrollWidth": 1030,
+      "selected": "Open-air amphitheatre",
+      "width": 1030
+    },
+    {
+      "caption": "Celebration dining place setting",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        1800,
+        1079
+      ],
+      "scrollWidth": 1030,
+      "selected": "Celebration dining place setting",
+      "width": 1030
+    },
+    {
+      "caption": "Private date-night setup",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        2310,
+        1529
+      ],
+      "scrollWidth": 1030,
+      "selected": "Private date-night setup",
+      "width": 1030
+    },
+    {
+      "caption": "Daytime wedding celebration",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        2256,
+        1565
+      ],
+      "scrollWidth": 1440,
+      "selected": "Daytime wedding celebration",
+      "width": 1440
+    },
+    {
+      "caption": "Wedding finale with fireworks",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        2400,
+        1350
+      ],
+      "scrollWidth": 1440,
+      "selected": "Wedding finale with fireworks",
+      "width": 1440
+    },
+    {
+      "caption": "Indoor floral mandap",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        1280,
+        960
+      ],
+      "scrollWidth": 1440,
+      "selected": "Indoor floral mandap",
+      "width": 1440
+    },
+    {
+      "caption": "Open-air amphitheatre",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        2318,
+        1535
+      ],
+      "scrollWidth": 1440,
+      "selected": "Open-air amphitheatre",
+      "width": 1440
+    },
+    {
+      "caption": "Celebration dining place setting",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        1800,
+        1079
+      ],
+      "scrollWidth": 1440,
+      "selected": "Celebration dining place setting",
+      "width": 1440
+    },
+    {
+      "caption": "Private date-night setup",
+      "fit": "contain",
+      "frameRatio": 1.7777777777777777,
+      "natural": [
+        2310,
+        1529
+      ],
+      "scrollWidth": 1440,
+      "selected": "Private date-night setup",
+      "width": 1440
+    }
+  ],
+  "home": [
+    {
+      "imageHeight": 161.6328125,
+      "imageWidth": 288,
+      "links": 1,
+      "roomCards": 0,
+      "scrollWidth": 320,
+      "src": "http://127.0.0.1:4331/images/rooms-editorial-mobile.webp",
+      "width": 320
+    },
+    {
+      "imageHeight": 200.921875,
+      "imageWidth": 358,
+      "links": 1,
+      "roomCards": 0,
+      "scrollWidth": 390,
+      "src": "http://127.0.0.1:4331/images/rooms-editorial-mobile.webp",
+      "width": 390
+    },
+    {
+      "imageHeight": 324.9609375,
+      "imageWidth": 579,
+      "links": 1,
+      "roomCards": 0,
+      "scrollWidth": 611,
+      "src": "http://127.0.0.1:4331/images/rooms-editorial-mobile.webp",
+      "width": 611
+    },
+    {
+      "imageHeight": 404.09375,
+      "imageWidth": 720,
+      "links": 1,
+      "roomCards": 0,
+      "scrollWidth": 768,
+      "src": "http://127.0.0.1:4331/images/rooms-editorial-mobile.webp",
+      "width": 768
+    },
+    {
+      "imageHeight": 551.140625,
+      "imageWidth": 982,
+      "links": 1,
+      "roomCards": 0,
+      "scrollWidth": 1030,
+      "src": "http://127.0.0.1:4331/images/rooms-editorial.webp",
+      "width": 1030
+    },
+    {
+      "imageHeight": 673.5,
+      "imageWidth": 1200,
+      "links": 1,
+      "roomCards": 0,
+      "scrollWidth": 1440,
+      "src": "http://127.0.0.1:4331/images/rooms-editorial.webp",
+      "width": 1440
+    }
+  ]
+}

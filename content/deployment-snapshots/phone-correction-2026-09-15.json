@@ -1,0 +1,63 @@
+{
+  "date": "2026-09-15",
+  "worker": "orchha-palace-hotel",
+  "version": "09e7ae64-df56-4836-a013-30876bb381d9",
+  "previousVersion": "b121fb25-9392-4d63-9194-cad9c1768601",
+  "change": "Use +91 95160 06204 for the shared event enquiry contact card and Planning a group stay? Call links.",
+  "testsPassed": 68,
+  "typeCheck": "passed with zero errors/warnings/hints",
+  "productionBuild": "passed",
+  "artifactVerification": "passed with production CAPTCHA",
+  "liveChecks": [
+    {
+      "path": "/weddings/",
+      "status": 200,
+      "eventPhoneCorrect": true
+    },
+    {
+      "path": "/corporate-events/",
+      "status": 200,
+      "eventPhoneCorrect": true
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "groupCallCorrect": true
+    },
+    {
+      "path": "/offers/",
+      "status": 200,
+      "groupCallCorrect": true
+    },
+    {
+      "path": "/hotel-amenities/",
+      "status": 200,
+      "groupCallCorrect": true
+    },
+    {
+      "path": "/rooms/",
+      "status": 200,
+      "groupCallCorrect": true
+    },
+    {
+      "path": "/rooms/deluxe-room/",
+      "status": 200,
+      "groupCallCorrect": true
+    },
+    {
+      "path": "/rooms/deluxe-room-twin/",
+      "status": 200,
+      "groupCallCorrect": true
+    },
+    {
+      "path": "/rooms/standard-room/",
+      "status": 200,
+      "groupCallCorrect": true
+    },
+    {
+      "path": "/rooms/standard-room-twin/",
+      "status": 200,
+      "groupCallCorrect": true
+    }
+  ]
+}

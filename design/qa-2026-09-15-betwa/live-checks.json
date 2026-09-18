@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-09-15T15:21:24.952205+00:00",
+  "checks": [
+    {
+      "path": "/dining/",
+      "status": 200,
+      "responsivePhoto": true,
+      "optionalReel": true,
+      "noInstagramEmbed": true,
+      "restaurantImageMetadata": true
+    },
+    {
+      "path": "/explore-orchha/",
+      "status": 200,
+      "responsivePhoto": true,
+      "optionalReel": true,
+      "noInstagramEmbed": true,
+      "afterPlanner": true
+    },
+    {
+      "path": "/weddings/",
+      "status": 200,
+      "eventPhoneCorrect": true
+    },
+    {
+      "path": "/corporate-events/",
+      "status": 200,
+      "eventPhoneCorrect": true
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "groupPhoneCorrect": true
+    },
+    {
+      "path": "/images/betwa-view-dining-480.webp",
+      "status": 200,
+      "matchesBuild": true,
+      "bytes": 24014
+    },
+    {
+      "path": "/images/betwa-view-dining-800.webp",
+      "status": 200,
+      "matchesBuild": true,
+      "bytes": 61416
+    },
+    {
+      "path": "/images/betwa-view-dining-1280.webp",
+      "status": 200,
+      "matchesBuild": true,
+      "bytes": 157544
+    },
+    {
+      "path": "/images/betwa-view-dining-1600.webp",
+      "status": 200,
+      "matchesBuild": true,
+      "bytes": 244882
+    }
+  ]
+}

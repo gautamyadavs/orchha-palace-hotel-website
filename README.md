@@ -2,6 +2,8 @@
 
 A mobile-first, conversion-focused Astro website for Orchha Palace. Cloudflare Workers Static Assets serves the Astro build, while the Worker enforces canonical redirects, security headers, cache policy and the event-enquiry API.
 
+**Developer handoff:** Start with [DEVELOPER_HANDOFF.md](DEVELOPER_HANDOFF.md) for setup, architecture, source-transfer requirements, account access, integration contracts, release/rollback instructions and verified open work as of 18 September 2026.
+
 ## Hosted preview
 
 The public staging preview is deployed from `main` with GitHub Actions at:

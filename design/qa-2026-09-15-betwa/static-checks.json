@@ -1,0 +1,18 @@
+[
+  {
+    "page": "dining",
+    "responsivePhoto": true,
+    "lazyLoaded": true,
+    "intrinsicDimensions": true,
+    "optionalReelLink": true,
+    "instagramEmbedRequests": 0
+  },
+  {
+    "page": "explore-orchha",
+    "responsivePhoto": true,
+    "lazyLoaded": true,
+    "intrinsicDimensions": true,
+    "optionalReelLink": true,
+    "instagramEmbedRequests": 0
+  }
+]
