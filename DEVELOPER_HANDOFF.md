@@ -1,6 +1,6 @@
 # Developer handoff — Orchha Palace Hotel & Convention Centre
 
-Prepared: **18 September 2026**. This document describes the inspected working directory, including its uncommitted changes. It is the technical onboarding guide; the existing launch checklist and deployment records remain supporting evidence.
+Prepared: **18 September 2026**. Source synchronization with GitHub was verified on the same date. This is the technical onboarding guide; the existing launch checklist and deployment records remain supporting evidence.
 
 **Contents:** [Start here](#1-start-here) · [Setup](#2-local-setup-and-commands) · [Access](#3-accounts-and-access-to-transfer) · [Architecture](#4-architecture-and-source-map) · [Business rules](#5-business-rules-and-browser-state) · [Enquiry API](#6-event-enquiry-api) · [Content and integrations](#7-content-design-and-optional-integrations) · [Release and rollback](#8-release-and-rollback) · [Verification and open work](#9-verification-baseline-and-open-work) · [Troubleshooting](#10-troubleshooting) · [Supporting records](#11-supporting-records) · [Transfer inventory](#12-source-transfer-inventory).
 
@@ -15,19 +15,19 @@ Orchha Palace is a static Astro website served through a Cloudflare Worker. It p
 | Canonical hostname | `orchhapalace.com`; `www` redirects with HTTP 308 |
 | GitHub Pages preview | [Preview website](https://gautamyadavs.github.io/orchha-palace-hotel-website/) |
 | Preflight Worker URL recorded in runbook | `https://orchha-palace-hotel-preflight.orchhapalace-hotel.workers.dev` |
-| Inspected branch / committed HEAD | `main` / `7505f185d6b0fc288847ca45afcaae728d1500c4` |
+| Verified website-source branch / commit | `main` / `fecdd3e27f99db8f0c0ff719225b3cf44df8ac72` (followed by this documentation update) |
 | Latest recorded release | 18 September 2026, mobile homepage hero and Kids Zone |
 | Latest recorded Worker version | `15507f2c-83f6-4871-b0e0-c9026f8f1c79` |
 | Recorded previous Worker version | `79726066-abe6-4405-b3b3-482385ebcf47` |
 
-**Transfer the current working source, not just the committed HEAD.** At preparation time, 14 tracked files had changes and additional implementation files, images and release evidence were untracked. The recorded September 15–18 releases include work newer than the committed source. A fresh clone alone will therefore miss that work until it is reviewed, committed and pushed.
+**The complete website source is now in GitHub.** Commit `fecdd3e27f99db8f0c0ff719225b3cf44df8ac72` includes the previously uncommitted September 15–18 changes, implementation files, images, documentation and release evidence. GitHub's `main` commit and tree matched the local checkout, with all 370 tracked files present and no uncommitted or untracked project files before this documentation update. The incoming developer can clone the repository; no separate file collection from the outgoing owner's computer is required. Local secrets, installed dependencies and generated build folders are intentionally excluded.
 
 Latest-version statements above come from repository deployment records. This documentation task did not query the live Cloudflare account, deploy, submit an enquiry or make a reservation.
 
 ### First-day sequence
 
 1. Receive repository and service access listed in section 3.
-2. Reconcile the current working directory with Git, including the files listed in section 12. Preserve the existing changes.
+2. Clone the latest `main` branch from the repository linked above; the source-transfer inventory in section 12 is already included.
 3. Install the locked dependencies, start the site and run the checks below.
 4. Read the booking and enquiry contracts before changing either journey.
 5. Confirm the current production deployment in Cloudflare before any release or rollback.
@@ -36,7 +36,7 @@ Latest-version statements above come from repository deployment records. This do
 
 The project requires **Node.js >=22.12.0**. Both checked-in CI workflows use **22.12.0**; use that version when reproducing CI. npm and `package-lock.json` are the dependency workflow. No Node version-manager file is checked in.
 
-For a new checkout, after the latest source has been transferred:
+For a new checkout:
 
 ```sh
 git clone https://github.com/gautamyadavs/orchha-palace-hotel-website.git
@@ -416,7 +416,6 @@ Historical evidence includes September 18 local/live checks at 320, 390, 430, 64
 
 | Follow-up | Owner / completion evidence |
 | --- | --- |
-| Reconcile uncommitted deployed changes with repository | Outgoing + incoming developer; a reviewed commit containing all implementation assets and release records |
 | Verify four Maximojo category mappings before adding room codes | Hotel reservations + Maximojo/PMS; recorded per-category handoff checks |
 | Controlled payment completion and cancellation/amendment test | Authorized hotel staff; launch handoff still has blank evidence fields |
 | Confirm production enquiry delivery after transfer/integration changes | Developer + sales; recorded Resend and inbox receipt, correct Reply-To; preflight delivery was documented on September 11 |
@@ -463,9 +462,9 @@ For implementation behaviour, use the source and current configuration. For rele
 
 ## 12. Source-transfer inventory
 
-This is the pre-existing work observed before adding this handoff. It is not a request to discard, reset or overwrite anything.
+The following work was uncommitted during the original documentation review and is now included in GitHub commit `fecdd3e27f99db8f0c0ff719225b3cf44df8ac72`. This inventory is retained for traceability; the incoming developer does not need to collect these files separately.
 
-**Modified tracked files:**
+**Included source and content updates:**
 
 ```text
 content/deployment-runbook.md
@@ -484,7 +483,7 @@ src/pages/index.astro
 src/styles/redesign.css
 ```
 
-**Untracked implementation and release files:**
+**Included additional implementation and release files:**
 
 ```text
 src/components/BetwaDiningFeature.astro
@@ -498,6 +497,6 @@ content/deployment-snapshots/mobile-hero-kids-zone-2026-09-18.json
 design/betwa-dining-media.md
 ```
 
-**Untracked evidence directories:** `design/audit-2026-09-11/`, `design/qa-2026-09-12/`, `design/qa-2026-09-13/`, `design/qa-2026-09-13-editorial/`, `design/qa-2026-09-13-usability/`, `design/qa-2026-09-15-betwa/`, `design/qa-2026-09-18/`.
+**Included evidence directories:** `design/audit-2026-09-11/`, `design/qa-2026-09-12/`, `design/qa-2026-09-13/`, `design/qa-2026-09-13-editorial/`, `design/qa-2026-09-13-usability/`, `design/qa-2026-09-15-betwa/`, `design/qa-2026-09-18/`.
 
-Include this document and its README/runbook documentation updates in the reviewed transfer. Review evidence files before publishing them to a repository. Exclude local `.env`, `.wrangler/`, `node_modules/`, `.astro/` and generated `dist/` from a source package; preserve the lockfile, public assets, source, tests and deployment configuration. The transfer is complete when the receiving developer can reproduce the build from the transferred source and the owner has confirmed the required account access.
+The repository contains this document, README/runbook updates, lockfile, public assets, source, tests and deployment configuration. Local `.env`, `.wrangler/`, `node_modules/`, `.astro/` and generated `dist/` are intentionally excluded. The outgoing owner only needs to transfer the required account control and share the repository link. The incoming developer handles installation, configuration, operational checks and future maintenance using this guide.
