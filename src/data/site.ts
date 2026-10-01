@@ -81,7 +81,7 @@ export const media: ImageAsset[] = [
     peopleVisible: true
   },
   {
-    ...image("madira", "/images/madira-selected.webp", "Madira bar with its warmly lit bottle display", "dining", "Madira Bar"),
+    ...image("patio-cafe", "/images/patio-cafe.jpg", "A guest enjoying a drink on the terrace at Patio Cafe, with the pink palace arches behind her", "dining", "Patio Cafe", "landscape", "55% 60%"),
     peopleVisible: true
   },
   image("food", "/images/dining-main.webp", "Formal dining room arranged for an evening meal at Orchha Palace", "dining", "Main dining room"),
@@ -278,13 +278,13 @@ export const dining: DiningVenue[] = [
     highlights: ["Chinese and Thai dishes", "Indian-Chinese favourites", "Intimate dining room"]
   },
   {
-    slug: "madira",
-    name: "Madira",
-    type: "Bar & lounge",
-    description: "A relaxed evening setting for wines, spirits, cocktails and conversation after a day exploring Orchha.",
-    location: "Hotel lounge",
-    image: byId("madira"),
-    highlights: ["Signature cocktails", "Wines and spirits", "Relaxed lounge seating"]
+    slug: "patio-cafe",
+    name: "Patio Cafe",
+    type: "Cafe & terrace",
+    description: "Pause for a coffee, a cool drink or a light bite, with palace arches and an open-air terrace as your backdrop.",
+    location: "Terrace setting",
+    image: byId("patio-cafe"),
+    highlights: ["Tea, coffee & refreshments", "Cafe favourites", "Open-air setting"]
   }
 ];
 

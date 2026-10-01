@@ -1,0 +1,214 @@
+{
+  "checkedAt": "2026-09-29T00:25:24.507326+00:00",
+  "browser": "Codex in-app browser",
+  "viewportHeight": 844,
+  "checks": [
+    {
+      "path": "/dining/",
+      "width": 320,
+      "documentWidth": 320,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/dining/",
+      "width": 360,
+      "documentWidth": 360,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/dining/",
+      "width": 390,
+      "documentWidth": 390,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/dining/",
+      "width": 430,
+      "documentWidth": 430,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/dining/",
+      "width": 768,
+      "documentWidth": 768,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/dining/",
+      "width": 959,
+      "documentWidth": 959,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/dining/",
+      "width": 960,
+      "documentWidth": 960,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/dining/",
+      "width": 1024,
+      "documentWidth": 1024,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/dining/",
+      "width": 1440,
+      "documentWidth": 1440,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/spa/",
+      "width": 320,
+      "documentWidth": 320,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/spa/",
+      "width": 360,
+      "documentWidth": 360,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/spa/",
+      "width": 390,
+      "documentWidth": 390,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/spa/",
+      "width": 430,
+      "documentWidth": 430,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/spa/",
+      "width": 768,
+      "documentWidth": 768,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/spa/",
+      "width": 959,
+      "documentWidth": 959,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/spa/",
+      "width": 960,
+      "documentWidth": 960,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/spa/",
+      "width": 1024,
+      "documentWidth": 1024,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/spa/",
+      "width": 1440,
+      "documentWidth": 1440,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/hotel-amenities/",
+      "width": 320,
+      "documentWidth": 320,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/hotel-amenities/",
+      "width": 360,
+      "documentWidth": 360,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/hotel-amenities/",
+      "width": 390,
+      "documentWidth": 390,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/hotel-amenities/",
+      "width": 430,
+      "documentWidth": 430,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/hotel-amenities/",
+      "width": 768,
+      "documentWidth": 768,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/hotel-amenities/",
+      "width": 959,
+      "documentWidth": 959,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/hotel-amenities/",
+      "width": 960,
+      "documentWidth": 960,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/hotel-amenities/",
+      "width": 1024,
+      "documentWidth": 1024,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    },
+    {
+      "path": "/hotel-amenities/",
+      "width": 1440,
+      "documentWidth": 1440,
+      "h1Count": 1,
+      "smallServiceTargets": 0
+    }
+  ],
+  "consoleErrors": [],
+  "visualReview": [
+    "390px Patio Cafe photograph is complete and its text remains readable.",
+    "390px private dining uses the candlelit garden photograph, readable copy and unobscured WhatsApp/call actions.",
+    "390px spa menu displays treatment name, duration and INR price before disclosure."
+  ],
+  "interactionReview": [
+    "Amenities treatment link opens spa.",
+    "Treatment disclosure opens and closes using Enter.",
+    "Mobile menu retains five primary journeys and secondary hotel links; no private-dining or spa entry.",
+    "Room booking opens from the spa mobile menu and Escape closes it.",
+    "Treatment and private-dining WhatsApp URLs carry service-specific drafts to the existing hotel number."
+  ],
+  "limitations": [
+    "Responsive browser emulation only; physical iOS/Android and field performance metrics were not measured.",
+    "No contact messages, calls, bookings, payments or real enquiry submissions were made."
+  ],
+  "recovery": "One browser navigation timed out; a fresh tab completed the remaining checks."
+}

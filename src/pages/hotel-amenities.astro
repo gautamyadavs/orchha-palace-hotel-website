@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import AvailabilityBar from "@/components/AvailabilityBar.astro";
 import { getSiteData } from "@/lib/cms";
+import { withBase } from "@/lib/paths";
 
 const { amenities, media } = await getSiteData();
 const hero = media.find((item) => item.id === "property-courtyard") || media[0];
@@ -16,7 +17,7 @@ const kidsZone = media.find((item) => item.id === "kids-zone") || hero;
   <PageHero eyebrow="Hotel & amenities" title="Everything a good stay needs" copy="Wellness, movement, family time, dining and useful service—close enough to enjoy without planning your day around it." image={hero.src} alt={hero.alt} />
 
   <section class="section shell">
-    <SectionHeading eyebrow="At the hotel" title="Spend the day entirely your way" copy="Some services, treatments and private instruction require advance booking; the concierge can arrange them before or during your stay." />
+    <SectionHeading eyebrow="At the hotel" title="Spend the day entirely your way" copy="Heritage-inspired courtyards, gardens and generous spaces set the pace at Orchha Palace. Some services and treatments require advance booking; the team can help arrange them before or during your stay." />
     <div class="amenity-grid">
       {amenities.map((item) => <article class="amenity-card"><span class="amenity-card__icon"><Icon name={item.icon} size={24} aria-hidden="true" /></span><h3>{item.name}</h3><p>{item.description}</p></article>)}
     </div>
@@ -28,7 +29,7 @@ const kidsZone = media.find((item) => item.id === "kids-zone") || hero;
       <div class="wellness-grid">
         <article class="wellness-card wellness-card--spa">
           <div class="wellness-card__image"><img src={spa.src} alt={spa.alt} width="1080" height="1080" loading="lazy" /></div>
-          <div class="wellness-card__body"><p class="eyebrow">Spa & salon</p><h3>A full spa-and-salon pause</h3><p>Kairali Spa and Vanity Durbar bring massage and facial treatments together with hair, beauty and grooming services. Advance appointments are recommended.</p><a class="text-link" href="https://wa.me/919516006201?text=Hello%20Orchha%20Palace%2C%20I%20would%20like%20to%20ask%20about%20a%20spa%20or%20salon%20appointment." target="_blank" rel="noreferrer">Ask about an appointment →</a></div>
+          <div class="wellness-card__body"><p class="eyebrow">Spa & salon</p><h3>A full spa-and-salon pause</h3><p>Kairali Spa and Vanity Durbar bring massage and facial treatments together with hair, beauty and grooming services. Explore treatment durations and prices, then arrange an appointment with our team.</p><a class="text-link" href={withBase("/spa/")}>Explore treatments & prices →</a></div>
         </article>
         <article class="wellness-card">
           <div class="wellness-card__image"><img src={kidsZone.src} alt={kidsZone.alt} width="1600" height="1066" loading="lazy" /></div>

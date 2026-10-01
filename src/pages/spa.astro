@@ -1,0 +1,42 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { contact, whatsappUrl } from "@/lib/contact";
+import { withBase } from "@/lib/paths";
+import { spaTreatments, formatSpaPrice } from "@/data/spa";
+---
+
+<BaseLayout title="Kairali Spa & Salon | Treatments at Orchha Palace" description="Explore 11 spa treatments at Orchha Palace, with durations and prices. Contact the team to arrange a Kairali Spa appointment or Vanity Durbar salon visit." stickyBooking={false}>
+  <header class="page-intro shell spa-intro">
+    <a class="text-link" href={withBase("/hotel-amenities/")}>← Hotel & amenities</a>
+    <p class="eyebrow">Kairali Spa · Orchha Palace</p>
+    <h1>A little time for yourself</h1>
+    <p>Choose a massage, a traditional Ayurvedic treatment or a facial, then let our team help arrange your appointment.</p>
+    <div class="service-actions"><a class="button button--primary" href="#treatments">Explore treatments <Icon name="ph:arrow-down" size={18} aria-hidden="true" /></a><a class="text-link" href={contact.primaryPhoneHref}>Call the spa team</a></div>
+  </header>
+
+  <section class="section section--paper" id="treatments" aria-labelledby="treatment-heading">
+    <div class="shell">
+      <p class="eyebrow">The treatment menu</p>
+      <h2 id="treatment-heading">Find your moment of calm</h2>
+      <p>Prices are in Indian rupees. Our team will confirm availability and the total price, including any applicable taxes, before booking.</p>
+      <div class="treatment-list">
+        {spaTreatments.map(treatment => <article class="treatment" id={treatment.id} aria-labelledby={`${treatment.id}-heading`}>
+          <h3 id={`${treatment.id}-heading`}>{treatment.name}</h3>
+          <dl class="treatment__facts"><div><dt>Duration</dt><dd>{treatment.minutes} minutes</dd></div><div><dt>Price</dt><dd>{formatSpaPrice(treatment.price)}</dd></div></dl>
+          <details><summary>About this treatment<span class="visually-hidden">: {treatment.name}</span></summary><p>{treatment.description}</p></details>
+          <a class="text-link" href={whatsappUrl(`Hello Orchha Palace, I would like to arrange ${treatment.name} (${treatment.minutes} minutes; listed price ${formatSpaPrice(treatment.price)}). Please confirm available appointments and the total price.`)} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Ask about this treatment <span aria-hidden="true">↗</span><span class="visually-hidden">: {treatment.name}, on WhatsApp</span></a>
+        </article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell arrival-section" aria-labelledby="spa-arrange-heading" id="spa-appointment">
+    <div><p class="eyebrow">Arrange your visit</p><h2 id="spa-arrange-heading">We'll help with the details</h2><p>Share your preferred treatment, date and time. Sending an enquiry starts a conversation; your appointment is confirmed by the hotel team.</p><div class="service-actions"><a class="button button--primary" href={contact.whatsapp.spa} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Ask on WhatsApp <Icon name="ph:whatsapp-logo" size={18} aria-hidden="true" /></a><a class="text-link" href={contact.primaryPhoneHref} data-track="call_clicked">{contact.primaryPhone}</a></div></div>
+    <div class="disclosures">
+      <details><summary>Should I book in advance?</summary><p>Advance appointments are recommended. Please confirm your preferred treatment and time with the team before your visit.</p></details>
+      <details><summary>Can I arrange a salon appointment?</summary><p>Vanity Durbar offers hair, beauty and grooming services. Ask the team about the service you have in mind, current prices and appointment times.</p><a class="text-link" href={whatsappUrl("Hello Orchha Palace, I would like to arrange an appointment at Vanity Durbar. Please share the current salon services, prices and availability.")} target="_blank" rel="noreferrer">Ask about the salon ↗</a></details>
+      <details><summary>Can you help me choose a treatment?</summary><p>Tell the spa team what you are looking for. They can explain the treatments and discuss suitability before confirming an appointment.</p></details>
+    </div>
+  </section>
+</BaseLayout>

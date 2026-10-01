@@ -1,0 +1,69 @@
+{
+  "checkedAt": "2026-09-29T00:22:50.702831+00:00",
+  "checks": [
+    {
+      "route": "/",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "af902e88afbcd37ec9e7d7551fec335cea86c34aea3ed950aee56eaf30efd7ba"
+    },
+    {
+      "route": "/dining/",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "5d96e07aa56d8bceda55ee285c5a76a813f4b8524062cc1a1d55c1b5f86ba48a"
+    },
+    {
+      "route": "/spa/",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "78ad6c32b16d0332fe627e22875ff95be74fb92019651c7c48747d648f352fdf"
+    },
+    {
+      "route": "/hotel-amenities/",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "7ff955332b508447e7ed50716ab3584cef14054aa12627035398b9889919cc82"
+    },
+    {
+      "route": "/gallery/",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "dc0cf56a376317f5e856cdf484fff9e5419668841003c4febcb237a7f973d458"
+    },
+    {
+      "route": "/explore-orchha/",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "aeae1ad17dd6dcf844ea4699aa08fc56ae313bb1b6697cf31267e1f61bbc1a55"
+    },
+    {
+      "route": "/images/patio-cafe.jpg",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "b23f6725c4cc8924e8db46bbb7606de31962cfa19f5314f29d26cb861d822069"
+    },
+    {
+      "route": "/sitemap-0.xml",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "470850f325e11ea240c8d7ea6ae1bb31b3328bbd6bd8ab992d66fc02e1d8841a"
+    },
+    {
+      "route": "/robots.txt",
+      "status": 200,
+      "matchesBuild": true,
+      "sha256": "e9c28b9a39be90db92e8ccc9eb36477be16b51699a26f36bc7658c33213ff0f8"
+    },
+    {
+      "url": "https://orchhapalace.com/madira/",
+      "status": 301,
+      "location": "https://orchhapalace.com/dining/"
+    },
+    {
+      "url": "https://www.orchhapalace.com/spa/",
+      "status": 308,
+      "location": "https://orchhapalace.com/spa/"
+    }
+  ]
+}

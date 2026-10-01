@@ -63,7 +63,9 @@ const isCurrent = (href: string) => {
       <Icon name="ph:list" size={22} aria-hidden="true" />
     </button>
   </div>
+</header>
 
+  <!-- Keep the viewport overlay outside the header's backdrop-filter containing block. -->
   <div class="menu-drawer" id="site-menu" role="dialog" aria-modal="true" aria-label="Site navigation" aria-hidden="true" data-menu>
     <div class="menu-drawer__top">
       <span class="menu-kicker">Orchha Palace</span>
@@ -104,4 +106,3 @@ const isCurrent = (href: string) => {
       </div>
     </div>
   </div>
-</header>

@@ -402,13 +402,14 @@ h3 {
   overflow-y: auto;
   padding: 24px 20px max(32px, env(safe-area-inset-bottom));
   pointer-events: none;
-  transition: opacity 180ms ease, visibility 180ms ease;
+  transition: opacity 180ms ease, visibility 0s linear 180ms;
 }
 
 .menu-drawer.is-open {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
+  transition-delay: 0s;
 }
 
 .menu-drawer__top {

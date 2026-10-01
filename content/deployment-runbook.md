@@ -81,3 +81,22 @@ The Resend and Turnstile secret values are stored only in the two Cloudflare Wor
 - Type checks, 68 tests, production artifact verification, strict deployment dry run and responsive browser checks at nine widths passed.
 - Repeated the nine-width browser checks against the live site; image framing, Kids Zone photo, navigation and booking controls passed with no page errors.
 - Release evidence: `deployment-snapshots/mobile-hero-kids-zone-2026-09-18.json` and `../design/qa-2026-09-18/`.
+
+## 28 September 2026 dining and spa content release
+
+- Live Worker version: `9ab15aea-5d34-4cd4-bea5-6832bfe4faf5`.
+- Previous working version: `15507f2c-83f6-4871-b0e0-c9026f8f1c79`.
+- Replaced the closed Madira with Patio Cafe and the owner-supplied photograph. Private dining remains a separate section on Dining with the existing garden image and WhatsApp/call arrangements; primary navigation is unchanged.
+- Published eleven approved spa treatments with durations/prices at `/spa/`, linked from Hotel & amenities. Complete food menus and other unconfirmed facts remain pending in the integration plan.
+- All 71 tests, type checks, production build, artifact verification and strict dry run passed. Live pages/assets matched the build, redirects passed, and the three changed service pages passed layout checks at nine widths from 320–1440px.
+- Published from the local working tree based on `50c6f16d20825e97509799d158fe7b86fc3bb351`; this release's source changes have not yet been committed or pushed. Preserve them before a later CI deployment.
+- Release evidence: `deployment-snapshots/dining-spa-2026-09-28.json` and `../design/qa-2026-09-28-content/`. Physical device and field-performance measurements are outside this verification.
+
+## 28 September 2026 scrolled navigation fix
+
+- Live Worker version: `68c7e19b-047f-4267-a53d-e2c7c737b6de`.
+- Previous working version: `9ab15aea-5d34-4cd4-bea5-6832bfe4faf5`.
+- The navigation drawer is now outside the header, preventing the scrolled header's backdrop filter from clipping it to header height. Opening and closing preserve page position; focus moves into the visible menu, returns on closing, and remains trapped while open.
+- Verified at seven viewport sizes including short phone and landscape layouts. Live checks at 390px and 1440px showed all eight menu links visible and hittable after scrolling, with no page movement or console errors.
+- 71 tests, type checks, build, artifact verification and strict dry run passed. Source changes remain in the local working tree.
+- Release evidence: `deployment-snapshots/navigation-menu-2026-09-28.json` and `../design/qa-2026-09-28-menu/review.md`.

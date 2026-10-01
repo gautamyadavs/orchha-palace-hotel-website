@@ -2,6 +2,7 @@ import { restoreItinerary } from "./itinerary";
 import { createClient } from "@sanity/client";
 import { fallbackSiteData } from "@/data/site";
 import type { ImageAsset, SiteData } from "./types";
+import { currentDining, currentDiningMedia } from "./dining-content";
 
 const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID;
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET || "production";
@@ -103,7 +104,8 @@ const hasApprovedImage = (value: { image?: ImageAsset }) => Boolean(
 
 function sanitizeCmsData(data: CmsSiteData): SiteData {
   const approvedMedia = (data.media || []).filter((asset) => asset.src && asset.publishApproved && asset.rightsStatus !== "verify");
-  const media = [...fallbackSiteData.media.filter(asset => !approvedMedia.some(m => m.id === asset.id)), ...approvedMedia];
+  const patio = fallbackSiteData.dining.find(venue => venue.slug === "patio-cafe")!;
+  const media = currentDiningMedia([...fallbackSiteData.media.filter(asset => !approvedMedia.some(m => m.id === asset.id)), ...approvedMedia], patio.image);
   const rooms = (data.rooms || [])
     .filter((room) => room.slug && room.name && hasApprovedImage(room))
     .map((room) => ({
@@ -115,7 +117,7 @@ function sanitizeCmsData(data: CmsSiteData): SiteData {
       maximojoRoomCode: room.bookingMode === "assisted" ? undefined : room.maximojoRoomCode,
       gallery: (room.gallery || []).filter((asset) => media.some((item) => item.id === asset.id)).length ? (room.gallery || []).filter((asset) => media.some((item) => item.id === asset.id)) : [room.image]
     }));
-  const dining = (data.dining || []).filter((venue) => venue.slug && venue.name && hasApprovedImage(venue));
+  const dining = currentDining((data.dining || []).filter((venue) => venue.slug && venue.name && hasApprovedImage(venue)), fallbackSiteData.dining);
   const venues = (data.venues || []).filter((venue) => venue.slug && venue.name && hasApprovedImage(venue)).map(venue => ({ ...venue,
     journeys: venue.journeys || fallbackSiteData.venues.find(v => v.slug === venue.slug)?.journeys || [],
     capacities: venue.capacities || fallbackSiteData.venues.find(v => v.slug === venue.slug)?.capacities || {}
@@ -126,7 +128,8 @@ function sanitizeCmsData(data: CmsSiteData): SiteData {
   const validActivities = (data.activities || []).filter(a => a.id && a.name && Array.isArray(a.categories) && ["earlyMorning", "morning", "afternoon", "evening"].includes(a.block) && /^(https:\/\/|\/[^\/])/.test(a.sourceUrl || ""));
   // An incomplete CMS catalogue must not remove owner-requested experiences.
   const activities = fallbackSiteData.activities.map(fallback => {
-    const activity = validActivities.find(a => a.id === fallback.id) || fallback;
+    // Preserve the confirmed outlet closure in saved and newly suggested hotel dining ideas.
+    const activity = fallback.id === "dining" ? fallback : validActivities.find(a => a.id === fallback.id) || fallback;
     return { ...activity, bookingUrl: activity.bookingUrl && /^https:\/\//.test(activity.bookingUrl) ? activity.bookingUrl : undefined };
   });
   const itineraryTemplates = fallbackSiteData.itineraryTemplates.map(fallback => {

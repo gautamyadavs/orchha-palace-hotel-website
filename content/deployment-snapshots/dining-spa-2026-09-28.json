@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-28",
+  "recordedAtUtc": "2026-09-29T00:25:24.533074+00:00",
+  "worker": "orchha-palace-hotel",
+  "version": "9ab15aea-5d34-4cd4-bea5-6832bfe4faf5",
+  "previousVersion": "15507f2c-83f6-4871-b0e0-c9026f8f1c79",
+  "sourceBaseCommit": "50c6f16d20825e97509799d158fe7b86fc3bb351",
+  "sourceState": "Published from this working tree; these changes are not committed or pushed.",
+  "sourceFileSha256": {
+    "content/media-manifest.csv": "e88d70b6a0f4d4531fc2490058d3df3b472e129d17248abb62812f1aada153d2",
+    "src/data/activities.ts": "64cce97dc40692fd3a2b2e358b542792a0b96c8c8c23cb4a1bf20450f09611f4",
+    "src/data/site.ts": "8c8f5154b95b020abe873bd1986b29e70572edc6f1248fd8a6dfbe68a4e7b0a9",
+    "src/lib/cms.ts": "da9b7e499ae129a3ceb280fe13abc17dfd89f593491e8e453b9ffbfd6f9fec54",
+    "src/lib/contact.ts": "177f6978f9604803ae42e1243e387ffd19c411f443bc5f46390e0ff1f030d091",
+    "src/pages/dining.astro": "fe91026bf58fc810aeeb4b288e9fd1e98187eacf4aadfff702cf740867cd19bb",
+    "src/pages/hotel-amenities.astro": "18038d63a554613300d209cd1c278a7e4a0ae7c0c28bf5b31456168d4031332b",
+    "src/pages/index.astro": "8022deabd5693c8bcb4428ab16033a5752c4b996de9ae8b23e822cfc4b2b9fe0",
+    "src/styles/redesign.css": "7baa98871f6b4abeab0ed927bd1c8a0b7fc0a3806969367add55fbc742f92208",
+    "src/data/spa.ts": "0d3973b6e3c8059d5d7a0d1076f59490f4652e8a76c148ec9cd6c121876bccf5",
+    "src/lib/dining-content.ts": "c76e4d632b0e214f94175cb39776a339f435ae968303145639f43e0488a0ce5d",
+    "src/pages/spa.astro": "b0986cf471283f1976728996faa1cd3039f8c935c972e7ff9bb99d66603914a5",
+    "tests/dining-content.test.ts": "38a4d48a8bb87310324d7958a7a16abb9f4805a41fa1af1ba91f9989c3f139e7",
+    "public/images/patio-cafe.jpg": "b23f6725c4cc8924e8db46bbb7606de31962cfa19f5314f29d26cb861d822069"
+  },
+  "changes": [
+    "Replace closed Madira with Patio Cafe and the owner-supplied photo across Dining, gallery, homepage and itinerary dining copy.",
+    "Keep private dining as a separate section within Dining with the existing garden photo and call/WhatsApp enquiry actions.",
+    "Publish the eleven owner-approved spa treatment names, durations and INR prices with a discovery link from Hotel & amenities.",
+    "Preserve established primary navigation and mobile-first layout; suppress competing booking bar around dining actions."
+  ],
+  "testsPassed": 71,
+  "typeCheck": "Zero errors, warnings or hints",
+  "productionBuild": "21 pages; passed",
+  "artifactVerification": "30 production files; passed",
+  "strictDryRun": "Passed",
+  "liveHttpEvidence": "design/qa-2026-09-28-content/live-http-checks.json",
+  "liveBrowserEvidence": "design/qa-2026-09-28-content/live-browser-checks.json",
+  "pendingContent": [
+    "Full food menus and their prices",
+    "Tax treatment and service hours",
+    "Unconfirmed room/venue/policy/review facts in integration plan"
+  ],
+  "deploymentNote": "Existing custom domains, KV namespaces, secrets and mail settings retained."
+}

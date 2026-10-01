@@ -73,8 +73,10 @@ function setupMenu() {
     menu.setAttribute("aria-hidden", String(!next));
     open.setAttribute("aria-expanded", String(next));
     document.body.classList.toggle("menu-open", next);
-    if (next) close.focus();
-    else open.focus();
+    if (next) {
+      menu.scrollTop = 0;
+      close.focus({ preventScroll: true });
+    } else open.focus({ preventScroll: true });
   };
 
   open.addEventListener("click", () => setOpen(true));

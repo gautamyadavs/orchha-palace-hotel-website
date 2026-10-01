@@ -1,0 +1,71 @@
+{
+  "date": "2026-09-28",
+  "recordedAtUtc": "2026-09-29T00:33:53.112753+00:00",
+  "worker": "orchha-palace-hotel",
+  "version": "68c7e19b-047f-4267-a53d-e2c7c737b6de",
+  "previousVersion": "9ab15aea-5d34-4cd4-bea5-6832bfe4faf5",
+  "sourceBaseCommit": "50c6f16d20825e97509799d158fe7b86fc3bb351",
+  "sourceState": "Published from the working tree; source changes remain uncommitted and unpushed.",
+  "changes": [
+    "Move the fixed navigation overlay outside the scrolled header containing block.",
+    "Make opening visibility immediate so Close menu receives keyboard focus.",
+    "Preserve page scroll during focus changes, reset menu scroll on opening, and contain menu overscroll."
+  ],
+  "testsPassed": 71,
+  "typeCheck": "passed: zero errors, warnings or hints",
+  "build": "21 pages; passed",
+  "productionVerifier": "30 files; passed",
+  "strictDryRun": "passed",
+  "localBrowserEvidence": "design/qa-2026-09-28-menu/review.md",
+  "liveBrowserChecks": [
+    {
+      "width": 390,
+      "height": 844,
+      "pageScrollBeforeOpenAfter": 4167,
+      "menuHeight": 844,
+      "menuTop": 0,
+      "allEightLinksVisibleAndHittable": true,
+      "closeFocused": true,
+      "escapeCloses": true
+    },
+    {
+      "width": 1440,
+      "height": 844,
+      "pageScrollBeforeOpenAfter": 1990.5,
+      "menuHeight": 844,
+      "menuTop": 0,
+      "allEightLinksVisibleAndHittable": true,
+      "closeFocused": true,
+      "escapeCloses": true
+    }
+  ],
+  "liveConsoleErrors": [],
+  "liveHttpChecks": [
+    {
+      "route": "/",
+      "matchesBuild": true,
+      "sha256": "95dd0f1fe115b69753f86759886ca196f594da11bec1bb94c1260e26850bba7d"
+    },
+    {
+      "route": "/dining/",
+      "matchesBuild": true,
+      "sha256": "6e5e66349fa11ffd433ab1fec18a8ba71c9239fac08b78a22dafe86907cfaaa0"
+    },
+    {
+      "route": "/spa/",
+      "matchesBuild": true,
+      "sha256": "91e14a5a42d3a8fad1af854b8c4e9b3134544988e8c77c3edaef4ec1c9df9545"
+    },
+    {
+      "route": "/_assets/BaseLayout.astro_astro_type_script_index_0_lang.--yTc7Xz.js",
+      "matchesBuild": true,
+      "sha256": "1bb48879d43a8673378ac13d430ef831e08d613a2996c4447a0ca1d9ececb2d7"
+    }
+  ],
+  "sourceFileSha256": {
+    "src/components/Header.astro": "315c1a18e48cf69b51bfec4b859d2a1d751f3860b6ca6a7682551ada77217511",
+    "src/scripts/site.ts": "e71724512040422ab44af1bbb1cb1beb6aa1543cc541a0b1f163348fae2192e4",
+    "src/styles/global.css": "e965a4454e143675864dc4669bdef61048c026a1619dbb87bbd8973a716893f7",
+    "src/styles/redesign.css": "255f9dc2f563fb54dbc57354a4f6033fd62c6ec482f99f0cc6b2c7e8615cd9f2"
+  }
+}

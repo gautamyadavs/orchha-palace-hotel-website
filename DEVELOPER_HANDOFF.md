@@ -2,6 +2,10 @@
 
 Prepared: **18 September 2026**. Source synchronization with GitHub was verified on the same date. This is the technical onboarding guide; the existing launch checklist and deployment records remain supporting evidence.
 
+**28 September release update:** Patio Cafe, private dining and the approved spa catalogue are now live as Worker version `9ab15aea-5d34-4cd4-bea5-6832bfe4faf5`. These additions are in the local working tree and have not yet been committed or pushed; the September 18 GitHub synchronization statements below describe that earlier baseline. Preserve the new source before a later CI deployment. See [release evidence](content/deployment-snapshots/dining-spa-2026-09-28.json) and [current content decisions](design/content-integration-plan.md).
+
+**Latest release:** The follow-up navigation fix is live as `68c7e19b-047f-4267-a53d-e2c7c737b6de`. The full-screen menu works after scrolling on mobile and desktop. See [navigation release evidence](content/deployment-snapshots/navigation-menu-2026-09-28.json); its source changes are also local and uncommitted.
+
 **Contents:** [Start here](#1-start-here) · [Setup](#2-local-setup-and-commands) · [Access](#3-accounts-and-access-to-transfer) · [Architecture](#4-architecture-and-source-map) · [Business rules](#5-business-rules-and-browser-state) · [Enquiry API](#6-event-enquiry-api) · [Content and integrations](#7-content-design-and-optional-integrations) · [Release and rollback](#8-release-and-rollback) · [Verification and open work](#9-verification-baseline-and-open-work) · [Troubleshooting](#10-troubleshooting) · [Supporting records](#11-supporting-records) · [Transfer inventory](#12-source-transfer-inventory).
 
 ## 1. Start here

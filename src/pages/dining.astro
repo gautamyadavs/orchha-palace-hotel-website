@@ -8,13 +8,15 @@ import { betwaViewDiningSchema } from "@/data/betwa-view-dining";
 import { contact } from "@/data/site";
 import { getSiteData } from "@/lib/cms";
 import { withBase } from "@/lib/paths";
+import { whatsappUrl } from "@/lib/contact";
 
 const { dining, media } = await getSiteData();
 const food = media.find((item) => item.id === "food") || dining[0].image;
 const groupDining = media.find((item) => item.id === "dining-groups") || food;
+const privateDining = media.find((item) => item.id === "private-date")!;
 const schema = dining.map((venue) => ({
   "@context": "https://schema.org",
-  "@type": venue.slug === "madira" ? "BarOrPub" : "Restaurant",
+  "@type": venue.slug === "patio-cafe" ? "CafeOrCoffeeShop" : "Restaurant",
   name: venue.name,
   description: venue.description,
   servesCuisine: venue.type,
@@ -23,22 +25,25 @@ const schema = dining.map((venue) => ({
 }));
 ---
 
-<BaseLayout title="Dining in Orchha | Orchha Palace & Betwa View Dining" description="Dine at Annajal, Dragon and Madira at Orchha Palace, or enjoy a riverside evening at Betwa View Dining at our sister property, Orchha Resort, by the river." image={food.src} schema={[...schema, betwaViewDiningSchema]}>
-  <PageHero eyebrow="Dining" title="Three places to follow your appetite" copy="Regional flavours, global comfort, Pan-Asian favourites and an easy evening bar—all within the hotel." image={food.src} alt={food.alt} />
+<BaseLayout title="Dining in Orchha | Orchha Palace & Betwa View Dining" description="Discover Annajal, Dragon and Patio Cafe at Orchha Palace. Arrange private dining, or visit Betwa View Dining at our sister property by the river." image={food.src} schema={[...schema, betwaViewDiningSchema]}>
+  <PageHero eyebrow="Dining" title="Three places to follow your appetite" copy="Regional flavours, Pan-Asian favourites and a relaxed terrace cafe—all within the hotel." image={food.src} alt={food.alt} />
 
   <section class="section shell">
-    <SectionHeading eyebrow="Choose your setting" title="From breakfast to a final drink" copy="Opening hours and service formats may change around events; the front desk can confirm today's schedule." />
+    <SectionHeading eyebrow="Choose your setting" title="Something for every part of your day" copy="Explore our restaurants and cafe. Ask the team for current menus, opening hours and a table for your visit." />
     <div class="dining-grid">
       {dining.map((venue) => (
-        <article class="dining-card">
-          <img src={venue.image.src} alt={venue.image.alt} width="960" height="740" loading="lazy" />
+        <article class:list={["dining-card", venue.slug === "patio-cafe" && "dining-card--patio"]} id={venue.slug}>
+          <img src={venue.image.src} alt={venue.image.alt} width={venue.slug === "patio-cafe" ? 1280 : 960} height={venue.slug === "patio-cafe" ? 853 : 740} loading="lazy" decoding="async" />
           <div class="dining-card__body">
             <p class="eyebrow">{venue.type}</p>
-            <h2 style="font-size:clamp(2.5rem,7vw,4rem)">{venue.name}</h2>
+            <h2>{venue.name}</h2>
             <p>{venue.description}</p>
             <div class="dining-card__meta"><span>{venue.location}</span>{venue.capacity && <span>{venue.capacity}</span>}</div>
-            <a class="text-link" href={`https://wa.me/919516006201?text=${encodeURIComponent(`Hello Orchha Palace, I would like to ask about a table at ${venue.name}.`)}`} target="_blank" rel="noreferrer">Ask about a table →</a>
-            <ul class="feature-list" style="margin-top:16px">{venue.highlights.map((item) => <li><Icon name="ph:check" size={17} /> {item}</li>)}</ul>
+            <ul class="feature-list">{venue.highlights.map((item) => <li><Icon name="ph:check" size={17} aria-hidden="true" /> {item}</li>)}</ul>
+            <div class="dining-card__actions" data-sticky-suppress>
+              <a class="text-link" href={whatsappUrl(`Hello Orchha Palace, I would like to ask about a table at ${venue.name}.`)} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Ask about a table <span aria-hidden="true">→</span><span class="visually-hidden"> at {venue.name} on WhatsApp</span></a>
+              <a class="text-link" href={whatsappUrl(`Hello Orchha Palace, please share the current ${venue.name} menu, prices and service hours.`)} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">Ask for the menu <span aria-hidden="true">↗</span><span class="visually-hidden"> for {venue.name} on WhatsApp</span></a>
+            </div>
           </div>
         </article>
       ))}
@@ -47,13 +52,27 @@ const schema = dining.map((venue) => ({
 
   <BetwaDiningFeature />
 
+  <section class="section shell private-dining" id="private-dining" aria-labelledby="private-dining-heading">
+    <figure class="private-dining__image"><img src={privateDining.src} alt={privateDining.alt} width="2310" height="1529" loading="lazy" decoding="async" /><figcaption>A private evening in the palace gardens</figcaption></figure>
+    <div class="private-dining__copy">
+      <p class="eyebrow">Private dining</p>
+      <h2 id="private-dining-heading">A table of your own</h2>
+      <p>A quiet dinner for two, an anniversary or time with the people closest to you. Let our team help arrange a private dining experience at Orchha Palace.</p>
+      <p>Call or WhatsApp to discuss your preferred date, party size, setting and menu. Our team will confirm the arrangements, availability and price before you book.</p>
+      <div class="service-actions" data-sticky-suppress>
+        <a class="button button--primary" href={contact.whatsapp.privateDining} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp to arrange <Icon name="ph:whatsapp-logo" size={18} aria-hidden="true" /></a>
+        <a class="button button--secondary" href={contact.primaryPhoneHref} data-track="call_clicked">Call to arrange <Icon name="ph:phone" size={18} aria-hidden="true" /></a>
+      </div>
+    </div>
+  </section>
+
   <section class="section section--dark">
     <div class="shell editorial-split">
       <div class="editorial-split__image"><img src={groupDining.src} alt={groupDining.alt} width="1800" height="1079" loading="lazy" /></div>
       <div class="editorial-split__copy">
         <p class="eyebrow eyebrow--light">A table for the occasion</p>
         <h2>Dining for groups and celebrations</h2>
-        <p style="color:rgba(255,255,255,.7)">Planning a wedding, conference or private dinner? The culinary team can shape menus and service around the event format and guest list.</p>
+        <p style="color:rgba(255,255,255,.85)">Planning a wedding, conference or larger celebration? The culinary team can shape menus and service around the event format and guest list.</p>
         <a class="text-link text-link--light" href={withBase("/weddings-events/#event-enquiry")}>Plan an event menu <Icon name="ph:arrow-right" size={18} /></a>
       </div>
     </div>
@@ -61,9 +80,9 @@ const schema = dining.map((venue) => ({
 
   <section class="section shell">
     <SectionHeading align="center" eyebrow="Reserve or ask" title="Speak with the hotel team" copy="For restaurant hours, dietary requests and group dining, contact the hotel directly." />
-    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap" data-sticky-suppress>
       <a class="button button--primary" href={contact.primaryPhoneHref} data-track="call_clicked">Call the hotel <Icon name="ph:phone" size={18} /></a>
-      <a class="button button--secondary" href={contact.whatsapp.stay} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp <Icon name="ph:whatsapp-logo" size={18} /></a>
+      <a class="button button--secondary" href={contact.whatsapp.dining} target="_blank" rel="noreferrer" data-track="whatsapp_clicked">WhatsApp <Icon name="ph:whatsapp-logo" size={18} /></a>
     </div>
   </section>
 </BaseLayout>
