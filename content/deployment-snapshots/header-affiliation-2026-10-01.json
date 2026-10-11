@@ -1,0 +1,141 @@
+{
+  "date": "2026-10-01",
+  "recordedAtUtc": "2026-10-01T18:41:26.717Z",
+  "worker": "orchha-palace-hotel",
+  "version": "5004ebc6-0f91-4d3e-b92e-4578fbdff0a4",
+  "previousVersion": "68c7e19b-047f-4267-a53d-e2c7c737b6de",
+  "sourceBaseCommit": "b9e84dad6ab72a9e2d8f261279419bd824175307",
+  "sourceState": "Published from the local working tree; header changes are not committed or pushed.",
+  "sourceFileSha256": {
+    "src/components/Header.astro": "cd929d59032ff2767b583cd19c16a64c49662e552ca39d275853e9309dc3c489",
+    "src/styles/redesign.css": "06d91d1bb8f7b14323833719f3ba7b8ac2fcc76844b2abefdc26616076867410"
+  },
+  "changes": [
+    "Add A unit of Oswal Motels and Resorts beneath the hotel identity in every page header and in the home link accessible name.",
+    "Use 11px mobile and 12px desktop body text; adjust vertical padding and strengthen the immersive header background for readability."
+  ],
+  "testsPassed": 71,
+  "typeCheck": "Zero errors, warnings or hints",
+  "productionBuild": "21 pages; passed",
+  "artifactVerification": "30 production files; passed",
+  "strictDryRun": "Passed",
+  "liveHttp": {
+    "pages": [
+      {
+        "path": "/404.html",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/booking-policies/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/contact/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/corporate-events/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/dining/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/explore-orchha/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/gallery/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/hotel-amenities/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/offers/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/privacy/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/rooms/deluxe-room/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/rooms/deluxe-room-twin/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/rooms/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/rooms/presidential-suite/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/rooms/standard-room/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/rooms/standard-room-twin/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/spa/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/terms/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/weddings/",
+        "status": 200,
+        "matchesBuild": true
+      },
+      {
+        "path": "/weddings-events/",
+        "status": 200,
+        "matchesBuild": true
+      }
+    ],
+    "wwwRedirect": 308,
+    "missingPage": 404,
+    "robots": 200,
+    "sitemap": 200,
+    "passed": true
+  },
+  "liveBrowser": {
+    "statesChecked": 56,
+    "failures": []
+  },
+  "deploymentNote": "Existing custom domains, KV, secrets and email settings retained."
+}

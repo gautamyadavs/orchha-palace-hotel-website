@@ -12,10 +12,11 @@ input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--maroon); f
 fieldset { min-width: 0; }
 .eyebrow { font-size: 14px; letter-spacing: .075em; }
 .small-copy, .content-note { font-size: 14px; color: var(--ink-soft); }
-.site-header { position: sticky; top: 0; height: 76px; background: var(--paper); color: var(--ink); border-bottom: 1px solid var(--line); padding-inline: 16px; }
+.site-header { position: sticky; top: 0; height: 76px; background: var(--paper); color: var(--ink); border-bottom: 1px solid var(--line); padding: 8px 16px; }
 .site-header .header-call, .site-header .menu-button { color: var(--maroon); border-color: var(--line); background: transparent; }
 .wordmark__name { font-size: 24px; }
 .wordmark__sub { font-size: 9px; }
+.wordmark__affiliation { margin-top: 6px; font-family: var(--body); font-size: 11px; line-height: 1.35; }
 .header-actions { gap: 8px; }
 .menu-button { padding-inline: 10px; }
 .header-call { display: none; }
@@ -196,6 +197,7 @@ body.menu-open .mobile-sticky, body.booking-open .mobile-sticky { display: none;
   .desktop-nav { display: flex; gap: 18px; }
   .desktop-nav a { font-size: 14px; text-transform: none; letter-spacing: 0; }
   .wordmark__name { font-size: 28px; }
+  .wordmark__affiliation { font-size: 12px; }
   .header-book { display: none; }
   .stay-hero { grid-template-columns: 1fr 1fr; gap: 32px; padding-top: 36px; align-items: center; }
   .stay-hero__image { height: 340px; grid-column: 2; grid-row: 1; }
@@ -218,7 +220,7 @@ body.menu-open .mobile-sticky, body.booking-open .mobile-sticky { display: none;
 @media(prefers-reduced-motion:reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
 
 /* Immersive arrival: the estate leads, with reservations immediately below. */
-.immersive-page .site-header:not(.is-scrolled) { background: linear-gradient(#17120e70,transparent); border-color:#ffffff30; color:#fffdf8; }
+.immersive-page .site-header:not(.is-scrolled) { background: linear-gradient(#17120e99,#17120e70); border-color:#ffffff30; color:#fffdf8; }
 .immersive-page .site-header:not(.is-scrolled) .wordmark,
 .immersive-page .site-header:not(.is-scrolled) .desktop-nav a,
 .immersive-page .site-header:not(.is-scrolled) .header-call,

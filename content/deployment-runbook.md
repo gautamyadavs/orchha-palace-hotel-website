@@ -100,3 +100,13 @@ The Resend and Turnstile secret values are stored only in the two Cloudflare Wor
 - Verified at seven viewport sizes including short phone and landscape layouts. Live checks at 390px and 1440px showed all eight menu links visible and hittable after scrolling, with no page movement or console errors.
 - 71 tests, type checks, build, artifact verification and strict dry run passed. Source changes remain in the local working tree.
 - Release evidence: `deployment-snapshots/navigation-menu-2026-09-28.json` and `../design/qa-2026-09-28-menu/review.md`.
+
+## 1 October 2026 hotel affiliation release
+
+- Live Worker version: `5004ebc6-0f91-4d3e-b92e-4578fbdff0a4`.
+- Previous working version: `68c7e19b-047f-4267-a53d-e2c7c737b6de`.
+- Added “A unit of Oswal Motels and Resorts” beneath the hotel identity in every header and the home link accessible name. Adjusted header spacing and immersive background for readability.
+- All 71 tests, type checks, production build, artifact verification and strict dry run passed. All 21 live pages match the build; www redirect, missing-page response, robots and sitemap passed.
+- Live header checks passed in 56 states across homepage, rooms, weddings and contact at seven widths from 320–1440px, before and after scrolling, with no clipping, overlap or horizontal overflow.
+- Published from the local working tree based on `b9e84dad6ab72a9e2d8f261279419bd824175307`; header changes are not committed or pushed.
+- Release evidence: `deployment-snapshots/header-affiliation-2026-10-01.json`.
