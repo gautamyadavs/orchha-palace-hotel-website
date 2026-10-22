@@ -16,7 +16,7 @@ const choices = venues.filter(v => v.journeys?.includes(journey));
   <h3 data-matched-heading hidden>Matches for your layout</h3>
   <div class="venue-results" data-matched-results>
     {choices.map(venue => <article class="venue-card" data-venue-card data-slug={venue.slug}>
-      <img src={venue.image.src} alt={venue.image.alt} width="640" height="400" loading="lazy" />
+      <img src={venue.image.src} alt={venue.image.alt} width="640" height="400" loading="lazy" style={`object-position:${venue.image.focalPoint || '50% 50%'};`} />
       <div class="venue-card__body"><p class="eyebrow">{venue.type} · {venue.size}</p><h3>{venue.name}</h3><p>{venue.description}</p><span class="venue-match" data-match-label>{venue.capacity}</span><p class="small-copy">{venue.image.subject === venue.name || venue.slug === "boardroom" ? "" : "Hotel setting shown; ask our team for this venue's layout and photographs."}</p><a class="button button--secondary" href="#event-enquiry" data-select-venue={venue.name}>Enquire about this space →</a></div>
     </article>)}
   </div>
